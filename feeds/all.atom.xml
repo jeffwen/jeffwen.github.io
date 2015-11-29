@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2015-11-27T03:15:00-08:00</updated><entry><title>Hello World!</title><link href="http://jeffwen.github.io/2015/11/27/hello-world" rel="alternate"></link><updated>2015-11-27T03:15:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-11-27:2015/11/27/hello-world</id><summary type="html">&lt;p&gt;Hello everyone, my name is Jeff. I've started this blog to keep track of the things that I am up to and also to share about exciting things that I am learning. Thanks for stopping by!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2015-11-28T13:03:00-08:00</updated><entry><title>Setting up the blog</title><link href="http://jeffwen.github.io/2015/11/28/pelican-setup" rel="alternate"></link><updated>2015-11-28T13:03:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-11-28:2015/11/28/pelican-setup</id><summary type="html">&lt;p&gt;&lt;em&gt;November 28, 2015&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Over the past couple of days, I have been working towards getting a blog up and running. There were a couple of different options that I was considering and ultimately I ended up choosing to use &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; as my site generator. I also use GitHub Pages to host my blog for free!&lt;/p&gt;
+&lt;h3&gt;Decisions&lt;/h3&gt;
+&lt;p&gt;Initially, I was considering just sticking with Jekyll, which is the site generator that pairs really nicely with the &lt;a href="https://help.github.com/articles/using-jekyll-with-pages/"&gt;GitHub Pages&lt;/a&gt;. However, I read a couple different posts by other users, thought about the decision, and noticed the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Ruby vs. Python&lt;/em&gt;: Jekyll is Ruby based whereas Pelican is Python based.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;While I am also picking up Ruby, I am definitely more comfortable with Python at this point.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Speed&lt;/em&gt;: While I am still new to blogging and don't necessarily feel the struggle of slow page loading (given that I don't have much experience with slow loading blogs), &lt;a href="http://arunrocks.com/moving-blogs-to-pelican/"&gt;this user's&lt;/a&gt; blog post was definitely persuasive enough for me to take speed into consideration.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Personal Growth&lt;/em&gt;: Jekyll might have been easier to use given that it is integrated with GitHub so well, but I wanted to (at least in my mind at the time) learn a little bit more by using something that required just a little more work. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Getting Started&lt;/h3&gt;
+&lt;p&gt;With these things in mind, I decided to jump right in and start setting up my blog. While it was quite simple for the most part, it definitely took some time figuring everything out because I was trying to use a couple different resources to make sure that by blog would run smoothly. Looking back on it, I guess it probably would have been better to stick with one solid resource vs. trying to merge different ways of doing the same thing. However, as stated before, I wanted to learn as much as possible and see the different ways people were setting up their blogs.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Resources:&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/3.6.3/"&gt;Pelican Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://mathamy.com/migrating-to-github-pages-using-pelican.html"&gt;Amy Halon's blog post on GitHub Pages Migration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/"&gt;Fedora Magazine's blog post on GitHub Pages and Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As I was following some of the resources mentioned earlier, I realized that It was a great opportunity for me to also learn more about other technologies as well. For example, I read up on GitHub submodules because Fedora's post mentioned initiaizing the output directory as a submodule. I am getting my hands dirty with Markdown because I am using Markdown to write these blog posts and pages. Additionally, HTML and CSS are relevant as well because I am learning to customize my blog.&lt;/p&gt;
+&lt;h3&gt;Final Thoughts&lt;/h3&gt;
+&lt;p&gt;It may seem that this blog post is rather short and ending prematurely, but I have only started to blog and so I hope that as I learn more about Pelican and blogging I will share more of my learnings and thoughts!&lt;/p&gt;</summary></entry><entry><title>Hello World!</title><link href="http://jeffwen.github.io/2015/11/27/hello-world" rel="alternate"></link><updated>2015-11-27T03:15:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-11-27:2015/11/27/hello-world</id><summary type="html">&lt;p&gt;Hello everyone, my name is Jeff. I've started this blog to keep track of the things that I am up to and also to share about exciting things that I am learning. Thanks for stopping by!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
