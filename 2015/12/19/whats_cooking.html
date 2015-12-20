@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; What's Cooking?  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.github.io">
+        <img src="http://jeffwen.github.io/images/jeff_logo.png" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.github.io">Jeff Wen</a></h2>
+      <p>aspiring data scientist, problem solver, wannabe tinkerer</p>
+      <ul>
+        <li><a href="http://jeffwen.github.io/pages/about-me.html">About Me</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.github.io">Index</a> &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2015/12/19/whats_cooking">What's Cooking?</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>December 19, 2015</em></p>
+<h3>Getting Started</h3>
+<p>Ever since I have known about kaggle, I have always seen it as a place where accomplished data scientists and skilled veterans of the machine learning space go to stretch their legs and dominate. However, as I continued to look through the competitions and through the forums where aspiring data scientists were asking a wide variety of questions, I realized that my preconceptions were probably holding me back from learning a lot through practical application. It is definitely one thing to read about algorithms and techniques and quite another to actually implement. Anyways, with that in mind, I figured I would jump in and get started.</p>
+<p>Before I got started on the whats cooking competition, I had read a lot about the models that I was planning to use and had also read code from past competitions; however, jumping into the competition helped me actually get my hands dirty with models that I had only used a couple times before. More importantly, having to actually write the code myself, I got to practice being (or at least trying to be) systematic and comprehensive in my modeling decisions. Ultimately, I think the competition pushed me to not only read/learn, but also practice and be comfortable with an iterative problem solving process. </p>
+<h3>What's Cooking</h3>
+<p>The <a href="https://www.kaggle.com/c/whats-cooking">competition</a> as mentioned before was hosted on the kaggle platform. While there were many competitions to choose from, I decided to do this cooking challenge because I was interested in learning natural language processing, which I felt like I hadn't really been able to practice. Although the competition did not require much real language processing, it was still appealing and interesting to think about how different ingredients could be used to predict the cuisine. <em>(Most of the code for this competition is on my <a href="https://github.com/jeffwen/Kaggle/blob/master/Whats%20Cooking/cooking.py">github</a>. There are a few cleanup functions and exploratory scripts that I unfortunately have on another computer)</em></p>
+<p>For me, the largest reason for joining this competition was to learn. More than wanting to place well on the leaderboard, I wanted to understand what I was doing with the algorithms I was using and I wanted to make educated decisions about my modeling choices. <em>Then</em>, if I happened to do well that would be an additional blessing. As a result, I spent lots of time learning by reading and tinkering. Instead of copying code from forums, I wanted to implement things myself, which took lots of time...lots of trial...and lots of error...</p>
+<h4><em>Initial decisions</em></h4>
+<p>To start with, my plan was to (I eventually only had time to do up to number 7, but ended up with a satisfying score):</p>
+<ol>
+<li>Start by exploring the data and summarizing the data to understand how the classes look, how the ingredients are distributed across cuisines, and start brainstorming which models I wanted to use</li>
+<li>Process the data so that I could use it as input into the model that I had decided to move forward with</li>
+<li>Build a simple baseline model upon which I could further improve<ul>
+<li>Logistic regression was good for this problem because its a simple model compared to the other models that I could have started with...</li>
+</ul>
+</li>
+<li>See if I need to change the way I was extracting features/ implement new feature extraction techniques to get more information from the data</li>
+<li>Fit the simple model again and tune the parameters</li>
+<li>Start experimenting with and tuning more complex models that make sense given the problem<ul>
+<li>One thing that I am trying to learn more about is when to use a model given the input data because it is easy to throw a million models at a problem and see what works, but it takes experience and skill to figure out what model would work best given the nature of the data (though in averaging I use many random models because the point of the weighted averaging, as I know it, is to try to use weak learners and/or uncorrelated submission files to create a stronger learner/submission)</li>
+</ul>
+</li>
+<li>Think about simple averaging by coming up with a weighted average of my submissions to see if the model performs better</li>
+<li>Enter into the real black box stuff where I stack and blend models to build crazy ensembles<ul>
+<li>Some really <a href="http://mlwave.com/kaggle-ensembling-guide/">legit stuff</a>...</li>
+</ul>
+</li>
+</ol>
+<p>Anyways, the data comes in .json files, which python makes pretty easy to parse with the json package. As an example, the first entry in the data file looks like this</p>
+<div class="highlight"><pre><span class="p">{</span><span class="s">u&#39;cuisine&#39;</span><span class="p">:</span> <span class="s">u&#39;greek&#39;</span><span class="p">,</span>
+ <span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">10259</span><span class="p">,</span>
+ <span class="s">u&#39;ingredients&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">u&#39;romaine lettuce&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;black olives&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;grape tomatoes&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;garlic&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;pepper&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;purple onion&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;seasoning&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;garbanzo beans&#39;</span><span class="p">,</span>
+  <span class="s">u&#39;feta cheese crumbles&#39;</span><span class="p">]}</span>
+</pre></div>
+
+
+<p><em>Note: I did a few things to look through the data and summarize/ explore the data before I got started. Namely, I looked at the counts of the each cuisine to see if there were any biased classes, which there were, but when I set custom weighting for the classes the models didn't change much so I decided I would return to this later. Furthermore, I looked to format the data correctly because things like the registered trademark signs caused encoding problems in the input data.</em></p>
+<p>Given the way the data was formatted, I wanted to separate out the cuisine as the y-variable and have the x-variables be the ingredients. This is where the initial decisions had to be made.</p>
+<ul>
+<li>How was I going to do the initial processing to set up my training data to extract features from the data?<ul>
+<li>I could use a simple <a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer">count vectorizer</a>, which converts the words in a document (or in this case recipe) into counts or...</li>
+<li>binary encoding, which (if I implemented this correctly means 0 if the ingredient is not in the recipe and 1 if it is) or...</li>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer">tfidf (term frequency inverse document frequency) vectorizer</a> to not only count but also return the normalized count based on how many times an ingredient appears in all the recipes</li>
+</ul>
+</li>
+<li>Once the format of the training data was decided, how was I going to implement the vectorizer or binary encoder?<ul>
+<li>This was a question I found myself asking because the standard vectorizer and encoder in sci-kit learn were slightly different than what I wanted to do.</li>
+</ul>
+</li>
+</ul>
+<p>I initially decided to write my own binary encoder because I thought that using a count vectorizer, though simple, would be throwing away information from the data. More specifically, I figured that, using the sample above, if my ingredients were ['romaine lettuce', 'black olives', 'grape tomatoes'...] and I used the stock count vectorizer then I would have the following as features ['romaine', 'lettuce', 'black', 'olives'...]. To me this was a problem because 'black olives' as one feature contained more information than 'black', 'olives' as two features.</p>
+<ul>
+<li>I had decided from the beginning that I wanted to start with a bag of ingredients and not a bag of words.</li>
+<li>Though I knew that I could customize the analyzer function in the sci-kit learn package, I wanted to start with a baseline model before moving onto more complex models.</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">binary_encoding</span><span class="p">(</span><span class="n">list_of_ingredients</span><span class="p">,</span><span class="n">input_data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    list_of_ingredients: a list of ingredients that has been deduplicated and represents the features (column titles of the matrix)</span>
+<span class="sd">    input_data: the data to be converted into a feature matrix</span>
+<span class="sd">    returns a sparse feature matrix</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span> <span class="c"># progress bar to help me figure how much has been completed</span>
+    <span class="n">aList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">list_of_ingredients</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c"># creates a new dictionary with keys from list of ingredients with the initial value set to 0</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">recipe</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">list_of_ingredients</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># if the ingredient is in the list of ingredients, then change value to 1</span>
+        <span class="n">aList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span> <span class="c"># create a sparse matrix</span>
+    <span class="k">return</span> <span class="n">sparse_matrix</span>
+</pre></div>
+
+
+<p>After implementing the function above on the data, and running a simply logistic regression model on the data, I received ~0.77 on the leaderboard. Though it wasn't great it was my first submission and I was quite happy. Even through this initial phase of feature extracting, I realized that a lot of the time I spent on this competition would be on feature engineering and processing.</p>
+<h4><em>Moving forward</em></h4>
+<p>With the ~0.77 in the books, I decided it was time to start tuning and adding complexity.</p>
+<p>The first thing that I did was write a preprocessing function to help me clean the input data. I decided that I wanted to stem the words so that 'olives' would become 'olive' because the plural shouldn't lead to two different ingredients. Then I also stripped the words of punctuation and other non-alphabetic characters. After this initial step, I decided it would be good to sort the words in the ingredient list so that ingredients like 'feta cheese crumbles' and 'crumble feta cheese' would be one feature and not multiple after the word stemming and ingredient sorting (may or may not have been necessary, but I figured given the way the data was structured it wouldn't hurt).</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span> <span class="c"># Progress bar to ease the waiting</span>
+    <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+        <span class="n">new_recipe</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ingredient</span> <span class="ow">in</span> <span class="n">recipe</span><span class="p">:</span>
+            <span class="n">new_ingredient</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ingredient</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^a-zA-Z -]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span> <span class="c"># only keeping the letters, spaces, and hyphens</span>
+                <span class="n">new_ingredient</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wn</span><span class="o">.</span><span class="n">morphy</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,.!:?;&#39; &quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,.!:?;&#39; &quot;</span><span class="p">))</span> <span class="c"># strip, stem, and append the word</span>
+            <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_ingredient</span><span class="p">))</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sort_ingredient</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+        <span class="n">new_recipe</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ingredient</span> <span class="ow">in</span> <span class="n">recipe</span><span class="p">:</span>
+            <span class="n">sorted_ingredient</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ingredient</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)))</span>
+            <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sorted_ingredient</span><span class="p">)</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+</pre></div>
+
+
+<p>After this preprocessing step, I move towards using <a href="https://en.wikipedia.org/wiki/Tf–idf">tf-idf</a> because I figured having an indication of the frequency of a certain ingredient would provide additional information as opposed to simple binary encoding. So I used the slightly modified tf-idf vectorizer from sci-kit learn. Similar to the count vectorizer, the default analyzer seemed to split up the words of an ingredient into two words because of the way that my data was being passed in. To solve this, I wrote my own analyzer function that basically parsed the ingredient list and returned the entire ingredient (with all the words) as one feature <em>(think: ['romaine lettuce', 'black olives'] vs. ['romaine', 'lettuce', 'black', 'olives'])</em>.</p>
+<p>Ultimately, combining the preprocessing with the tf-idf vectorizing and a logistic regession model gave me ~0.778 on the leader board (an improvement!). So the next step was to figure out how to further tune the model. </p>
+<h4><em>Model tuning</em></h4>
+<p>Modeling tuning seems to be an art in the machine learning world. This was where I felt out of my league because I did not have much experience. I had manually set complexity parameters before when pruning decision trees, but had not really experimented with changing the many parameters in the models I was using.</p>
+<p>So I spent lots of time reading through the forums to see what others were doing and saw that the top performers were using grid searches. I eventually ended up using a grid search to create my strongest performing single model, but initially when I was experimenting I used cross validation to manually see how changing the regularization parameter would affect my CV scores and found that with C=5 my model was scoring around ~0.782 with the CV that I was performing on my own system. When I uploaded the submission after predicting the new cuisines I got ~0.7857 so again there was an improvement (though it was not great that my own CV was returning scores that were slightly off. I probably will spend some more time figuring out how to model a more precise evaluation metric next time.)</p>
+<p><img alt="logreg tfidf score" src="/images/logreg_1.png" /></p>
+<p>At this point in the competition there were around ~1000 or so competitors so I was in the top 50%, which was exciting considering just a few weeks ago I didn't even think I could create any worthwhile models.</p>
+<h4><em>Rethinking my initial assumptions</em></h4>
+<p>Initially, I had decided not to use the standard sci-kit learn vectorizer analyzers because I felt that it would take away information from my data. However, upon further consideration, I realized that it was worth a try because with &gt; 5000 features not all the features would be important anyways so why create more features by creating a bag of ingredients if a bag of words may actually help to reduce complexity a little bit.</p>
+<p>With this in mind, I rewrote my preprocessing function and started using the tf-idf vectorizer from sci-kit learn with a few parameters modified.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">preprocess_all_ingredients</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span> <span class="c"># Progress bar to ease the waiting</span>
+    <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+        <span class="n">new_recipe</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ingredient</span> <span class="ow">in</span> <span class="n">recipe</span><span class="p">:</span>
+            <span class="n">new_ingredient</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">ingredient</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="c"># using a word lemmatizer, which is related to stemming, but takes into account context also (in this case other ingredients in the recipe)</span>
+                <span class="n">word</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^a-zA-Z]&#39;</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+                <span class="n">new_ingredient</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WordNetLemmatizer</span><span class="p">()</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,.!:?;&#39; &quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,.!:?;&#39; &quot;</span><span class="p">))</span>
+            <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_ingredient</span><span class="p">))</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+</pre></div>
+
+
+<p>The new function is similar to the previous preprocessing function but uses a lemmatizer instead of a stemmer (<a href="http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">read more here</a>), which basically takes context into account (though lemmatization may not have much use in this case given the ingredients are separate words in a string and not a cohesive sentence).</p>
+<div class="highlight"><pre><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s">&#39;english&#39;</span><span class="p">,</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">analyzer</span><span class="o">=</span><span class="s">&#39;word&#39;</span><span class="p">,</span> <span class="n">max_df</span><span class="o">=</span><span class="mf">0.56</span><span class="p">,</span> <span class="n">token_pattern</span><span class="o">=</span><span class="s">r&#39;\w+&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>With the new preprocessing and vectorizer in place, I used a logistic regression again and got ~0.787. So there was again an improvement but at this point, I figured maybe I had come close to the extent of progress I would make with the logistic regression model. I did run a grid search over the regularization parameter and received a score of ~0.788. However, I was ready to move onto other models and thought that I would perhaps come back to logistic regressions if I were to do stacking and blending of models later on.</p>
+<h4><em>Big improvements</em></h4>
+<p>The next steps in the modeling process led to huge improvements and at one point even got me to the top 3% of the leaderboard. </p>
+<p>At this time the top performers seemed to be using neural nets and xgb models (extreme gradient boosted trees). I tried xgb but my results were not great (the best xgb gave me ~0.78). </p>
+<p>With the basic preprocessing functions set, I felt like I should spend more time on reading and understanding how to tune my models. I had used support vector machines (SVM) before, but I was unsure if the model would handle the data given that my computer is old and SVMs are not known to perform particularly quickly if the dataset is too large. Given that I had thousand of features, I was afraid of the run time of using SVMs, but in the end after reading a couple resources (including <a href="http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf">this one</a>) I decided I would give it a try and just change to something else if necessary. Furthermore, SVMs have fewer hyperparameters to tune (so it would be easier to set up a grid search compared to say xgb or neural nets).</p>
+<div class="highlight"><pre><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;linear&#39;</span><span class="p">]},{</span><span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;rbf&#39;</span><span class="p">]}]</span>
+</pre></div>
+
+
+<p>I tried both linear and non-linear kernels and a variety of regularization parameters (I tried to read a lot on how to choose the parameters to place in the grid search). After fitting the model, which took at least 8 hours, I took a look at the parameter grid, which also shows the CV scores from the 3-fold CV that was performed in the grid search and noticed that the scores were pretty varied, but some scores were &gt; 0.80. Of course I was excited, but not ecstatic because I knew that my CV was not exactly in line with the Kaggle leaderboard score calculation. When I submitted, I was surpised to see that my submission received a score on the leaderboard of ~0.81044 (<strong>HUGE improvement for me!</strong>).</p>
+<p><img alt="SVM improvement" src="/images/svm_2.png" /></p>
+<p>At this point there were ~1200 teams in the competition so my score put me somewhere in the top 3%! I was originally okay with the top 50%...but no complaints!</p>
+<h4><em>Finishing touches</em></h4>
+<p>With only a couple days or so left in the competition, I didn't have much time to run additional stacked models or try tuning neural networks. However, I knew that I could squeeze a little more out of my submissions and so I spent some time researching stacking and blending of models. I had read that many recent winners had performed so well because they had implemented some form of stacking and/or blending (the netflix prize was won by an ensemble of <a href="http://data-informed.com/in-awarding-prize-for-analytics-netflix-failed-to-predict-it-wouldnt-be-used/">800 different models</a>). Of course, basic understanding of what each model is doing is very important and was my main goal, but at this point I felt like I could do little more.</p>
+<p>I basically ended up doing a weighted average of my top submission files (which is not stacking or blending but a precursor step). In particular, I gave my SVM 3x weight, logreg 1x, linear SVC 1x, another logreg 1x, and extra trees classifier 1x and ended up with a score of ~0.81225, which at the time placed me at 40th out of ~1300 teams.</p>
+<p><img alt="Ensemble score" src="/images/ensemble_1.png" /></p>
+<h3>Lots to learn</h3>
+<p>It has been such a journey starting with importing the .json files to getting (at the time) 40th on the leaderboard. Even though with a few more hours to go in the competition I figure I may drop a few places, I feel like I have gained at least a taste of what it feels like to enter and apply the things that I have learned.</p>
+<h4>Next steps</h4>
+<p>In entering this competition I got a chance to apply a lot of things that I had read about. Furthermore, I read <strong>EVEN MORE</strong> things that I didn't get to try out but hope to in the future. I have listed a few take-aways and things to try in the future.</p>
+<ol>
+<li>Parameter tuning is very important and though grid search worked out well this time, its really computationally intensive and in another setting I might not have the luxury to perform this type of exhaustive search. I can try random search, which may be better but a very interesting thing that I read about were two packages called: Spearmint and Hyperopt, which use bayesian optimization to perform the parameter search (read this awesome <a href="https://jmhessel.github.io/Bayesian-Optimization/">blog post</a> or <a href="http://fastml.com/optimizing-hyperparams-with-hyperopt/">this one</a> to learn more about parameter tuning and bayesian optimization)</li>
+<li>Fitting models is easy, but figuring which model to use and when is difficult</li>
+<li>The need for a representative cross validation evaluation metric is very important if you want to know how your model is performing. I think this is why some teams spend quite a bit of time writing their own evaluation function that matches the competition's evaluation function because if they tell you how you will be judged why not use it!</li>
+<li>Simple models can actually perform really well when tuned properly. Given that simple models are MUCH faster to train it may be better to use a simple model if the application does not require absolute accuracy (this really depends on the problem at hand; healthcare is not an area where we want to use less accurate models just to speed up the modeling process)</li>
+<li>The entire problem solving approach has to iterative.</li>
+<li>Feature engineering and preprocessing take lots of time but are very important! I think this is where industry domain becomes handy because if I knew more about cooking I might have been able to create some more informative features</li>
+</ol>
+<h3>The End!</h3>
+<p>There are a lot of things that I have left out of this post in regards to my process and thinking but if there are any questions feel free to email me! I hope that this is just a start of my continued learning through kaggle and similar platforms. </p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: December 19 2015</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/python/">python</a>
+    </p>
+  </div>
+
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a> </p>
+    </div>
+  </main>
+</body>
+</html>

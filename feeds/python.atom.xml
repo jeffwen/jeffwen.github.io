@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2015-12-19T11:01:00-08:00</updated><entry><title>What's Cooking?</title><link href="http://jeffwen.github.io/2015/12/19/whats_cooking" rel="alternate"></link><updated>2015-12-19T11:01:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-12-19:2015/12/19/whats_cooking</id><summary type="html">&lt;p&gt;&lt;em&gt;December 19, 2015&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/python.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2015-12-19T11:01:00-08:00</updated><entry><title>What's Cooking?</title><link href="http://jeffwen.github.io/2015/12/19/whats_cooking" rel="alternate"></link><updated>2015-12-19T11:01:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-12-19:2015/12/19/whats_cooking</id><summary type="html">&lt;p&gt;&lt;em&gt;December 19, 2015&lt;/em&gt;&lt;/p&gt;
 &lt;h3&gt;Getting Started&lt;/h3&gt;
 &lt;p&gt;Ever since I have known about kaggle, I have always seen it as a place where accomplished data scientists and skilled veterans of the machine learning space go to stretch their legs and dominate. However, as I continued to look through the competitions and through the forums where aspiring data scientists were asking a wide variety of questions, I realized that my preconceptions were probably holding me back from learning a lot through practical application. It is definitely one thing to read about algorithms and techniques and quite another to actually implement. Anyways, with that in mind, I figured I would jump in and get started.&lt;/p&gt;
 &lt;p&gt;Before I got started on the whats cooking competition, I had read a lot about the models that I was planning to use and had also read code from past competitions; however, jumping into the competition helped me actually get my hands dirty with models that I had only used a couple times before. More importantly, having to actually write the code myself, I got to practice being (or at least trying to be) systematic and comprehensive in my modeling decisions. Ultimately, I think the competition pushed me to not only read/learn, but also practice and be comfortable with an iterative problem solving process. &lt;/p&gt;
@@ -175,91 +175,4 @@
 &lt;li&gt;Feature engineering and preprocessing take lots of time but are very important! I think this is where industry domain becomes handy because if I knew more about cooking I might have been able to create some more informative features&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3&gt;The End!&lt;/h3&gt;
-&lt;p&gt;There are a lot of things that I have left out of this post in regards to my process and thinking but if there are any questions feel free to email me! I hope that this is just a start of my continued learning through kaggle and similar platforms. &lt;/p&gt;</summary></entry><entry><title>Setting up the blog</title><link href="http://jeffwen.github.io/2015/11/28/pelican-setup" rel="alternate"></link><updated>2015-11-28T13:03:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-11-28:2015/11/28/pelican-setup</id><summary type="html">&lt;p&gt;&lt;em&gt;November 28, 2015&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Over the past couple of days, I have been working towards getting a blog up and running. There were a couple of different options that I was considering and ultimately I ended up choosing to use &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; as my site generator. I also use GitHub Pages to host my blog for free!&lt;/p&gt;
-&lt;h3&gt;Decisions&lt;/h3&gt;
-&lt;p&gt;Initially, I was considering just sticking with Jekyll, which is the site generator that pairs really nicely with &lt;a href="https://help.github.com/articles/using-jekyll-with-pages/"&gt;GitHub Pages&lt;/a&gt;. However, I read a couple different posts by other users, thought about the decision, and noticed the following:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;Ruby vs. Python&lt;/em&gt;: Jekyll is Ruby based whereas Pelican is Python based.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Although I am also picking up Ruby, I am definitely more comfortable with Python at this point.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;Speed&lt;/em&gt;: While I am still new to blogging and don't necessarily feel the struggle of slow page loading (given that I don't have much experience with slow loading blogs), &lt;a href="http://arunrocks.com/moving-blogs-to-pelican/"&gt;this user's&lt;/a&gt; blog post was definitely persuasive enough for me to take speed into consideration.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;Personal Growth&lt;/em&gt;: Jekyll might have been easier to use given that it is integrated with GitHub so well, but I wanted to (at least in my mind at the time) learn a little bit more by using something that required just a little more work. &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;Getting Started&lt;/h3&gt;
-&lt;p&gt;With these things in mind, I decided to jump right in and start setting up my blog. It was quite simple for the most part but it definitely took some time figuring everything out because I was trying to use a couple different resources to make sure that my blog would run smoothly. Looking back on it, I guess it probably would have been better to stick with one solid resource vs. trying to merge different ways of doing the same thing. However, as stated before, I wanted to learn as much as possible and see the different ways people were setting up their blogs.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Resources:&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/3.6.3/"&gt;Pelican Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://mathamy.com/migrating-to-github-pages-using-pelican.html"&gt;Amy Halon's blog post on GitHub Pages Migration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/"&gt;Fedora Magazine's blog post on GitHub Pages and Pelican&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;As I was following some of the resources mentioned earlier, I realized that it was a great opportunity for me to also learn more about other technologies as well. For example, I read up on GitHub submodules because Fedora's post mentioned initiaizing the output directory as a submodule. I am getting my hands dirty with Markdown because I am using Markdown to write these blog posts and pages. Additionally, HTML and CSS are relevant as well because I am learning to customize my blog. Therefore, all in all, things seem to be going pretty smoothly and I am excited to see what else I can do with this site!&lt;/p&gt;
-&lt;h3&gt;Customization&lt;/h3&gt;
-&lt;h4&gt;New Posts&lt;/h4&gt;
-&lt;p&gt;In order to get more familiar with the workings of the platform/ try to customize what I was doing, I decided to write my own function to help speed up the process of writing a new blog. Pelican makes this quite simple with the fabfile.py, which allows you to create new functions for anything that you may want to customize.&lt;/p&gt;
-&lt;p&gt;In my case, I wanted to be able to create new posts from the command line. So by typing the following I can now create a new Markdown file in my content folder with the title, slug, date, etc. preformatted.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;fab newpost:&lt;span class="s2"&gt;&amp;quot;title of my post&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The code that makes this happen is just a simple function that fills in a prespecified template.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;TEMPLATE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s"&gt;Title: {title}&lt;/span&gt;
-&lt;span class="s"&gt;Date: {year}-{month}-{day} {hour}:{minute}&lt;/span&gt;
-&lt;span class="s"&gt;Category:&lt;/span&gt;
-&lt;span class="s"&gt;Slug: {slug}&lt;/span&gt;
-&lt;span class="s"&gt;Summary:&lt;/span&gt;
-&lt;span class="s"&gt;Status: draft&lt;/span&gt;
-&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;newpost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;today&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;slug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;f_create&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;content/{}{:0&amp;gt;2}{:0&amp;gt;2}_{}.md&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TEMPLATE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;hour&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hour&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;minute&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;minute&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_create&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-         &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;File created -&amp;gt; &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;f_create&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h4&gt;Themes&lt;/h4&gt;
-&lt;p&gt;I also wanted to experiment with HTML/ CSS and modify the themes that I was using on my blog. I started with the &lt;a href="https://github.com/gfidente/pelican-svbhack"&gt;SVBHACK&lt;/a&gt; theme but did not really like that the index and archives links were at the top of the page, which seemed to clutter the simplicity of the page. This was a pretty simple customization that I fixed by changing some of the HTML template code to move the links around but now the top of the page is clean!&lt;/p&gt;
-&lt;p&gt;Original:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="original index and archives" src="/images/index_archives_orig.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Modified:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="new archives" src="/images/archives_new.png" /&gt;&lt;/p&gt;
-&lt;p&gt;I was also interested in customizing the color of the side column and so that took some time digging through the style sheet to make it look the way I wanted. Anyways, now things seem to be the way I want them and I hope that they don't break.&lt;/p&gt;
-&lt;h3&gt;Writing and Viewing&lt;/h3&gt;
-&lt;p&gt;Pelican actually makes it surprisingly simple to write and view what has been written.&lt;/p&gt;
-&lt;p&gt;With the function that I wrote above, I can now create first drafts pretty quickly, then when I want to see the post on my blog, Pelican allows for a local server to be created to view the changes. What is most awesome is that if I use&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;make devserver
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;I can actually have the page regenerate each time with new content and all I have to do is refresh the page. So now I can make sure that everything is formatted correctly before I publish my posts.&lt;/p&gt;
-&lt;h3&gt;Final Thoughts&lt;/h3&gt;
-&lt;p&gt;As I learn more about Pelican and blogging in general, I may update this post to include new information about customizations or features that I learn about!&lt;/p&gt;</summary></entry><entry><title>Hello World!</title><link href="http://jeffwen.github.io/2015/11/27/hello-world" rel="alternate"></link><updated>2015-11-27T03:15:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2015-11-27:2015/11/27/hello-world</id><summary type="html">&lt;p&gt;&lt;em&gt;November 27, 2015&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Hello everyone, my name is Jeff. I've started this blog to keep track of the things that I am up to and also to share about exciting things that I am learning. Thanks for stopping by!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;There are a lot of things that I have left out of this post in regards to my process and thinking but if there are any questions feel free to email me! I hope that this is just a start of my continued learning through kaggle and similar platforms. &lt;/p&gt;</summary></entry></feed>
