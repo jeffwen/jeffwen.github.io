@@ -230,8 +230,15 @@
 <p><img alt="Ensemble score" src="/images/ensemble_1.png" /></p>
 <h3>Lots to learn</h3>
 <p>It has been such a journey starting with importing the .json files to getting (at the time) 40th on the leaderboard. Even though with a few more hours to go in the competition I figure I may drop a few places, I feel like I have gained at least a taste of what it feels like to enter and apply the things that I have learned.</p>
-<h4>Next steps</h4>
 <p>In entering this competition I got a chance to apply a lot of things that I had read about. Furthermore, I read <strong>EVEN MORE</strong> things that I didn't get to try out but hope to in the future. I have listed a few take-aways and things to try in the future.</p>
+<h4><em>Next steps</em></h4>
+<ol>
+<li>Use Levenstein distance to map similar words together (I actually have a function in my <a href="https://github.com/jeffwen/Kaggle/blob/master/Whats%20Cooking/cooking.py">cooking code</a> that I was going to use, but I never got around to implementing it...)</li>
+<li>Use Bayesian Optimization or Random Search to optimize parameter settings</li>
+<li>Stack and blend different models</li>
+<li>Experiment with other models (i.e. neural networks, xgb (with good parameter tuning))</li>
+</ol>
+<h4><em>Take-aways</em></h4>
 <ol>
 <li>Parameter tuning is very important and though grid search worked out well this time, its really computationally intensive and in another setting I might not have the luxury to perform this type of exhaustive search. I can try random search, which may be better but a very interesting thing that I read about were two packages called: Spearmint and Hyperopt, which use bayesian optimization to perform the parameter search (read this awesome <a href="https://jmhessel.github.io/Bayesian-Optimization/">blog post</a> or <a href="http://fastml.com/optimizing-hyperparams-with-hyperopt/">this one</a> to learn more about parameter tuning and bayesian optimization)</li>
 <li>Fitting models is easy, but figuring which model to use and when is difficult</li>

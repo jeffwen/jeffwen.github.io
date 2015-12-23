@@ -164,8 +164,15 @@
 &lt;p&gt;&lt;img alt="Ensemble score" src="/images/ensemble_1.png" /&gt;&lt;/p&gt;
 &lt;h3&gt;Lots to learn&lt;/h3&gt;
 &lt;p&gt;It has been such a journey starting with importing the .json files to getting (at the time) 40th on the leaderboard. Even though with a few more hours to go in the competition I figure I may drop a few places, I feel like I have gained at least a taste of what it feels like to enter and apply the things that I have learned.&lt;/p&gt;
-&lt;h4&gt;Next steps&lt;/h4&gt;
 &lt;p&gt;In entering this competition I got a chance to apply a lot of things that I had read about. Furthermore, I read &lt;strong&gt;EVEN MORE&lt;/strong&gt; things that I didn't get to try out but hope to in the future. I have listed a few take-aways and things to try in the future.&lt;/p&gt;
+&lt;h4&gt;&lt;em&gt;Next steps&lt;/em&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Use Levenstein distance to map similar words together (I actually have a function in my &lt;a href="https://github.com/jeffwen/Kaggle/blob/master/Whats%20Cooking/cooking.py"&gt;cooking code&lt;/a&gt; that I was going to use, but I never got around to implementing it...)&lt;/li&gt;
+&lt;li&gt;Use Bayesian Optimization or Random Search to optimize parameter settings&lt;/li&gt;
+&lt;li&gt;Stack and blend different models&lt;/li&gt;
+&lt;li&gt;Experiment with other models (i.e. neural networks, xgb (with good parameter tuning))&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;&lt;em&gt;Take-aways&lt;/em&gt;&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;Parameter tuning is very important and though grid search worked out well this time, its really computationally intensive and in another setting I might not have the luxury to perform this type of exhaustive search. I can try random search, which may be better but a very interesting thing that I read about were two packages called: Spearmint and Hyperopt, which use bayesian optimization to perform the parameter search (read this awesome &lt;a href="https://jmhessel.github.io/Bayesian-Optimization/"&gt;blog post&lt;/a&gt; or &lt;a href="http://fastml.com/optimizing-hyperparams-with-hyperopt/"&gt;this one&lt;/a&gt; to learn more about parameter tuning and bayesian optimization)&lt;/li&gt;
 &lt;li&gt;Fitting models is easy, but figuring which model to use and when is difficult&lt;/li&gt;
