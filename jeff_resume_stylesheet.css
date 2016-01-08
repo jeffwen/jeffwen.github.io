@@ -119,12 +119,13 @@ div p a {
 
 @media only screen and (max-device-width: 480px) {
   #aside {
-      position: absolute;
+      position: relative;
       width:auto;
       margin: 0vh 3vw 0vh 3vw;
       font-size: 1.0em;
       text-align:left;
       float: none;
+      clear: both;
   }
   
   #main_text {
@@ -135,6 +136,18 @@ div p a {
       font-weight:bold;
       font-size: 1.3em;
       letter-spacing: -0.5px;
+  }
+
+  #left {
+	float:left;
+	width: auto;
+  }
+
+  #right {
+    text-align:left;
+    font-style:italic;
+    color:#999999;
+    width: auto;
   }
 
 }
