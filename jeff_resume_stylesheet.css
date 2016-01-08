@@ -115,3 +115,25 @@ div p a {
 .education {
     margin: -0.2% 0% 2% 0%;
 }
+
+
+@media only screen and (max-device-width: 480px) {
+  #aside {
+      position: absolute;
+      height: 100%;
+      width:100%;
+      margin: 0vw 3vw 0vh 3vw;
+      font-size: 1.0em;
+  }
+  
+  #main_text {
+      margin: 0vw 3vw 0vh 3vw;
+  }
+
+  .header_aside {
+      font-weight:bold;
+      font-size: 1.3em;
+      letter-spacing: -0.5px;
+  }
+
+}
