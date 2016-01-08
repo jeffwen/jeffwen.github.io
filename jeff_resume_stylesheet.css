@@ -36,7 +36,7 @@ a:hover {
 }
 
 #last_name {
-    font-weight:500;
+    font-weight:600;
 }
 
 #aside { 
@@ -121,7 +121,7 @@ div p a {
   #aside {
       position: relative;
       width:auto;
-      margin: 5vh 3vw 0vh 3vw;
+      margin: 6vh 3vw 0vh 3vw;
       font-size: 1.0em;
       text-align:left;
       float: none;
