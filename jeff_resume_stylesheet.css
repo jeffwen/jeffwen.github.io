@@ -121,7 +121,7 @@ div p a {
   #aside {
       position: relative;
       width:auto;
-      margin: 1vh 3vw 0vh 3vw;
+      margin: 3vh 3vw 0vh 3vw;
       font-size: 1.0em;
       text-align:left;
       float: none;
@@ -133,7 +133,7 @@ div p a {
   }
   
   #main_text {
-      margin: 0vw 3vw 0vh 3vw;
+      margin: 0vh 3vw 0vh 3vw;
   }
 
   .header_aside {
