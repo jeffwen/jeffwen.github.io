@@ -121,11 +121,15 @@ div p a {
   #aside {
       position: relative;
       width:auto;
-      margin: 0vh 3vw 0vh 3vw;
+      margin: 1vh 3vw 0vh 3vw;
       font-size: 1.0em;
       text-align:left;
       float: none;
       clear: both;
+  }
+
+  div p a {
+      color: #ff8000;
   }
   
   #main_text {
@@ -144,10 +148,10 @@ div p a {
   }
 
   #right {
-    text-align:left;
-    font-style:italic;
-    color:#999999;
-    width: auto;
+      text-align:left;
+      font-style:italic;
+      color:#999999;
+      width: auto;
   }
 
 }
