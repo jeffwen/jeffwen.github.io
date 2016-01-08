@@ -120,10 +120,11 @@ div p a {
 @media only screen and (max-device-width: 480px) {
   #aside {
       position: absolute;
-      height: 100%;
-      width:100%;
-      margin: 0vw 3vw 0vh 3vw;
+      width:auto;
+      margin: 0vh 3vw 0vh 3vw;
       font-size: 1.0em;
+      text-align:left;
+      float: none;
   }
   
   #main_text {
