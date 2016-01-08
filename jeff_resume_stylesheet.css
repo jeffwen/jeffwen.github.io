@@ -43,7 +43,7 @@ a:hover {
     font-size: 0.9em;
     color: #4D4D4D;
     text-align: right;
-    width: 18vh;
+    width: 20vh;
     position: fixed;
     margin: 0.28% 0% 0% 0%;
     clear: both;
@@ -73,7 +73,7 @@ div p a {
 }
 
 #main_text {
-    margin: 0vh 3vh 0vh 20vh;
+    margin: 0vh 3vh 0vh 22vh;
     color: #4D4D4D;
     clear:left;
     float:right;
