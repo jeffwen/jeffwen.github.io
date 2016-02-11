@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; Movie Scraping and Regression Analysis  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.github.io">
+        <img src="http://jeffwen.github.io/images/jeff_logo.png" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.github.io">Jeff Wen</a></h2>
+      <p>aspiring data scientist, problem solver, wannabe tinkerer</p>
+      <ul>
+        <li><a href="http://jeffwen.github.io/pages/about-me.html">About Me</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.github.io">Index</a> &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2016/02/10/movie_scraping_and_regression_analysis">Movie Scraping and Regression Analysis</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>February 10, 2016</em></p>
+<p>In ths post, I will share a bit about what I have been up to over the past few weeks. I plan on putting up my code soon!</p>
+<h1>Getting Started</h1>
+<p>For this project, I wanted to make use of a couple things that I learned at Metis. More specifically, I was interested in using BeautifulSoup, Statsmodels, and Scikit-learn to try and predict total adjusted domestic gross from movie data scraped from <a href="boxofficemojo.com">boxofficemojo.com</a>. One of the main objectives of the project was to try and get a sense for how to collect data and make sure that it is in a clean enough format to run analyses on.</p>
+<p>One of the things that I realized while participating in kaggle competitions is that a lot of the time the data comes in very nice formats. Most of the major data errors are already taken care of and there isn't much if any scraping that needs to be done to get the data (I can just download the data). Therefore, I figured it would be nice to get a sense for how to web scrape then clean the data myself to understand the process more completely.</p>
+<h1>Objectives</h1>
+<p>Below are some of the objectives that I had in mind before starting the project:</p>
+<ol>
+<li>Get familiar with using BeautifulSoup to scrape web data<ul>
+<li>Put HTML knowledge to use so that I can effectively isolate and extract the information I want from boxofficemojo</li>
+</ul>
+</li>
+<li>Compare and contrast using Statsmodels and Scikit-learn to do linear regression<ul>
+<li>Understand how and when to use transformations to variables in order to create a better model</li>
+<li>Experiment between Lasso, Ridge, and Elastic Net to regularize the models that are built</li>
+</ul>
+</li>
+<li>Learn more about utilizing cross validation as a tool to identify the best model</li>
+</ol>
+<h1>Scraping the Data</h1>
+<p>The data scraping was one of the most time consuming parts of this project because it took quite a bit of time to define the business problem enough to come up with an idea of what I needed and it was also difficult at times to navigate through the nested tables (the HTML). However, BeautifulSoup made it quite simple to grab the HTML and parse through it.</p>
+<p>More about the business problem. In order to make the project more interesting our instructors at Metis had us come up with a problem that we wanted to solve. For me, I figured I could use this the data and the model that I created to predict the total adjusted domestic gross. The motivating question for this is as a hypothetical merchandise production company (Nexus), we had already purchased rights from a couple movie studios to produce products for their movies. However, because production lines are relatively inflexible and take a while to reorganize, the business question was whether we could use a regression model to identify movies that would be more popular so that we could reorganize our production lines before crunch time (when the movies got immensely popular) to ensure that we properly allocated our resources. </p>
+<p>With this problem in mind, it was time to start the scraping process. I decided to start by scraping as many movies as possible so that I could build out my training data set. When I looked at the a <a href="http://www.boxofficemojo.com/movies/?page=main&amp;adjust_mo=&amp;adjust_yr=2016&amp;id=avatar.htm">sample page</a> on boxofficemojo, I noticed that a lot of interesting information was captured in the table at the top of each movie page. As a first step, I realized it would be quick to just take down this information.</p>
+<p><img alt="Avatar Sample" src="/images/avatar_sample.png" /></p>
+<p>I wrote a couple functions that used BeautifulSoup to output the HTML, then parse the HTML to extract just the information in that table. Afterwards, I stored the information in a dictionary of dictionaries (key = movie slug; values = information in the table) then I put that information into a pandas dataframe. The dict within a dict allowed me to add details to the dictionary for each movie if I decided to get more information (which I did).</p>
+<p>I realized that if I really wanted to create a suitable training set then I needed to scrape many movies. In order to do this, I went to the alphabetical index and scraped the links of each movie (~16k) and passed each link into the previous information getting function. After these two steps, I had most of the information that I needed.</p>
+<p>The last bit of scraping I did was to get the daily sales information and the daily theater count information. Originally I figured it would be interesting to do time series analysis on the daily sales information to predict a movie's sales and while I did try an ARIMA model I decided I would go back to that later.</p>
+<h1>Data Cleaning</h1>
+<p>The next focus was to clean the data and start thinking about how to get the model up and running. I started by importing the dataframes that I had created into my Python environment.</p>
+<p>Then I  worked with the variables to make sure that they were able to be processed
+<em> Turning the date strings into datetime objects
+</em> Turning the runtime string from "1 hr. 52 min." to integer format
+<em> Getting the Month, Year, and Day for each datetime object
+</em> Drop the NA values
+* Reorder the columns</p>
+<p>With the initial data cleaning steps completed, I moved forward to building the linear regression models.</p>
+<h2>Model Building</h2>
+<p>I wanted to create an initial plot to take a look at some of the data and make sure that things looked normal. I also created a residual plot just to check and see if the residuals were more or less random.</p>
+<ul>
+<li>From the initial plot it looks like there are quite a few values that are sitting right at 0, so I want to look and see what those are/ get rid of the ones that are NAs (though we should have already dropped these)<ul>
+<li>When I looked further into this problem, it seemed like the problem was not from NAs but actually from opening sales that were exteremly small</li>
+<li>Further investigation showed that the very small observations were from releases at very few theaters vs. many theaters</li>
+</ul>
+</li>
+<li>The residuals plot also looks a bit bunched together and definitely looks like there is some heteroscedasticity</li>
+<li>I decided that it might be good to transform the data to see if it could deal with some of the effect</li>
+</ul>
+<p><img alt="Initial Residuals" src="/img/initial_resids.png" /></p>
+<p>After fitting the initial model, the adjusted R-squared was .457, which was not too horrible for a first go. I continued the process of analyzing the shape of the residuals and further transformed variables that seemed to have non-normal residuals. </p>
+<p><img alt="Inital Regression Results" src="/img/initial_reg.png" /></p>
+<h3>Bring in more data</h3>
+<p>In order to deal with the observations that looked to bunched near 0, I brought in the number of theaters that the movie was released at to calculate the average opening sales per number of theaters.</p>
+<h3>Continuing the model building</h3>
+<p>With the new data, I continued to iterate and build models successively by tuning the parameters (mainly by plotting the residuals and looking to see if the residuals were random/ checking to see that there weren't major collinearity problems). By this time the model's adjusted R-squared was at .657.</p>
+<p>I figured it might be good to group the genres because some of the genres were occurring realtively infrequently. So I wrote a function to standardize the number of genres. However, when I ran the regression again, the model seemed to fit the data less well so I took out the new genre variable that I created.</p>
+<p>After performing log and exponential transformations to the dependent and some of the independent variables, the model seemed to be more or less set (at least in terms of fit of the residuals and the adjusted r-squared ~0.70). </p>
+<div class="highlight"><pre><span class="n">model4</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s">&#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">model_data_3</span><span class="p">)</span>
+<span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit_regularized</span><span class="p">()</span>
+</pre></div>
+
+
+<p>In the above code example, the <code>Popular_Month</code> independent variable is a generated binary variable based on which of the months were popular (May, June, July, November, and December).</p>
+<p>Given that the model was explaning about ~30% more of the variance than the initial model, I felt like it was time to move to scikit-learn to do some train test splits along with cross validation to make sure that the model was performing as expected on unseen data. </p>
+<h2>Move to scikit-learn</h2>
+<p>The main reason for moving to scikit-learn at this point was to take advantage of the convenient cross validation tools.</p>
+<p>The move to scikit-learn meant that I needed to make sure that the features were properly processed so that sklearn could take it all in. Unlike statsmodels, dummy variables are not automatically generated in sklearn so it is actually easier to generate the dummy variables using pandas.get_dummies() function. However, I made sure to delete one of the columns from each column that I was turning into dummy variables so there would not be collinearity issues.</p>
+<p>Another benefit of using scikit-learn is that the <a href="http://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model">regularized linear models</a> are accessible and quite easy to use. I experimented with lasso, ridge, and eventually decided to use elasticnet because it makes use of both lasso and ridge regularization. (Also scikit-learn bundles cross validation and elasticnet which makes scoring and testing the models quite simple!)</p>
+<p>In order to do cross validation, I used sklearn's <code>train_test_split</code> module to create 70%/30% splits of the ~900 or so observations. Then I trained the model on the 70% and performed 10-fold ElasticNetCV (with sklearn) and separately tested on the remaining 30%.</p>
+<h1>What Did I Learn</h1>
+<p>Throughout the process, I realized that I was going back and forth between many of the different models and features to figure out what combination worked the best. While I could probably have used grid search or something similar to find the best parameters and automatically build a model, it was fun to manually work through building the model step by step.</p>
+<p>I also learned how to use BeautifulSoup to scrape data from a web page. While BeautifulSoup is a great package, I learned that it was still quite time consuming to figure out where the data actually resides.</p>
+<h1>Next Steps</h1>
+<p>Given that this project encapsulated many different aspects, I think that the main improvements and ways to continue learning is to refine each of the steps. For example:</p>
+<ul>
+<li>Web scraping: I used BeautifulSoup to scrape the web page, but I want to think about using Selenium to scrape web pages that might not have nicely laid out HTML (think information kidden behind a more interactive dynamic javascript page).</li>
+<li>Modeling: most of the modeling building and analyses that I performed in statsmodels and sklearn had to do with linear regression. However, there were many different features of both packages that I didn't get a chance to look at. I think it would be interesting to continue utilizing both packages for futher analyses.<ul>
+<li>statsmodels: I performed some initial trend and seasonal decomposition in order to do time series analysis (see detrended and deseasoned graphs below!) but as mentioned earlier I decided against further looking into this for the time being.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Seasonal Decomposition" src="/images/seasonal_decompose.png" /></p>
+<p>This was a fun project that exposed me to a lot of different tools and I look forward to learning more by continuing some of the ideas that I had about how to extend the analysis!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: February 10 2016</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/misc/">misc</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2016/02/10/movie_scraping_and_regression_analysis";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a> </p>
+    </div>
+  </main>
+</body>
+</html>
