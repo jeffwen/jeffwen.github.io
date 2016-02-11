@@ -68,7 +68,7 @@
     <p><em>February 10, 2016</em></p>
 <p>In ths post, I will share a bit about what I have been up to over the past few weeks. I plan on putting up my code soon!</p>
 <h1>Getting Started</h1>
-<p>For this project, I wanted to make use of a couple things that I learned at Metis. More specifically, I was interested in using BeautifulSoup, Statsmodels, and Scikit-learn to try and predict total adjusted domestic gross from movie data scraped from <a href="www.boxofficemojo.com">boxofficemojo.com</a>. One of the main objectives of the project was to try and get a sense for how to collect data and make sure that it is in a clean enough format to run analyses on.</p>
+<p>For this project, I wanted to make use of a couple things that I learned at Metis. More specifically, I was interested in using BeautifulSoup, Statsmodels, and Scikit-learn to try and predict total adjusted domestic gross from movie data scraped from <a href="http://www.boxofficemojo.com">boxofficemojo</a>. One of the main objectives of the project was to try and get a sense for how to collect data and make sure that it is in a clean enough format to run analyses on.</p>
 <p>One of the things that I realized while participating in kaggle competitions is that a lot of the time the data comes in very nice formats. Most of the major data errors are already taken care of and there isn't much if any scraping that needs to be done to get the data (I can just download the data). Therefore, I figured it would be nice to get a sense for how to web scrape then clean the data myself to understand the process more completely.</p>
 <h1>Objectives</h1>
 <p>Below are some of the objectives that I had in mind before starting the project:</p>
@@ -94,12 +94,14 @@
 <p>The last bit of scraping I did was to get the daily sales information and the daily theater count information. Originally I figured it would be interesting to do time series analysis on the daily sales information to predict a movie's sales and while I did try an ARIMA model I decided I would go back to that later.</p>
 <h1>Data Cleaning</h1>
 <p>The next focus was to clean the data and start thinking about how to get the model up and running. I started by importing the dataframes that I had created into my Python environment.</p>
-<p>Then I  worked with the variables to make sure that they were able to be processed
-<em> Turning the date strings into datetime objects
-</em> Turning the runtime string from "1 hr. 52 min." to integer format
-<em> Getting the Month, Year, and Day for each datetime object
-</em> Drop the NA values
-* Reorder the columns</p>
+<p>Then I  worked with the variables to make sure that they were able to be processed</p>
+<ul>
+<li>Turning the date strings into datetime objects</li>
+<li>Turning the runtime string from "1 hr. 52 min." to integer format</li>
+<li>Getting the Month, Year, and Day for each datetime object</li>
+<li>Drop the NA values</li>
+<li>Reorder the columns</li>
+</ul>
 <p>With the initial data cleaning steps completed, I moved forward to building the linear regression models.</p>
 <h2>Model Building</h2>
 <p>I wanted to create an initial plot to take a look at some of the data and make sure that things looked normal. I also created a residual plot just to check and see if the residuals were more or less random.</p>
