@@ -107,8 +107,8 @@
   </div>
   <div class="article_text">
     <p><em>March 18, 2016</em></p>
-<p>In this post, I discuss the results of the work from the <a href="http://jeffwen/github.io/making_census_data_exciting_part_1/">first post</a>. That first post was a bit lengthy and went into the details of getting the PostgreSQL set up, but that was all necessary to be able to query the data to set up the <a href="/dashboard.html">dashboard</a> (a screenshot is shown below, you can click on multiple things at once...cross filter charts)!</p>
-<p><a href="/dashboard.html"><img alt="Dashboard" src="/images/dashboard.png" /></a></p>
+<p>In this post, I discuss the results of the work from the <a href="/2016/02/27/making_census_data_exciting_part_1">first post</a>. That first post was a bit lengthy and went into the details of getting the PostgreSQL set up, but that was all necessary to be able to query the data to set up the <a href="/html/dashboard.html">dashboard</a> (a screenshot is shown below, you can click on multiple things at once...cross filter charts)!</p>
+<p><a href="/html/dashboard.html"><img alt="Dashboard" src="/images/dashboard.png" /></a></p>
 <h3>Problem Statement</h3>
 <p>So the goal of the project was to see if <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">census data</a> could be used in an interesting manner. While discussing possible problems that could be solved, our team figured that it would be interesting to use the data as if we had just acquired a freelance employment company. Let me make this more clear:</p>
 <ol>
@@ -124,7 +124,7 @@
 <div class="highlight"><pre><span class="c"># input must be strings</span>
 <span class="k">def</span> <span class="nf">query_database</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    dbname: databse name</span>
+<span class="sd">    dbname: database name</span>
 <span class="sd">    user: username</span>
 <span class="sd">    password: password for the user</span>
 <span class="sd">    host: public dns</span>
