@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <!-- <script src="/theme/typed.js-master/js/typed.js"></script> -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <!-- <script> -->
+  <!--     jQuery(function($){ -->
+  <!--     $(".element").typed({ -->
+  <!--       strings: ["aspiring data scientist.", "problem solver.","wannabe tinkerer."], -->
+  <!--       typeSpeed: 50 -->
+  <!--     }); -->
+  <!--     }); -->
+      
+  <!-- </script> -->
+
+  <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; Making Census Data Exciting (Part 1)  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--   <style> -->
+<!--      .typed-cursor{ -->
+<!--      opacity: 1; -->
+<!--      font-weight: 100; -->
+<!--     -webkit-animation: blink 0.7s infinite; -->
+<!--     -moz-animation: blink 0.7s infinite; -->
+<!--      animation: blink 0.7s infinite; -->
+<!--      font-size: 1.5rem; -->
+<!--      vertical-align:middle; -->
+<!-- } -->
+<!-- @keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-webkit-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-moz-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!--      } -->
+
+<!--      </style> -->
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.github.io">
+        <img src="http://jeffwen.github.io/images/jeff_logo.png" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.github.io">Jeff Wen</a></h2>
+      <p>aspiring data scientist, problem solver, wannabe tinkerer</p>
+      <!-- <p class="element" style="display:inline-block;"></div> -->
+      <ul>
+        <li><a href="http://jeffwen.github.io/pages/about-me.html">About Me</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.github.io">Index</a> &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2016/02/27/making_census_data_exciting_part_1">Making Census Data Exciting (Part 1)</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>February 27, 2016</em></p>
+<p>Let's talk about remote servers, census data, classification models, and data visualization...lots to cover...</p>
+<p><em>Warning:</em> This post will be a bit lengthy and cover some details that might not be that interesting but I am also using this post as a way to capture the process so I don't forget things.
+<img alt="Census Logo" src="/images/census-logo.png" /></p>
+<h3>Summary</h3>
+<p>In this post, I will discuss some of the deisgn decisions that I made while working on this project and also go through some of the set up required to get things up and running. To start off with the goal of this project was to take census data and use it and visualize it in an interesting way.</p>
+<p>While I did not really have a clear idea when I started the project, I worked with a couple of my teammates to come up with an overall plan. We had to use <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">census data</a> and also had to think about how to tell a story with that data using classification models and D3.js. With this said, we really racked our brains to try to figure out how to use the data in an interesting way. I think we eventually did and will share more in the upcoming 2 posts!</p>
+<h3>Setup</h3>
+<p>One of the tools that I wanted to start playing around with was Amazon's EC2 servers because the trial version is free for the first year and I also wanted to learn the technology! However, the set up for the EC2 server was actually not as straight forward as I would have imagined. Particularly because I wanted to use PostgreSQL and directly connect to the server to pull data into my local machine to analyze with Python (Psycopg2 to the rescue).</p>
+<h4>Amazon Instance</h4>
+<p>Anyways, the first step was to create the EC2 instance:</p>
+<ol>
+<li>Make sure that you have an AWS account and select a region that makes sense (in my case US West)</li>
+<li>Choose one of the configurations that you want (my teammates and I chose Ubuntu)</li>
+<li>Select a "free tier" instance ("t2.micro" for me!)</li>
+<li>Walk through the setup process by following the prompts</li>
+<li>Setup security groups<ul>
+<li>This part was a bit confusing because PostgreSQL required another port to allow connections from my local machine's Python (will talk more about this later)</li>
+</ul>
+</li>
+<li>Choose to "Create a new key pair" and give it a name</li>
+<li>Download your .pem file.</li>
+<li>Move the file somewhere sensible like ~/.ssh/.</li>
+<li>Make the file read only with chmod 400 filename</li>
+</ol>
+<p>At this point, the server is set up and can be accessed using:</p>
+<div class="highlight"><pre>ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
+</pre></div>
+
+
+<h4>Loading the tools and getting things ready</h4>
+<p>At this point we needed to get a couple packages onto the server so that we could get working. <code>apt-get</code> is awesome for this when using Ubuntu.</p>
+<ol>
+<li>First of all we needed to be able to install Python related things:<ul>
+<li>Use <code>pip</code> to install Python things: <code>sudo apt-get install python-pip</code></li>
+<li>Other scipy things: <code>sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose</code></li>
+<li>I like git and emacs :) : <code>sudo apt-get install git emacs</code></li>
+</ul>
+</li>
+<li>Instead of signing in as 'Ubuntu' I added myself as a user:<ul>
+<li><code>sudo adduser [username]</code></li>
+<li>Grant total access: <code>sudo visudo</code> which will open a nano text file<ul>
+<li>Add <code>[username] ALL=(ALL:ALL) ALL</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Setup public key by following this <a href="http://docs.oracle.com/cd/E19253-01/816-4557/sshuser-33/index.html">link</a><ul>
+<li>Once the public key is generated copy it/ paste it onto remote server (copy/ paste probably isn't the best way... but it works!)<ul>
+<li>Copy this <code>~/.ssh/id_rsa.pub</code></li>
+<li>Create proper files on remote machine <code>sudo mkdir /home/my_cool_username/.ssh/</code></li>
+<li>Paste the copied public key into the authorized keys file <code>sudo nano /home/my_cool_username/.ssh/authorized_keys</code></li>
+</ul>
+</li>
+<li>This should work now! <code>ssh my_cool_username@123.234.123.234</code></li>
+</ul>
+</li>
+<li>Make it easier to login<ul>
+<li>Edit ssh config file by adding<ul>
+<li><code>Host my_cool_machine</code></li>
+<li><code>User my_cool_username</code></li>
+</ul>
+</li>
+<li>Edit <code>/etc/hosts</code> file<ul>
+<li><code>Host_ip my_cool_machine</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Finally we can now login using <code>ssh my_cool_machine</code><ul>
+<li>And easily move things over to the remote machine using <code>scp cool_file.png my_cool_machine:~</code></li>
+</ul>
+</li>
+</ol>
+<h4>PostgreSQL</h4>
+<p>In order to start using PostgreSQL I had to install PostgreSQL onto the remote machine and set up the access so that I could reach it from my local machine through Python.</p>
+<ol>
+<li>
+<p>Install PostgreSQL <code>sudo apt-get install postgresql postgresql-contrib</code></p>
+<ul>
+<li>Start and stop the PostgreSQL server using the following<ul>
+<li><code>sudo service postgresql status</code></li>
+<li><code>sudo service postgresql stop</code></li>
+<li><code>sudo service postgresql start</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Installing PostgreSQL created a <code>postgres</code> user, but to add myself as a user I had to</p>
+</li>
+</ol>
+<div class="highlight"><pre>sudo -u postgres createuser --superuser my_user_name
+sudo -u postgres psql
+<span class="c"># now in psql...</span>
+<span class="se">\p</span>assword my_user_name
+<span class="c"># exit out of psql with Ctrl+D</span>
+<span class="c"># Create a database for your user</span>
+sudo -u postgres createdb my_user_name
+</pre></div>
+
+
+<h3>Load the data</h3>
+<p>At this point the Postgres environment was set up but there was no data yet! So in order to add some data, I found it easiest to just directly import a <code>.csv</code> file. However, I had to create the database first.</p>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">census</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Then switch to the newly created database <code>\c endor</code></p>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">census</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">age</span> <span class="nb">INT</span><span class="p">;</span> 
+    <span class="n">workclass</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">fnlwgt</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">education</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">education_num</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">marital_status</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">occupation</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">relationship</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">race</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">sex</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">capital_gain</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">capital_loss</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">hours_per_week</span> <span class="nb">INT</span><span class="p">,</span>
+    <span class="n">native_country</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<p>Now with the data table set up, I scp'ed the census data from my local machine to the remote machine and copied the data into database.</p>
+<div class="highlight"><pre><span class="k">COPY</span> <span class="n">census</span> <span class="k">FROM</span> <span class="s1">&#39;/path/to/ewoks.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
+</pre></div>
+
+
+<h3>Permissions</h3>
+<p>Now the Postgres database is set up and work can begin if I wanted to do all the work on my remote machine. However, it is much easier to work from my local machine so I had to change a few things in the Postgres configuration files and my Amazon AWS security group.</p>
+<p>Lets start with the AWS security group. Whenever I want to log into my remote machine from a different IP address I need to add a 'rule' that allows that new IP address (or I can set it to allow any IP but thats probably not the best). So under security group on my AWS I add a new SSH with my current IP address. But I also need to allow communication with the Postgres database. Luckily, AWS has a pretty smooth process for this. Once again I add a 'rule' but this time from the drop down I select 'PostgreSQL' and I can allow any IP address to access the databse or some specified ones.</p>
+<p><img alt="Postgres AWS" src="/images/postgre_aws.png" /></p>
+<p>In order to edit the Postgres configuration files, I need to go back into my remote machine. There are 2 files that I need to edit.</p>
+<ul>
+<li><code>sudo nano /etc/postgresql/9.3/main/postgresql.conf</code><ul>
+<li>Under 'CONNECTIONS &amp; AUTHENTIFICATION' change the 'listening_addresses' from 'localhost' to '*' this will allow all to access<ul>
+<li><code>listen_addresses = '*'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>sudo nano /etc/postgresql/9.3/main/pg_hba.conf</code><ul>
+<li>Under 'IPv4 LOCAL CONNECTIONS' I change the allowed IPs<ul>
+<li><code>host all all 0.0.0.0/0 trust</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>FINALLY. At this point, I can actually access my remote database from my local machine. However, when using Python and psycopg2 to access the database there were a few more hurdles that I had to jump over :(.</p>
+<h3>Psycopg2 and Python</h3>
+<p>To directly connect with the database I had to install <a href="http://initd.org/psycopg/">psycopg2</a>, which is a Postgres adapter for Python. I did the following in order to get the set up working... (lots of steps and troubleshooting; took  me a long time to figure out the last step)</p>
+<div class="highlight"><pre><span class="n">brew</span> <span class="n">install</span> <span class="n">postgresql</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
+<span class="c"># this next step I had to preform only because it kept throwing back an error saying that my</span>
+<span class="c"># AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug</span>
+<span class="n">brew</span> <span class="n">unlink</span> <span class="n">openssl</span> <span class="o">&amp;&amp;</span> <span class="n">brew</span> <span class="n">link</span> <span class="n">openssl</span> <span class="o">--</span><span class="n">force</span>
+</pre></div>
+
+
+<h3>Finishing up</h3>
+<p>Whew! That was exciting. I know...</p>
+<p>The process to get the server and database all set up may seem quite tedious, but many of the steps above are actually quite quick! Plus, it is good to have things all set up so that the analysis and visualization steps can happen smoothly! In the next post, I will discuss more of the details behind the analysis and also hopefully show a working version of the D3 dashboard!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: February 27 2016</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/python/">Python</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2016/02/27/making_census_data_exciting_part_1";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a> </p>
+    </div>
+  </main>
+</body>
+</html>

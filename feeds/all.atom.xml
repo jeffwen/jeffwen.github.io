@@ -1,5 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-02-10T16:27:00-08:00</updated><entry><title>Movie Scraping and Regression Analysis</title><link href="http://jeffwen.github.io/2016/02/10/movie_scraping_and_regression_analysis" rel="alternate"></link><updated>2016-02-10T16:27:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-02-10:2016/02/10/movie_scraping_and_regression_analysis</id><summary type="html">&lt;p&gt;&lt;em&gt;February 10, 2016&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-02-27T13:31:00-08:00</updated><entry><title>Making Census Data Exciting (Part 1)</title><link href="http://jeffwen.github.io/2016/02/27/making_census_data_exciting_part_1" rel="alternate"></link><updated>2016-02-27T13:31:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-02-27:2016/02/27/making_census_data_exciting_part_1</id><summary type="html">&lt;p&gt;&lt;em&gt;February 27, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Let's talk about remote servers, census data, classification models, and data visualization...lots to cover...&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Warning:&lt;/em&gt; This post will be a bit lengthy and cover some details that might not be that interesting but I am also using this post as a way to capture the process so I don't forget things.
+&lt;img alt="Census Logo" src="/images/census-logo.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;In this post, I will discuss some of the deisgn decisions that I made while working on this project and also go through some of the set up required to get things up and running. To start off with the goal of this project was to take census data and use it and visualize it in an interesting way.&lt;/p&gt;
+&lt;p&gt;While I did not really have a clear idea when I started the project, I worked with a couple of my teammates to come up with an overall plan. We had to use &lt;a href="https://archive.ics.uci.edu/ml/datasets/Census+Income"&gt;census data&lt;/a&gt; and also had to think about how to tell a story with that data using classification models and D3.js. With this said, we really racked our brains to try to figure out how to use the data in an interesting way. I think we eventually did and will share more in the upcoming 2 posts!&lt;/p&gt;
+&lt;h3&gt;Setup&lt;/h3&gt;
+&lt;p&gt;One of the tools that I wanted to start playing around with was Amazon's EC2 servers because the trial version is free for the first year and I also wanted to learn the technology! However, the set up for the EC2 server was actually not as straight forward as I would have imagined. Particularly because I wanted to use PostgreSQL and directly connect to the server to pull data into my local machine to analyze with Python (Psycopg2 to the rescue).&lt;/p&gt;
+&lt;h4&gt;Amazon Instance&lt;/h4&gt;
+&lt;p&gt;Anyways, the first step was to create the EC2 instance:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Make sure that you have an AWS account and select a region that makes sense (in my case US West)&lt;/li&gt;
+&lt;li&gt;Choose one of the configurations that you want (my teammates and I chose Ubuntu)&lt;/li&gt;
+&lt;li&gt;Select a "free tier" instance ("t2.micro" for me!)&lt;/li&gt;
+&lt;li&gt;Walk through the setup process by following the prompts&lt;/li&gt;
+&lt;li&gt;Setup security groups&lt;ul&gt;
+&lt;li&gt;This part was a bit confusing because PostgreSQL required another port to allow connections from my local machine's Python (will talk more about this later)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Choose to "Create a new key pair" and give it a name&lt;/li&gt;
+&lt;li&gt;Download your .pem file.&lt;/li&gt;
+&lt;li&gt;Move the file somewhere sensible like ~/.ssh/.&lt;/li&gt;
+&lt;li&gt;Make the file read only with chmod 400 filename&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;At this point, the server is set up and can be accessed using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Loading the tools and getting things ready&lt;/h4&gt;
+&lt;p&gt;At this point we needed to get a couple packages onto the server so that we could get working. &lt;code&gt;apt-get&lt;/code&gt; is awesome for this when using Ubuntu.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First of all we needed to be able to install Python related things:&lt;ul&gt;
+&lt;li&gt;Use &lt;code&gt;pip&lt;/code&gt; to install Python things: &lt;code&gt;sudo apt-get install python-pip&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Other scipy things: &lt;code&gt;sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;I like git and emacs :) : &lt;code&gt;sudo apt-get install git emacs&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Instead of signing in as 'Ubuntu' I added myself as a user:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo adduser [username]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Grant total access: &lt;code&gt;sudo visudo&lt;/code&gt; which will open a nano text file&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;[username] ALL=(ALL:ALL) ALL&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Setup public key by following this &lt;a href="http://docs.oracle.com/cd/E19253-01/816-4557/sshuser-33/index.html"&gt;link&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;Once the public key is generated copy it/ paste it onto remote server (copy/ paste probably isn't the best way... but it works!)&lt;ul&gt;
+&lt;li&gt;Copy this &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Create proper files on remote machine &lt;code&gt;sudo mkdir /home/my_cool_username/.ssh/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Paste the copied public key into the authorized keys file &lt;code&gt;sudo nano /home/my_cool_username/.ssh/authorized_keys&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This should work now! &lt;code&gt;ssh my_cool_username@123.234.123.234&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Make it easier to login&lt;ul&gt;
+&lt;li&gt;Edit ssh config file by adding&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Host my_cool_machine&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;User my_cool_username&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Edit &lt;code&gt;/etc/hosts&lt;/code&gt; file&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Host_ip my_cool_machine&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Finally we can now login using &lt;code&gt;ssh my_cool_machine&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;And easily move things over to the remote machine using &lt;code&gt;scp cool_file.png my_cool_machine:~&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;PostgreSQL&lt;/h4&gt;
+&lt;p&gt;In order to start using PostgreSQL I had to install PostgreSQL onto the remote machine and set up the access so that I could reach it from my local machine through Python.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install PostgreSQL &lt;code&gt;sudo apt-get install postgresql postgresql-contrib&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start and stop the PostgreSQL server using the following&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo service postgresql status&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo service postgresql stop&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo service postgresql start&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Installing PostgreSQL created a &lt;code&gt;postgres&lt;/code&gt; user, but to add myself as a user I had to&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo -u postgres createuser --superuser my_user_name
+sudo -u postgres psql
+&lt;span class="c"&gt;# now in psql...&lt;/span&gt;
+&lt;span class="se"&gt;\p&lt;/span&gt;assword my_user_name
+&lt;span class="c"&gt;# exit out of psql with Ctrl+D&lt;/span&gt;
+&lt;span class="c"&gt;# Create a database for your user&lt;/span&gt;
+sudo -u postgres createdb my_user_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Load the data&lt;/h3&gt;
+&lt;p&gt;At this point the Postgres environment was set up but there was no data yet! So in order to add some data, I found it easiest to just directly import a &lt;code&gt;.csv&lt;/code&gt; file. However, I had to create the database first.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then switch to the newly created database &lt;code&gt;\c endor&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="nb"&gt;SERIAL&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;age&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+    &lt;span class="n"&gt;workclass&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;fnlwgt&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;education&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;education_num&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;marital_status&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;occupation&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;relationship&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;race&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;sex&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;capital_gain&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;capital_loss&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;hours_per_week&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;native_country&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now with the data table set up, I scp'ed the census data from my local machine to the remote machine and copied the data into database.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/path/to/ewoks.csv&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;DELIMITER&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;CSV&lt;/span&gt; &lt;span class="n"&gt;HEADER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Permissions&lt;/h3&gt;
+&lt;p&gt;Now the Postgres database is set up and work can begin if I wanted to do all the work on my remote machine. However, it is much easier to work from my local machine so I had to change a few things in the Postgres configuration files and my Amazon AWS security group.&lt;/p&gt;
+&lt;p&gt;Lets start with the AWS security group. Whenever I want to log into my remote machine from a different IP address I need to add a 'rule' that allows that new IP address (or I can set it to allow any IP but thats probably not the best). So under security group on my AWS I add a new SSH with my current IP address. But I also need to allow communication with the Postgres database. Luckily, AWS has a pretty smooth process for this. Once again I add a 'rule' but this time from the drop down I select 'PostgreSQL' and I can allow any IP address to access the databse or some specified ones.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Postgres AWS" src="/images/postgre_aws.png" /&gt;&lt;/p&gt;
+&lt;p&gt;In order to edit the Postgres configuration files, I need to go back into my remote machine. There are 2 files that I need to edit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo nano /etc/postgresql/9.3/main/postgresql.conf&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;Under 'CONNECTIONS &amp;amp; AUTHENTIFICATION' change the 'listening_addresses' from 'localhost' to '*' this will allow all to access&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;listen_addresses = '*'&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo nano /etc/postgresql/9.3/main/pg_hba.conf&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;Under 'IPv4 LOCAL CONNECTIONS' I change the allowed IPs&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;host all all 0.0.0.0/0 trust&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;FINALLY. At this point, I can actually access my remote database from my local machine. However, when using Python and psycopg2 to access the database there were a few more hurdles that I had to jump over :(.&lt;/p&gt;
+&lt;h3&gt;Psycopg2 and Python&lt;/h3&gt;
+&lt;p&gt;To directly connect with the database I had to install &lt;a href="http://initd.org/psycopg/"&gt;psycopg2&lt;/a&gt;, which is a Postgres adapter for Python. I did the following in order to get the set up working... (lots of steps and troubleshooting; took  me a long time to figure out the last step)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;psycopg2&lt;/span&gt;
+&lt;span class="c"&gt;# this next step I had to preform only because it kept throwing back an error saying that my&lt;/span&gt;
+&lt;span class="c"&gt;# AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;unlink&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;force&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Finishing up&lt;/h3&gt;
+&lt;p&gt;Whew! That was exciting. I know...&lt;/p&gt;
+&lt;p&gt;The process to get the server and database all set up may seem quite tedious, but many of the steps above are actually quite quick! Plus, it is good to have things all set up so that the analysis and visualization steps can happen smoothly! In the next post, I will discuss more of the details behind the analysis and also hopefully show a working version of the D3 dashboard!&lt;/p&gt;</summary></entry><entry><title>Movie Scraping and Regression Analysis</title><link href="http://jeffwen.github.io/2016/02/10/movie_scraping_and_regression_analysis" rel="alternate"></link><updated>2016-02-10T16:27:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-02-10:2016/02/10/movie_scraping_and_regression_analysis</id><summary type="html">&lt;p&gt;&lt;em&gt;February 10, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In ths post, I will share a bit about what I have been up to over the past few weeks. I plan on putting up my code soon!&lt;/p&gt;
 &lt;h1&gt;Getting Started&lt;/h1&gt;
 &lt;p&gt;For this project, I wanted to make use of a couple things that I learned at Metis. More specifically, I was interested in using BeautifulSoup, Statsmodels, and Scikit-learn to try and predict total adjusted domestic gross from movie data scraped from &lt;a href="http://www.boxofficemojo.com"&gt;boxofficemojo&lt;/a&gt;. One of the main objectives of the project was to try and get a sense for how to collect data and make sure that it is in a clean enough format to run analyses on.&lt;/p&gt;
