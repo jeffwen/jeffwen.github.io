@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/python.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-02-27T13:31:00-08:00</updated><entry><title>Making Census Data Exciting (Part 1)</title><link href="http://jeffwen.github.io/2016/02/27/making_census_data_exciting_part_1" rel="alternate"></link><updated>2016-02-27T13:31:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-02-27:2016/02/27/making_census_data_exciting_part_1</id><summary type="html">&lt;p&gt;&lt;em&gt;February 27, 2016&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/python.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-03-18T17:47:00-07:00</updated><entry><title>Making Census Data Exciting (Part 2)</title><link href="http://jeffwen.github.io/2016/03/18/making_census_data_exciting_part_2" rel="alternate"></link><updated>2016-03-18T17:47:00-07:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-03-18:2016/03/18/making_census_data_exciting_part_2</id><summary type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In this post, I discuss the results of the work from the &lt;a href="http://jeffwen/github.io/making_census_data_exciting_part_1/"&gt;first post&lt;/a&gt;. That first post was a bit lengthy and went into the details of getting the PostgreSQL set up, but that was all necessary to be able to query the data to set up the &lt;a href="/dashboard.html"&gt;dashboard&lt;/a&gt; (a screenshot is shown below, you can click on multiple things at once...cross filter charts)!&lt;/p&gt;
+&lt;p&gt;&lt;a href="/dashboard.html"&gt;&lt;img alt="Dashboard" src="/images/dashboard.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Problem Statement&lt;/h3&gt;
+&lt;p&gt;So the goal of the project was to see if &lt;a href="https://archive.ics.uci.edu/ml/datasets/Census+Income"&gt;census data&lt;/a&gt; could be used in an interesting manner. While discussing possible problems that could be solved, our team figured that it would be interesting to use the data as if we had just acquired a freelance employment company. Let me make this more clear:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The parent company (a job posting company, think Monster.com), had just acquired a freelance job posting company (they have many freelance, gig type job postings)&lt;/li&gt;
+&lt;li&gt;The parent company has a database of existing users but because it was not focused on freelance and gig type jobs, the database does not have hours worked per week as a feature for its users&lt;/li&gt;
+&lt;li&gt;Machine learning would be used to predict how many hours an individual works (we bucketed this into &amp;lt; 40 hours or &amp;gt;= 40 hours)&lt;/li&gt;
+&lt;li&gt;Ultimately, in the hypothetical world, we would then target individuals that (we predicted) worked &amp;lt; 40 hours with the part-time job postings (from the acquired company)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After the prediction, was the visualization aspect that would help our hypothetical company's managers to slice and dice data as they wanted.&lt;/p&gt;
+&lt;h3&gt;Approach&lt;/h3&gt;
+&lt;p&gt;As part of the problem, I wanted to use PostgreSQL to get used to using it in a remote environment so that I could learn to store my data remotely (hence the previous post). However, the next step was to get the data out of the database so that it could be manipulated and massaged for further analysis.&lt;/p&gt;
+&lt;p&gt;For this, Psycopg2 was the best tool as it allowed for a pretty straight forward way to connect with the remote database. I wrote a Python script so that anyone on my team could quickly enter their login details and the script would ask for the SQL query. Then, the output would be a pandas dataframe of the data that was requested.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# input must be strings&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;query_database&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    dbname: databse name&lt;/span&gt;
+&lt;span class="sd"&gt;    user: username&lt;/span&gt;
+&lt;span class="sd"&gt;    password: password for the user&lt;/span&gt;
+&lt;span class="sd"&gt;    host: public dns&lt;/span&gt;
+&lt;span class="sd"&gt;    port: typically for postgresql 5432&lt;/span&gt;
+&lt;span class="sd"&gt;    returns a pandas dataframe of the given query&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c"&gt;# Create connection with database&lt;/span&gt;
+        &lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dbname=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;dbname&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; user=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; password=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; host=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; port=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Connected&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Ask for user&amp;#39;s SQL query&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Query please: &amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;input_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Execute search query&lt;/span&gt;
+        &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchall&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Return dataframe&lt;/span&gt;
+        &lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;
+
+    &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Connection error or query mistake&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This made it quite easy to get the data out of the AWS database. The next steps was to clean the data and then run models to predict the hours worked.&lt;/p&gt;
+&lt;p&gt;In terms of cleaning the data, I wrote a function that took as input the previously outputted dataframe and returned a cleaned dataframe with white spaces removed from column headers, hours per week worked turned into a binary variable (&amp;lt; 40 hours worked or &amp;gt;= 40 hours worked), and other categorical variables turned into dummy variable columns. &lt;/p&gt;
+&lt;h3&gt;Predictions&lt;/h3&gt;
+&lt;p&gt;For the next step, we used the cleaned data as input to a couple different classification models. In order to test our models' accuracy we used 3 fold cross validation and achieved an accuracy score of ~70%. We could have used other error metrics but in our case we felt like the model was performing as good as we would have expected (we actually averaged couple models to achieve this accuracy).&lt;/p&gt;
+&lt;p&gt;Given the business problem, we were okay with 70% because for our hypothetical company, any classification of &amp;lt; 40 hours worked (part-time) would mean that those individuals now had a lot of new job postings to browse (we acquired a freelance/ gig job posting company). Therefore, any exposure to these job postings would be better than nothing at all. Of course, in reality as we begin to get responses to the part-time job postings we would refine the prediction to make sure that we aren't showing part-time jobs to individuals who are actually working full-time (false positives).&lt;/p&gt;
+&lt;h3&gt;Dashboard&lt;/h3&gt;
+&lt;p&gt;The dashboard. Oh man. Okay, so a big part of this project was to practice using D3. Honestly, I had seen D3 used before, but I had no idea how flexible it was and how cool it was (the ease of use is something else). So I was quite excited to get my hands dirty.&lt;/p&gt;
+&lt;p&gt;The great thing about making dashboards is that there are lots of examples to draw from. For this particular dashboard, I used an example that &lt;a href="http://bl.ocks.org/saraquigley/81807cb241cb4bbbaa6b"&gt;Sara Quigley&lt;/a&gt; had made.&lt;/p&gt;
+&lt;p&gt;By the end, the resulting dashboard was quite different and I felt like I got to experiment with quite a lot of different techniques. &lt;em&gt;(as an aside: I am thankful for templates and also think that if possible you should make use of resources that are available, but make sure you know what is actually happening when you change things!)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I spent a lot of time reading through the code to try to understand how cross filter objects were being created and used. By the end, I had taken out a couple charts and also added a few items to the dashboard so that it fit out business problem&lt;/p&gt;
+&lt;p&gt;Also reading &lt;a href="https://github.com/mbostock/d3/wiki/API-Reference"&gt;documentation&lt;/a&gt; is probably one of the best ways to learn so I did a lot of that.&lt;/p&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Overall, this project was quite interesting in that it had multiple moving parts that came together as a single dashboard deliverable. The awesome thing about this project was that it was pretty open ended so the problem statement that we came up with actually seemed like a real problem.&lt;/p&gt;
+&lt;p&gt;I spent most of my time on setting up the database, writing the script to pull data out, and tweaking/customizing the dashboard. In terms of takeaways, I realized that visualization is a large aspect of data science because the communication of results is vital to any problem. More specifically, a visually appealing tool can really help tell an impactful story (of course, the tool has to make sense).&lt;/p&gt;
+&lt;p&gt;Working with PostgreSQL and D3 helped me understand a more complete picture of the analytics space than just using Python. Moving forward, I would like to continue expanding my knowledge in these technologies and more!&lt;/p&gt;</summary></entry><entry><title>Making Census Data Exciting (Part 1)</title><link href="http://jeffwen.github.io/2016/02/27/making_census_data_exciting_part_1" rel="alternate"></link><updated>2016-02-27T13:31:00-08:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-02-27:2016/02/27/making_census_data_exciting_part_1</id><summary type="html">&lt;p&gt;&lt;em&gt;February 27, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Let's talk about remote servers, census data, classification models, and data visualization...lots to cover...&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Warning:&lt;/em&gt; This post will be a bit lengthy and cover some details that might not be that interesting but I am also using this post as a way to capture the process so I don't forget things.
 &lt;img alt="Census Logo" src="/images/census-logo.png" /&gt;&lt;/p&gt;
