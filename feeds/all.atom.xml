@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-03-18T22:18:00-07:00</updated><entry><title>Mr. President, what did you say?</title><link href="http://jeffwen.github.io/2016/03/18/mr_president_what_did_you_say" rel="alternate"></link><updated>2016-03-18T22:18:00-07:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-03-18:2016/03/18/mr_president_what_did_you_say</id><summary type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen</title><link href="http://jeffwen.github.io/" rel="alternate"></link><link href="http://jeffwen.github.io/feeds/all.atom.xml" rel="self"></link><id>http://jeffwen.github.io/</id><updated>2016-05-02T14:26:00-07:00</updated><entry><title>Visaurant: Reimagining the food search experience</title><link href="http://jeffwen.github.io/2016/05/02/visaurant" rel="alternate"></link><updated>2016-05-02T14:26:00-07:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-05-02:2016/05/02/visaurant</id><summary type="html">&lt;p&gt;&lt;em&gt;May 02, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Visaurant Logo" src="/images/visaurant_logo.png" /&gt;
+This blog post is a work in progress and will detail the process that I took to create the Visaurant project.&lt;/p&gt;
+&lt;p&gt;Visaurant (as you can see in the video below) is a reimagination of the way users search through images that they are interested in. One prime use case for Visaurant is in sorting and filtering through food images (hence &lt;em&gt;VIS&lt;/em&gt; -ual rest- &lt;em&gt;AURANT&lt;/em&gt;).&lt;/p&gt;
+&lt;h3&gt;Background&lt;/h3&gt;
+&lt;p&gt;So why do we want a visual search application?&lt;/p&gt;
+&lt;p&gt;Images represent a wealth of information. As cliche as it sounds, &lt;em&gt;'a picture is worth a thousand words'&lt;/em&gt; especially when it comes to looking for food items that seem appetizing. Speaking from personal experience, I often use apps like Yelp by:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Going to the images of a particular restaurant&lt;/li&gt;
+&lt;li&gt;Looking for the pictures that look good&lt;/li&gt;
+&lt;li&gt;Reading the caption&lt;/li&gt;
+&lt;li&gt;Going back to the reviews to find the reviews regarding the item that I saw&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;While this process works, it is by no means streamlined. Having to go back and forth between the images, captions, and reviews is a hassle and quite often overwhelming because there are so many images to sift through. So although images are powerful and contain a lot of information, if the images are not ordered or organized then it becomes difficult to find what I care about (like the example below...).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Yelp Restaurant Photos" src="/images/yelp_photo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Visaurant aims to change that by:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Clustering visually similar images to allow users to quickly narrow down to images of interest&lt;/li&gt;
+&lt;li&gt;Parsing through captions to extract reviews that are relevant to the image that was selected&lt;/li&gt;
+&lt;/ol&gt;
+&lt;iframe src="https://player.vimeo.com/video/165064797" width="640" height="344" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h4&gt;What is happening in the video?&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;User gets to select a group of images from a restaurant that looks interesting (4 selections)
+&lt;img alt="Visaurant Selection" src="/images/visaurant_selection.png" /&gt;&lt;/li&gt;
+&lt;li&gt;Recommendations will be made based on the user's selections&lt;/li&gt;
+&lt;li&gt;User can once again select the restaurant that looks most appealing
+&lt;img alt="Visaurant Recommendation" src="/images/visaurant_recommendation.png" /&gt;&lt;/li&gt;
+&lt;li&gt;Restaurant specific page will show up allowing the user to hover over images that look interesting and images within the same visual cluster will be highlighted
+&lt;img alt="Visaurant Highlight" src="/images/visaurant_highlight.png" /&gt;&lt;/li&gt;
+&lt;li&gt;User can select an image and all images will be filtered for images in the same cluster
+&lt;img alt="Visaurant Filtered" src="/images/visaurant_filtered.png" /&gt;&lt;/li&gt;
+&lt;li&gt;After filtering down to a single cluster, user can select a specific image to bring up reviews that have matching words with the image's caption
+&lt;img alt="Visaurant Caption" src="/images/visaurant_caption.png" /&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Mr. President, what did you say?</title><link href="http://jeffwen.github.io/2016/03/18/mr_president_what_did_you_say" rel="alternate"></link><updated>2016-03-18T22:18:00-07:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.github.io,2016-03-18:2016/03/18/mr_president_what_did_you_say</id><summary type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;I know this may be annoying but embedding D3 in Pelican isn't the easiest thing so PLEASE click &lt;a href="/html/president.html"&gt;here&lt;/a&gt; to see the actual D3! The rest of the blog here will detail the process.&lt;/p&gt;
 &lt;p&gt;Also, yes very soon I will actually deploy these things somewhere so they aren't just static HTML pages...&lt;/p&gt;
 &lt;p&gt;But still, hope you enjoy!&lt;/p&gt;

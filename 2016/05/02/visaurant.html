@@ -30,10 +30,11 @@
 
   <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
 
+<meta name="keywords" content="">
 
   <title>
     Jeff Wen
-&ndash; Categories  </title>
+&ndash; Visaurant: Reimagining the food search experience  </title>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -101,12 +102,65 @@
     </header>-->
 
 <article>
-  <div class="article_text">
-    <ul>
-      <li><a href="http://jeffwen.github.io/category/misc/">misc</a> (3)</li>
-      <li><a href="http://jeffwen.github.io/category/python/">Python</a> (5)</li>
-    </ul>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2016/05/02/visaurant">Visaurant: Reimagining the food search experience</a></h3>
   </div>
+  <div class="article_text">
+    <p><em>May 02, 2016</em></p>
+<p><img alt="Visaurant Logo" src="/images/visaurant_logo.png" />
+This blog post is a work in progress and will detail the process that I took to create the Visaurant project.</p>
+<p>Visaurant (as you can see in the video below) is a reimagination of the way users search through images that they are interested in. One prime use case for Visaurant is in sorting and filtering through food images (hence <em>VIS</em> -ual rest- <em>AURANT</em>).</p>
+<h3>Background</h3>
+<p>So why do we want a visual search application?</p>
+<p>Images represent a wealth of information. As cliche as it sounds, <em>'a picture is worth a thousand words'</em> especially when it comes to looking for food items that seem appetizing. Speaking from personal experience, I often use apps like Yelp by:</p>
+<ol>
+<li>Going to the images of a particular restaurant</li>
+<li>Looking for the pictures that look good</li>
+<li>Reading the caption</li>
+<li>Going back to the reviews to find the reviews regarding the item that I saw</li>
+</ol>
+<p>While this process works, it is by no means streamlined. Having to go back and forth between the images, captions, and reviews is a hassle and quite often overwhelming because there are so many images to sift through. So although images are powerful and contain a lot of information, if the images are not ordered or organized then it becomes difficult to find what I care about (like the example below...).</p>
+<p><img alt="Yelp Restaurant Photos" src="/images/yelp_photo.png" /></p>
+<p>Visaurant aims to change that by:</p>
+<ol>
+<li>Clustering visually similar images to allow users to quickly narrow down to images of interest</li>
+<li>Parsing through captions to extract reviews that are relevant to the image that was selected</li>
+</ol>
+<iframe src="https://player.vimeo.com/video/165064797" width="640" height="344" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<h4>What is happening in the video?</h4>
+<ol>
+<li>User gets to select a group of images from a restaurant that looks interesting (4 selections)
+<img alt="Visaurant Selection" src="/images/visaurant_selection.png" /></li>
+<li>Recommendations will be made based on the user's selections</li>
+<li>User can once again select the restaurant that looks most appealing
+<img alt="Visaurant Recommendation" src="/images/visaurant_recommendation.png" /></li>
+<li>Restaurant specific page will show up allowing the user to hover over images that look interesting and images within the same visual cluster will be highlighted
+<img alt="Visaurant Highlight" src="/images/visaurant_highlight.png" /></li>
+<li>User can select an image and all images will be filtered for images in the same cluster
+<img alt="Visaurant Filtered" src="/images/visaurant_filtered.png" /></li>
+<li>After filtering down to a single cluster, user can select a specific image to bring up reviews that have matching words with the image's caption
+<img alt="Visaurant Caption" src="/images/visaurant_caption.png" /></li>
+</ol>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: May 02 2016</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/python/">Python</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2016/05/02/visaurant";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
 </article>
 
 		     
