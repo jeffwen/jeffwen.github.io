@@ -137,6 +137,12 @@ div p a {
   margin-right: -0.15em;
 }
 
+#wrapper{
+    width: 980px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 
 @media only screen and (max-device-width: 480px) {
   #aside {
