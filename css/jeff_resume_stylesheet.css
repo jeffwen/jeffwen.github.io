@@ -43,7 +43,6 @@ a:hover {
     font-size: 0.9em;
     color: #4D4D4D;
     text-align: right;
-    width: 20vw;
     position: fixed;
     margin-top: 1.4vh;
     padding-left: 2vw;
@@ -73,7 +72,7 @@ div p a {
 }
 
 #main_text {
-    margin: 1vw 3vw 0vh 15vw;
+    margin: 1vw 2vw 0vh 15vw;
     color: #4D4D4D;
     clear:left;
     float:right;
