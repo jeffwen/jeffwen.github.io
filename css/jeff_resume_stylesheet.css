@@ -45,7 +45,8 @@ a:hover {
     text-align: right;
     width: 20vw;
     position: fixed;
-    margin-top: 1.4vh; 
+    margin-top: 1.4vh;
+    padding-left: 2vw;
 }
 
 .header_aside {
@@ -72,7 +73,7 @@ div p a {
 }
 
 #main_text {
-    margin: 1vw 3vw 0vh 22vw;
+    margin: 1vw 3vw 0vh 15vw;
     color: #4D4D4D;
     clear:left;
     float:right;
@@ -148,7 +149,7 @@ div p a {
   #aside {
       position: relative;
       width:auto;
-      margin: 6vh 3vw 0vh 3vw;
+      margin: 6vh 3vw 0vh 1vw;
       font-size: 1.0em;
       text-align:left;
       float: none;
@@ -172,11 +173,13 @@ div p a {
   #left {
 	float:left;
 	width: auto;
+    font-size:0.8em;
   }
 
   #right {
-      text-align:left;
+      text-align:right;
       font-style:italic;
+      font-size: 0.5em;
       color:#999999;
       width: auto;
   }
