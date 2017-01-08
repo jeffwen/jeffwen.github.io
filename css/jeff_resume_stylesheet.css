@@ -147,9 +147,9 @@ div p a {
 @media only screen and (max-device-width: 480px) {
   #aside {
       position: relative;
-      width:auto;
+      width: auto;
       margin: 6vh 3vw 0vh 1vw;
-      font-size: 1.0em;
+      font-size: 0.8em;
       text-align:left;
       float: none;
       clear: both;
@@ -161,6 +161,7 @@ div p a {
   
   #main_text {
       margin: 1vh 3vw 0vh 3vw;
+      font-size: 0.8em;
   }
 
   .header_aside {
@@ -183,4 +184,27 @@ div p a {
       width: auto;
   }
 
+  #header {
+      font-size:2em;
+  }
+  
+  #wrapper {
+      width: auto;
+      margin: 0 auto;
+      overflow: hidden;
+  }
+
+}
+
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait){
+    #main_text {
+        margin: 1vh 3vw 0vh 25vw;
+    }
+
+    #aside {
+        margin-top: 1vh;
+    }
 }
