@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <!-- <script src="/theme/typed.js-master/js/typed.js"></script> -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <!-- <script> -->
+  <!--     jQuery(function($){ -->
+  <!--     $(".element").typed({ -->
+  <!--       strings: ["aspiring data scientist.", "problem solver.","wannabe tinkerer."], -->
+  <!--       typeSpeed: 50 -->
+  <!--     }); -->
+  <!--     }); -->
+      
+  <!-- </script> -->
+
+  <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; Lane Finding from Video Feeds  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--   <style> -->
+<!--      .typed-cursor{ -->
+<!--      opacity: 1; -->
+<!--      font-weight: 100; -->
+<!--     -webkit-animation: blink 0.7s infinite; -->
+<!--     -moz-animation: blink 0.7s infinite; -->
+<!--      animation: blink 0.7s infinite; -->
+<!--      font-size: 1.5rem; -->
+<!--      vertical-align:middle; -->
+<!-- } -->
+<!-- @keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-webkit-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-moz-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!--      } -->
+
+<!--      </style> -->
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.github.io">
+        <img src="http://jeffwen.github.io/images/jeff_logo.png" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.github.io">Jeff Wen</a></h2>
+      <p>aspiring data scientist, problem solver, wannabe tinkerer</p>
+      <!-- <p class="element" style="display:inline-block;"></div> -->
+      <ul>
+        <li><a href="http://jeffwen.github.io/pages/about-me.html">About Me</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.github.io">Index</a> &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2017/02/23/lane_finding">Lane Finding from Video Feeds</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>February 23, 2017</em></p>
+<h1>Finding Lane Lines on the Road</h1>
+<p>The github repository with the associate IPython Notebook can be found <a href="https://github.com/jeffwen/sdcnd_find_lanes">here</a>.</p>
+<h2>Objective</h2>
+<p>The ultimate goal of this project was to be able to identify lane lines in both images and videos. Namely, to develop a pipeline that utilizes different computer vision techniques to mark the location of lane lines. The approach that I took explored multiple techniques to obtain the best results:</p>
+<ul>
+<li>Color selection with OpenCV with different color maps<ul>
+<li>Grayscale </li>
+<li>Hue, saturation, and light</li>
+</ul>
+</li>
+<li>Gaussian blur to reduce noise</li>
+<li>Canny edge detection</li>
+<li>Hough line transformation</li>
+<li>Moving average of previous lane lines </li>
+</ul>
+<h2>Color Manipulation</h2>
+<p>To start with, images came as screenshots from an onboard video feed.</p>
+<p><img alt="lane1" src="/images/solidWhiteRight.jpg" /> 
+<img alt="lane2" src="/images/solidYellowLeft.jpg" /></p>
+<p>The first step that I took was to turn the image to grayscale to make it easier to work, namely to reduce the number of channels to work with. However, when dealing with more challenging images such as lane lines that are on non-contrasting backgrounds (white or gray tarmac), the eventual pipeline for lane linea detection does not perform well. In order to improve the performance, I switched to using <a href="https://en.wikipedia.org/wiki/HSL_and_HSV#HSL">hue, saturation, and light</a> color space, which is better able to highlight the yellow and white lane lines.</p>
+<p><em>Grayscale</em>
+<img alt="gray" src="/images/challengeShadow_gray.jpg" /> </p>
+<p><em>HSL color space</em>
+<img alt="hsl" src="/images/challengeShadow_hlsimage_pyplot.jpg" /></p>
+<p>In the above image, we can see that the yellow lane is very clearly highlighted and the white line markings are also captured well when compared to the grayscale image. However, to further improve the performance of the processing pipeline, we can also select out the colors that we know we care about (in this case the yellow and white lines, which are now blue and green)</p>
+<div class="highlight"><pre><span class="c">## color selection for yellow and white, using the HSL color space</span>
+<span class="k">def</span> <span class="nf">color_selection</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+
+    <span class="n">hls_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2HLS</span><span class="p">)</span>
+
+    <span class="n">white_color</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="n">hls_image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">]))</span> <span class="c">## note that OpenCV uses BGR not RGB</span>
+    <span class="n">yellow_color</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="n">hls_image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">]))</span>
+
+    <span class="n">combined_color_images</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">(</span><span class="n">white_color</span><span class="p">,</span> <span class="n">yellow_color</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">combined_color_images</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In the above code, I first convert the color map from RGB to HSL. Then I use the <code>inRange</code> function provided by OpenCV to select colors that fall into the white and yellow ranges. After that I combine the white and yellow masks together with the <code>bitwise_or</code> function. </p>
+<p>With the above HSL image, we can now try to isolate the yellow and the white lines. While there are many different techniques that can be utilized here, I chose to detect the edges within the image using the Canny edge detection algorithm. </p>
+<h2>Edge Detection</h2>
+<p><em>HSL color selection</em>
+<img alt="hsl" src="/images/challengeShadow_hsl.jpg" /></p>
+<p>Given the above image, the goal is to pick out the lane lines. In order to do this, I use the <a href="https://en.wikipedia.org/wiki/Canny_edge_detector">canny edge detector</a> algorithm. In short, the algorithm:</p>
+<div class="highlight"><pre>1. Applies a gaussian filter to the image to reduce noise
+2. Finds the gradients in both the horizontal and vertical directions
+3. Non-maximum supression, which is a way to thin the detected edges by only keeping the maximum gradient values and setting others to 0
+4. Determining potential edges by checking against a threshold 
+5. Finish cleaning potential edges by checking in the potential edge is connected to an actual edge
+</pre></div>
+
+
+<p>While, the canny edge detector automatically applies <a href="https://en.wikipedia.org/wiki/Gaussian_blur">gaussian blur</a>, I applied gaussian blur outside of the edge detector so that I could have more freedom with the kernel parameter. After running the image through the blurring and edge detection functions, the image is as follows. Note, the input image to this is the HSL color converted image. </p>
+<p><em>HSL color selection with canny edge detection</em>
+<img alt="hsl_canny" src="/images/challengeShadow_hslcanny.jpg" /></p>
+<p>With the image above, we see that the lane lines are pretty well identified. It took a bit of trial and error to find suitable thresholds for the canny edge detector though the creator John Canny recommended a ratio of 1:2 or 1:3 for the low vs. high threshold. Although the image above seems to mark the lane lines quite well, there is still a lot of noise surrounding the lane that we do not care about. In order to address this, we can apply a region mask to just keep the area that we know contains the lane lines. </p>
+<p><em>Region masking</em>
+<img alt="region_bounds" src="/images/challengeShadow_regionmask.jpg" /></p>
+<p>After applying the mask to the canny image, we get the following output. We can contrast this with the gray image after canny edge detection and the region selection. </p>
+<p><em>Grayscale image with canny edge detection and region masking</em>
+<img alt="region_canny_gray" src="/images/challengeShadow_grayregioncanny.jpg" /> </p>
+<p><em>HSL color selection with canny edge detection and region masking</em>
+<img alt="region_canny" src="/images/challengeShadow_regioncanny.jpg" /> </p>
+<p>As shown above, the HSL version provides a cleaner indication of the lane lines. Below are the functions used in processing the images.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="p">,</span> <span class="n">high_threshold</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the Canny transform&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="p">,</span> <span class="n">high_threshold</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gaussian_blur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies a Gaussian Noise kernel&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">region_of_interest</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies an image mask.</span>
+
+<span class="sd">    Only keeps the region of the image defined by the polygon</span>
+<span class="sd">    formed from `vertices`. The rest of the image is set to black.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c">#defining a blank mask to start with</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>   
+
+    <span class="c">#defining a 3 channel or 1 channel color to fill the mask with depending on the input image</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">channel_count</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c"># i.e. 3 or 4 depending on your image</span>
+        <span class="n">ignore_mask_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,)</span> <span class="o">*</span> <span class="n">channel_count</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ignore_mask_color</span> <span class="o">=</span> <span class="mi">255</span>
+
+    <span class="c">#filling pixels inside the polygon defined by &quot;vertices&quot; with the fill color    </span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">fillPoly</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">ignore_mask_color</span><span class="p">)</span>
+
+    <span class="c">#returning the image only where mask pixels are nonzero</span>
+    <span class="n">masked_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">masked_image</span>
+</pre></div>
+
+
+<h2>Hough Line Transform</h2>
+<p>Now that we have a collection of edges, we need to identify the lane lines within the image. The <a href="https://en.wikipedia.org/wiki/Hough_transform">hough line transform</a>, which was first invented to identify lines within images, is great for this task. To learn more about this algorithm, this <a href="http://alyssaq.github.io/2014/understanding-hough-transform/">blog</a> is a great resource. </p>
+<p>_HSL color selection with canny edge detection, region masking, and hough transform
+<img alt="hsl_hough" src="/images/challengeShadow_hlshoughimage_pyplot.jpg" /></p>
+<p>Pretty awesome! The lane lines have now been highlighted and boxed with the red lines. There are quite a few parameters that needed to be adjusted, but after adjusting the parameters, the algorithm is able to pick out the lines quite well. Note that the OpenCV version of the hough transform that we are using is the probabilistic version, which is an improvement over the original. In the IPython notebook, I use a different version of the <code>hough_lines</code> function that simple outputs the lines as a vector rather than overlaying the lines over the initial image. </p>
+<p>Given the above image and specifically the hough lines, we now have a vector of multiple lines segments in the form of (x1,y1,x2,y2) endpoints. In order to draw lines on an image, we need a way to extrapolate an average line from the vector of endpoints.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">hough_lines_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">min_line_len</span><span class="p">,</span> <span class="n">max_line_gap</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `img` should be the output of a Canny transform.</span>
+
+<span class="sd">    Returns an image with hough lines drawn.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">HoughLinesP</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">minLineLength</span><span class="o">=</span><span class="n">min_line_len</span><span class="p">,</span> <span class="n">maxLineGap</span><span class="o">=</span><span class="n">max_line_gap</span><span class="p">)</span>
+    <span class="n">line_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">draw_lines</span><span class="p">(</span><span class="n">line_img</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">line_img</span>
+</pre></div>
+
+
+<h2>Lane Line Averaging</h2>
+<p>In order to find the average line on each side of the lane, we can first calculate the slope of each line segment and separate the positive and negative sloped lines, which represents the left and right lane lines. Then we can find the average of the left and right slopes and intercepts to get an average of the lanes. When I initially did this, the average was quite sensitive to outliers. I tried to adjust for the outliers by removing points that were greater than 1.5 standard deviations from the rest of the slopes. However, the averaged lines were still quite sensitive to the outliers. </p>
+<p>Ultimately, by calculating the line length and calculating the weighted average of the lane line, the output was much more stable and robust against spurious line segments that the hough transform identified. </p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">avg_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+
+    <span class="n">neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="c">## calculate slopes for each line to identify the positive and negative lines</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
+            <span class="n">intercept</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">slope</span><span class="o">*</span><span class="n">x1</span>
+            <span class="n">line_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">slope</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">line_length</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neg</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">line_length</span><span class="p">]]),</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">slope</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">line_length</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">line_length</span><span class="p">]]),</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c">## just keep the observations with slopes with 2 std dev</span>
+    <span class="n">neg</span> <span class="o">=</span> <span class="n">neg</span><span class="p">[</span><span class="n">to_keep_index</span><span class="p">(</span><span class="n">neg</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">to_keep_index</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])]</span>
+
+    <span class="c">## weighted average of the slopes and intercepts based on the length of the line segment</span>
+    <span class="n">neg_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="n">pos_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">None</span>
+
+    <span class="k">return</span> <span class="n">neg_lines</span><span class="p">,</span> <span class="n">pos_lines</span>
+
+<span class="c">## removing the outliers (adapted from http://stackoverflow.com/questions/11686720/is-there-a-numpy-builtin-to-reject-outliers-from-a-list)</span>
+<span class="k">def</span> <span class="nf">to_keep_index</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">obs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">std</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">obs</span><span class="p">))</span>
+</pre></div>
+
+
+<p>The above function calculates the slope, intercept, and line length of each line segment. At this point, we can take the average lane lines from the above function and plot the lane lines onto the original image. </p>
+<p><em>Final processed image</em>
+<img alt="hsl_final" src="/images/challengeShadow_processed.jpg" /></p>
+<p>It seems to have performed quite well! Below are a few other sample images of the outputs from the lane finding pipeline. </p>
+<p><em>Sample processed images</em>
+<img alt="solid_yellow" src="/images/solidYellowCurve_processed.jpg" /> 
+<img alt="solid_white" src="/images/solidWhiteRight_processed.jpg" /></p>
+<h2>Applying Lane Finding to Videos</h2>
+<p>Now that we can identify and mark the lane lines within the image supplied, we can use the algorithm on a video, which is just a sequence of images. If we just apply the pipeline directly to the video, we get the following. </p>
+<ul>
+<li><a href="https://vimeo.com/205495473">Lane Finding (Without Previous Averaging)</a></li>
+</ul>
+<p>The video seems to show the lane lines without any problems, but when we take a closer look the lane line highlights are jittering and jumping across back and forth around the actual location of the lane line. While, the algorithm basically accomplishes the problem that we first set out to solve, maybe we can improve on this. </p>
+<p>Specifically, the lane lines coming from a video feed usually do not change dramatically from second to second. If we take this into account, we can "smooth" the lane lines plotted out by keeping a queue. With each frame of the video, we can pop off the oldest set of lane line endpoints. Then for all the remaining lane lines and the newest lane line, we take an average to get the "smoothed" lane line. </p>
+<p>Below is the code for the lane line detector and the link to the test videos.</p>
+<ul>
+<li><a href="https://vimeo.com/205495845">Lane Finding - White Line (With Averaging)</a></li>
+<li><a href="https://vimeo.com/205495681">Lane Finding - Yellow Line (With Averaging)</a></li>
+<li><a href="https://vimeo.com/205495856">Lane Finding - Curve (With Averaging)</a></li>
+</ul>
+<p>The above videos show that the new detector with the lane line averaging works quite nicely! Although if there are drastic changes the algorithm does not follow those changes until a bit later, we can fiddle with this by changing the size of the queue.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">lane_detector</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_lane_lines</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">find_mean_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lane_lines</span><span class="p">,</span> <span class="n">prev_lane_lines</span><span class="p">):</span>
+
+        <span class="c">## add the new lane line</span>
+        <span class="k">if</span> <span class="n">lane_lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">prev_lane_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lane_lines</span><span class="p">)</span>
+
+        <span class="c">## only keep the 10 most recent lane lines</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_lane_lines</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">prev_lane_lines</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c">## take the average of the past lane lines and the new ones</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_lane_lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prev_lane_lines</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="n">imshape</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c">## selecting yellow and white colors</span>
+        <span class="n">color_selected_img</span> <span class="o">=</span> <span class="n">color_selection</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="c">## Define a kernel size and apply Gaussian smoothing</span>
+        <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">17</span>
+        <span class="n">blur_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">color_selected_img</span><span class="p">,(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">),</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c">## apply canny edge detection</span>
+        <span class="n">canny_img</span> <span class="o">=</span> <span class="n">canny</span><span class="p">(</span><span class="n">blur_img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">high_threshold</span><span class="o">=</span><span class="mi">160</span><span class="p">)</span>
+
+        <span class="c">## apply region of interest</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">100</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*.</span><span class="mi">45</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*.</span><span class="mi">55</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">region_img</span> <span class="o">=</span> <span class="n">region_of_interest</span><span class="p">(</span><span class="n">canny_img</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="n">vertices</span><span class="p">)</span>
+
+        <span class="c">## apply hough transformation</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># distance resolution in pixels of the Hough grid</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="c"># angular resolution in radians of the Hough grid</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="mi">15</span> <span class="c"># minimum number of votes (intersections in Hough grid cell)</span>
+        <span class="n">min_line_len</span> <span class="o">=</span> <span class="mi">25</span> <span class="c">#minimum number of pixels making up a line</span>
+        <span class="n">max_line_gap</span> <span class="o">=</span> <span class="mi">250</span>   <span class="c"># maximum gap in pixels between connectable line segments</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">hough_lines</span><span class="p">(</span><span class="n">region_img</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">min_line_len</span><span class="p">,</span> <span class="n">max_line_gap</span><span class="p">)</span>
+
+        <span class="c">## get the average slopes and intercepts for each lane line</span>
+        <span class="n">slopes_intercepts</span> <span class="o">=</span> <span class="n">avg_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+        <span class="c"># find the endpoints given the slopes and intercepts</span>
+        <span class="n">endpoints</span> <span class="o">=</span> <span class="n">gen_endpoints</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">slopes_intercepts</span><span class="p">)</span>
+
+        <span class="c">## generate lane lines on a black image</span>
+        <span class="n">lane_lines</span> <span class="o">=</span> <span class="n">gen_lane_lines</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">endpoints</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">find_mean_lines</span><span class="p">(</span><span class="n">endpoints</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_lane_lines</span><span class="p">))</span>
+
+        <span class="n">final_img</span> <span class="o">=</span> <span class="n">weighted_img</span><span class="p">(</span><span class="n">lane_lines</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">final_img</span>
+</pre></div>
+
+
+<h2>Shortcomings &amp; Next Steps</h2>
+<p>While the detector works fairly well for straight roads, there are limitations:</p>
+<ol>
+<li>Curved Roads</li>
+<li>Lane markings that are not yellow or white</li>
+<li>Different perspective </li>
+</ol>
+<p>In order to deal with these shortcomings, we would need to make the algorithm more robust to differences in the input video. For example, to deal with the curves in the road instead of setting a fixed length for the lane line highlights, which is currently 60% of the image height, we might be able to use the length of the identified line segment from th hough line transform as a proxy for how long the highlight should be. </p>
+<p>The yellow and white lane lines might be harder to deal with, but we can combine human input as well as computational methods. For example, if there are training images from roads in different areas with different colored markings, we can keep a "dictionary" of these lane colors and setup the algorithm to look for the colors that expected given the geographic region in consideration. </p>
+<p>The videos that were supplied as test videos were all basically filmed at the same angle and the roads were also fairly similar. However, if the vehicle was traveling over a hill or out of a trough the perspective would change. In these cases, the algorithm might not perform as well. In order to adjust for this, we can first apply a perspective normalization to the input video so that input would always have the same orientation and perspective. </p>
+<p>Overall, this project was interesting and fun! It incorporated a lot of techniques and concepts that have been available for many years, but is now being applied to interesting problems like self-driving cars. </p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: February 23 2017</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/python/">Python</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2017/02/23/lane_finding";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a> </p>
+    </div>
+  </main>
+</body>
+</html>
