@@ -110,7 +110,7 @@
 <p>I know this may be annoying but embedding D3 in Pelican isn't the easiest thing so PLEASE click <a href="/html/president.html">here</a> to see the actual D3! The rest of the blog here will detail the process.</p>
 <p>Also, yes very soon I will actually deploy these things somewhere so they aren't just static HTML pages...</p>
 <p>But still, hope you enjoy!</p>
-<p><a href="/html/president.html"><img alt="President Network" src="/images/president_network.png" /></a></p>
+<p><a href="/html/president.html"><img alt="President Network" src="/images/president_network.png"></a></p>
 <h3>What are we doing here</h3>
 <p>I would like to provide some details both for whoever is reading and also for myself so I remember this project.</p>
 <p>This particular project was one of the most difficult to date for me because it required the use of a couple different technologies in unison and also with this project, I tried to actually build most of the D3 visualizations by myself. As a result, it took a bit of time and I am quite proud of the outcome!</p>
@@ -123,11 +123,11 @@
 <p>The broader goal was to see if I could analyze text and see how presidents' were either similar or different in the topics that they discussed. I also wanted to identify if those topics changed across time.</p>
 <h3>MongoDB</h3>
 <p>MongoDB is really easy to get running. Remember that post about the <a href="/2016/02/27/making_census_data_exciting_part_1">census data</a>? Well let me just post a little bit of code to show how quick it is to set up MongoDB (granted, this is on my local machine and not on AWS...but still I'm trying to make a point so forgive me).</p>
-<div class="highlight"><pre><span class="c"># install with homebrew (mac)</span>
+<div class="highlight"><pre><span></span><span class="c1"># install with homebrew (mac)</span>
 brew install mongodb
-<span class="c"># make a data directory (for mongo to write to)</span>
+<span class="c1"># make a data directory (for mongo to write to)</span>
 sudo mkdir /data/db
-<span class="c"># change ownership for the directory and start the mongo server</span>
+<span class="c1"># change ownership for the directory and start the mongo server</span>
 sudo chown your_username /data/db
 mongod
 </pre></div>
@@ -137,9 +137,9 @@ mongod
 <p>With the database set up, I had to get my data.</p>
 <h3>Presidential Data</h3>
 <p>There were a couple sites that had some great resources, but the one that I ended up using was the UC Santa Barbara <a href="http://www.presidency.ucsb.edu/sou.php">American Presidency Project</a>. It has speeches, press releases, and much more dating back to President Washington.</p>
-<p><a href="http://www.presidency.ucsb.edu/sou.php"><img alt="American Presidency Project" src="/images/presidency_project.png" /></a></p>
+<p><a href="http://www.presidency.ucsb.edu/sou.php"><img alt="American Presidency Project" src="/images/presidency_project.png"></a></p>
 <p>While it would have been great to have some form of an API to make calls to and get nicely formatted data, I did not have that luxury in this case and so I scraped the data that I needed using BeautifulSoup. Usually, this wouldn't be the easiest part, but this time it was actually quite simple!</p>
-<div class="highlight"><pre><span class="c"># make the request to the website</span>
+<div class="highlight"><pre><span></span><span class="c1"># make the request to the website</span>
 <span class="k">def</span> <span class="nf">requester</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    url: url of the site to be scraped</span>
@@ -150,34 +150,34 @@ mongod
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="c"># state of the union addresses urls</span>
+<span class="c1"># state of the union addresses urls</span>
 <span class="k">def</span> <span class="nf">get_union_address_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">requester</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-    <span class="c"># only extract the links from the page that link to speeches</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;table&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;.*/ws/index&#39;</span><span class="p">))</span>
+    <span class="c1"># only extract the links from the page that link to speeches</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.*/ws/index&#39;</span><span class="p">))</span>
     <span class="n">speech_urls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-        <span class="n">speech_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s">&#39;href&#39;</span><span class="p">])</span>
+        <span class="n">speech_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">speech_urls</span>
 
-<span class="c"># extract the text from the speeches as a dictionary</span>
+<span class="c1"># extract the text from the speeches as a dictionary</span>
 <span class="k">def</span> <span class="nf">parse_union_address</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">requester</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">president</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">president</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="n">president</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">president</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-    <span class="c"># create a dictionary with the details of interest</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;span&#39;</span><span class="p">,{</span><span class="s">&#39;class&#39;</span><span class="p">:</span><span class="s">&#39;docdate&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">&#39;%B </span><span class="si">%d</span><span class="s">, %Y&#39;</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;span&#39;</span><span class="p">,{</span><span class="s">&#39;class&#39;</span><span class="p">:</span><span class="s">&#39;displaytext&#39;</span><span class="p">})</span>
+    <span class="c1"># create a dictionary with the details of interest</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;docdate&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;displaytext&#39;</span><span class="p">})</span>
 
-    <span class="c"># each paragraph is separated into (as it will be considered a document in later analyses)</span>
+    <span class="c1"># each paragraph is separated into (as it will be considered a document in later analyses)</span>
     <span class="n">text_list</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">text_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">text_list</span><span class="p">]</span>
-    <span class="n">aDict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;president&#39;</span><span class="p">:</span><span class="n">president</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s">&#39;title&#39;</span><span class="p">:</span><span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s">&#39;date&#39;</span><span class="p">:</span><span class="n">date</span><span class="p">,</span><span class="s">&#39;text&#39;</span><span class="p">:</span><span class="n">text_list</span><span class="p">,</span><span class="s">&#39;url&#39;</span><span class="p">:</span><span class="n">url</span><span class="p">,</span><span class="s">&#39;speech&#39;</span><span class="p">:</span><span class="s">&#39;State of the Union&#39;</span><span class="p">}</span>
+    <span class="n">aDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;president&#39;</span><span class="p">:</span><span class="n">president</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="n">date</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="n">text_list</span><span class="p">,</span><span class="s1">&#39;url&#39;</span><span class="p">:</span><span class="n">url</span><span class="p">,</span><span class="s1">&#39;speech&#39;</span><span class="p">:</span><span class="s1">&#39;State of the Union&#39;</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">aDict</span>
 </pre></div>
 
@@ -194,7 +194,7 @@ mongod
 <p>With the network created, I realized that the connections were actually based more on the time period in which the presidents served. So I added the color and labels to identify the presidents by the period in which they served. I also included the party toggle to show that my initial hypothesis was incorrect.</p>
 <p>In order to learn more about what the presidents' talked about, I decided to dive down into the particular time periods. My thought was that if I could limit the president set to within the same time period, then some of the finer details of topics discussed would show up.</p>
 <h4>Latent Dirichlet Allocation</h4>
-<p><a href="/html/president.html"><img alt="LDA Topics" src="/images/lda_bubbles.png" /></a></p>
+<p><a href="/html/president.html"><img alt="LDA Topics" src="/images/lda_bubbles.png"></a></p>
 <p>In order to extract the topics that were discussed in the different speeches and press releases, I decided that it would be more accurate to run the analyses on separate paragraphs. When a president gives a State of the Union Address or Inaugural Address, each paragraph is typically a separate topic; therefore, I made each paragraph an individual document (if it was more than 10 words long).</p>
 <p>I used <a href="http://jmlr.csail.mit.edu/papers/v3/blei03a.html">latent dirichlet allocation</a>, which is a probabilistic approach to generating topics. Very basically, we start by randomly assigning k topics to a document (a mixture of topics), then each word in the document to a topic. This is a fairly poor representation of the topics at this stage, but it improves by going through and updating the topic for each word by choosing a new topic with probability that the new topic generated this word (here is an <a href="https://www.quora.com/What-is-a-good-explanation-of-Latent-Dirichlet-Allocation/answer/Edwin-Chen-1?srid=CiUY">awesome explanation</a> that is a lot more clear! Go read! seriously!).</p>
 <p>Therefore, for each paragraph I extracted the most likely topic words (from the LDA output). Just to finish things up, I connected these topic words back to the initial paragraphs so that I could see the paragraphs that LDA determined to be a certain topic.</p>

@@ -129,7 +129,7 @@
 <p>The data scraping was one of the most time consuming parts of this project because it took quite a bit of time to define the business problem enough to come up with an idea of what I needed and it was also difficult at times to navigate through the nested tables (the HTML). However, BeautifulSoup made it quite simple to grab the HTML and parse through it.</p>
 <p>More about the business problem. In order to make the project more interesting our instructors at Metis had us come up with a problem that we wanted to solve. For me, I figured I could use this the data and the model that I created to predict the total adjusted domestic gross. The motivating question for this is as a hypothetical merchandise production company (Nexus), we had already purchased rights from a couple movie studios to produce products for their movies. However, because production lines are relatively inflexible and take a while to reorganize, the business question was whether we could use a regression model to identify movies that would be more popular so that we could reorganize our production lines before crunch time (when the movies got immensely popular) to ensure that we properly allocated our resources. </p>
 <p>With this problem in mind, it was time to start the scraping process. I decided to start by scraping as many movies as possible so that I could build out my training data set. When I looked at the a <a href="http://www.boxofficemojo.com/movies/?page=main&amp;adjust_mo=&amp;adjust_yr=2016&amp;id=avatar.htm">sample page</a> on boxofficemojo, I noticed that a lot of interesting information was captured in the table at the top of each movie page. As a first step, I realized it would be quick to just take down this information.</p>
-<p><img alt="Avatar Sample" src="/images/avatar_sample.png" /></p>
+<p><img alt="Avatar Sample" src="/images/avatar_sample.png"></p>
 <p>I wrote a couple functions that used BeautifulSoup to output the HTML, then parse the HTML to extract just the information in that table. Afterwards, I stored the information in a dictionary of dictionaries (key = movie slug; values = information in the table) then I put that information into a pandas dataframe. The dict within a dict allowed me to add details to the dictionary for each movie if I decided to get more information (which I did).</p>
 <p>I realized that if I really wanted to create a suitable training set then I needed to scrape many movies. In order to do this, I went to the alphabetical index and scraped the links of each movie (~16k) and passed each link into the previous information getting function. After these two steps, I had most of the information that I needed.</p>
 <p>The last bit of scraping I did was to get the daily sales information and the daily theater count information. Originally I figured it would be interesting to do time series analysis on the daily sales information to predict a movie's sales and while I did try an ARIMA model I decided I would go back to that later.</p>
@@ -155,16 +155,16 @@
 <li>The residuals plot also looks a bit bunched together and definitely looks like there is some heteroscedasticity</li>
 <li>I decided that it might be good to transform the data to see if it could deal with some of the effect</li>
 </ul>
-<p><img alt="Initial Residuals" src="/images/initial_resids.png" /></p>
+<p><img alt="Initial Residuals" src="/images/initial_resids.png"></p>
 <p>After fitting the initial model, the adjusted R-squared was .457, which was not too horrible for a first go. I continued the process of analyzing the shape of the residuals and further transformed variables that seemed to have non-normal residuals. </p>
-<p><img alt="Inital Regression Results" src="/images/initial_reg.png" /></p>
+<p><img alt="Inital Regression Results" src="/images/initial_reg.png"></p>
 <h3>Bring in more data</h3>
 <p>In order to deal with the observations that looked to bunched near 0, I brought in the number of theaters that the movie was released at to calculate the average opening sales per number of theaters.</p>
 <h3>Continuing the model building</h3>
 <p>With the new data, I continued to iterate and build models successively by tuning the parameters (mainly by plotting the residuals and looking to see if the residuals were random/ checking to see that there weren't major collinearity problems). By this time the model's adjusted R-squared was at .657.</p>
 <p>I figured it might be good to group the genres because some of the genres were occurring realtively infrequently. So I wrote a function to standardize the number of genres. However, when I ran the regression again, the model seemed to fit the data less well so I took out the new genre variable that I created.</p>
 <p>After performing log and exponential transformations to the dependent and some of the independent variables, the model seemed to be more or less set (at least in terms of fit of the residuals and the adjusted r-squared ~0.70). </p>
-<div class="highlight"><pre><span class="n">model4</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s">&#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">model_data_3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">model4</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">model_data_3</span><span class="p">)</span>
 <span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit_regularized</span><span class="p">()</span>
 </pre></div>
 
@@ -188,7 +188,7 @@
 </ul>
 </li>
 </ul>
-<p><img alt="Seasonal Decomposition" src="/images/seasonal_decompose.png" /></p>
+<p><img alt="Seasonal Decomposition" src="/images/seasonal_decompose.png"></p>
 <p>This was a fun project that exposed me to a lot of different tools and I look forward to learning more by continuing some of the ideas that I had about how to extend the analysis!</p>
   </div>
   <div class="article_meta">

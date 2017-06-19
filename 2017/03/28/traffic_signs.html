@@ -107,19 +107,18 @@
   </div>
   <div class="article_text">
     <p><em>March 28, 2017</em></p>
-<h2>Traffic Sign Recognition</h2>
 <p>In this project, we classify <a href="http://benchmark.ini.rub.de/?section=gtsrb&amp;subsection=dataset">German traffic signs</a>. The code for this project can be found in this <a href="https://github.com/jeffwen/sdcnd_traffic_sign/blob/master/Traffic_Sign_Classifier.ipynb">IPython notebook</a>.</p>
 <p>The objective of this project is to ultimately design, train, and test a convolutional neural network (CNN) to see if we can accurately classify the traffic signs. Specifically, with image classification tasks the variability of input images might cause the model to perform poorly. In order to remedy this situation, we will consider preprocessing steps to ensure that the model is robust to varying input images. Furthermore, depending on how the model performs, we may need to consider regularization steps such as dropouts or L2 regularization. </p>
 <p>To start with, I use the <a href="http://yann.lecun.com/exdb/lenet/">LeNet-5 architecture</a> that was first published by Yann Lecun's lab in 1998. Eventually, I augmented the training set with rotated and zoomed images, normalized images, and included dropouts for the fully connected layers. This led to a final model that achieved ~95% on the validation set and ~94% on the test set. </p>
 <h3>Data Set Summary &amp; Exploration</h3>
 <p>Before jumping into the model, we can take a look at some of the images within the dataset. </p>
-<p><img alt="alt text" src="/images/media/example1.png" title="80 kph" /> <img alt="alt text" src="/images/media/example2.png" title="Straight or right" /> <img alt="alt text" src="/images/media/example3.png" title="Stop" /> 
-<img alt="alt text" src="/images/media/example4.png" title="100 kph" /> <img alt="alt text" src="/images/media/example5.png" title="30 kph" /> <img alt="alt text" src="/images/media/example6.png" title="Beware ice/ snow" /></p>
+<p><img alt="alt text" src="/images/sdcnd/example1.png" title="80 kph"> <img alt="alt text" src="/images/sdcnd/example2.png" title="Straight or right"> <img alt="alt text" src="/images/sdcnd/example3.png" title="Stop"> 
+<img alt="alt text" src="/images/sdcnd/example4.png" title="100 kph"> <img alt="alt text" src="/images/sdcnd/example5.png" title="30 kph"> <img alt="alt text" src="/images/sdcnd/example6.png" title="Beware ice/ snow"></p>
 <p>The images vary quite a lot in terms of brightness/ we can imagine that the orientation of the images might also be quite different. More specifically, we can take a look at just stop signs and see that there is quite a lot of variation. </p>
-<p><img alt="alt text" src="/images/media/stop1.png" title="Stop Sign" /> <img alt="alt text" src="/images/media/stop2.png" title="Stop Sign" /> <img alt="alt text" src="/images/media/stop3.png" title="Stop Sign" /> 
-<img alt="alt text" src="/images/media/stop4.png" title="Stop Sign" /> <img alt="alt text" src="/images/media/stop5.png" title="Stop Sign" /> <img alt="alt text" src="/images/media/stop6.png" title="Stop Sign" /></p>
+<p><img alt="alt text" src="/images/sdcnd/stop1.png" title="Stop Sign"> <img alt="alt text" src="/images/sdcnd/stop2.png" title="Stop Sign"> <img alt="alt text" src="/images/sdcnd/stop3.png" title="Stop Sign"> 
+<img alt="alt text" src="/images/sdcnd/stop4.png" title="Stop Sign"> <img alt="alt text" src="/images/sdcnd/stop5.png" title="Stop Sign"> <img alt="alt text" src="/images/sdcnd/stop6.png" title="Stop Sign"></p>
 <p>Additionally, we can take a look at how the traffic sign classes are distributed (to see if the classes are evenly balanced). Looking at the below histogram, it seems like there are some classes that are represented 7x as much as the least  represented class. Later on we might want to upsample the less represented classes to make the model more robust. </p>
-<p><img alt="alt text" src="/images/media/histogram.png" title="Class Histogram" /></p>
+<p><img alt="alt text" src="/images/sdcnd/histogram.png" title="Class Histogram"></p>
 <p>Below are some summary statistics calculated from the dataset that we have:</p>
 <ul>
 <li>Number of training examples = <code>34799</code></li>
@@ -134,29 +133,29 @@
 <p>First of all, I implemented grayscaling of the traffic sign images. While there may be some information lost because the color information in the image might contain information about the traffic sign, grayscaling simplifies the 3 channels into a single channel, which can lead to quicker model training. Additionally, taking away the color channels might allow the CNN to "focus" on extracting the important non-color features better. </p>
 <p>After performing grayscaling, I performed mean subtraction and normalization of the image pixels. Specifically, in the cs231n <a href="http://cs231n.github.io/neural-networks-2/">course notes</a> Andrej Karpathy mentions that the standard preprocessing techniques involve mean subtraction <code>img = img - np.mean(img)</code> and normalization <code>img = img / np.std(img)</code>. </p>
 <p>Before Processing Images</p>
-<p><img alt="alt text" src="/images/media/before_process.png" title="Before Processing" /> <img alt="alt text" src="/images/media/before_process2.png" title="Before Processing" /> </p>
+<p><img alt="alt text" src="/images/sdcnd/before_process.png" title="Before Processing"> <img alt="alt text" src="/images/sdcnd/before_process2.png" title="Before Processing"> </p>
 <p>After Processing Images</p>
-<p><img alt="alt text" src="/images/media/after_process.png" title="After Processing" /> <img alt="alt text" src="/images/media/after_process2.png" title="After Processing" /> </p>
+<p><img alt="alt text" src="/images/sdcnd/after_process.png" title="After Processing"> <img alt="alt text" src="/images/sdcnd/after_process2.png" title="After Processing"> </p>
 <p>At this point, model performed fairly well and better than the 93% on the validation set that was required in the grading rubric. To start with, the original LeNet-5 network applied to the colored images achieved ~88% on the validation set. Then the gray scaling, mean subtraction, and normalization combined with dropouts on the fully connected layers pushed the validation accuracy to ~95%. 
 - I added the dropouts because looking at the original train vs. validation curve, the model shows strong overfitting. As to why the drops were only applied to the fully connected layers, looking at this <a href="https://www.kaggle.com/c/state-farm-distracted-driver-detection/discussion/20201">kaggle question</a> the author mentions that we usualy do not apply dropouts to the convolution layer because the convolution layer is meant to extract features and also does not have that many features to regularize.</p>
 <p>Original LeNet Architecture</p>
-<p><img alt="alt text" src="/images/media/train_valid_original.png" title="Train vs Validation Curve (Original)" /> </p>
+<p><img alt="alt text" src="/images/sdcnd/train_valid_original.png" title="Train vs Validation Curve (Original)"> </p>
 <p>LeNet Architecture with Grayscaling, Normalization, and Dropouts</p>
-<p><img alt="alt text" src="/images/media/train_valid_gray_norm.png" title="Train vs Validation Curve (Grayscale, Normalization, Dropout)" /></p>
+<p><img alt="alt text" src="/images/sdcnd/train_valid_gray_norm.png" title="Train vs Validation Curve (Grayscale, Normalization, Dropout)"></p>
 <p><strong>Model Evaluation and Deep Dive</strong></p>
 <p>While the model is performing fairly well, we can dive deeper in to the performance of the model to figure out what is happening with the predictions. Specifically, below are the histogram and confusion matrix of validation actuals vs. the validation predicted. By looking at the histogram and confusion matrix, we can look at where the classifications are mistaken and what classes are typically wrong. </p>
-<p><img alt="alt text" src="/images/media/actual_vs_pred_hist.png" title="Actual vs. Predicted Histogram" /></p>
-<p><img alt="alt text" src="/images/media/gray_norm_confusion.png" title="Confusion Matrix (grayscale, normalization, dropounts)" /></p>
+<p><img alt="alt text" src="/images/sdcnd/actual_vs_pred_hist.png" title="Actual vs. Predicted Histogram"></p>
+<p><img alt="alt text" src="/images/sdcnd/gray_norm_confusion.png" title="Confusion Matrix (grayscale, normalization, dropounts)"></p>
 <p>If we look at the histogram above, we see that most of the bars are at about the same place. Similarly, it seems like the diagonal is quite well defined, which means that the CNN did fairly well! However, if we look at the off diagonal cells in the confusion matrix, we see that there are definitely misclassifications. For example, what is actually supposed to be class 0 gets misclassified as class 4 or class 16 gets misclassified as class 41. Below are sample images from these classes.</p>
 <p>Class 0 misclassified as Class 4</p>
-<p><img alt="alt text" src="/images/media/class0_class4_1.png" title="Class 0" /> <img alt="alt text" src="/images/media/class0_class4_2.png" title="Class 4" /></p>
+<p><img alt="alt text" src="/images/sdcnd/class0_class4_1.png" title="Class 0"> <img alt="alt text" src="/images/sdcnd/class0_class4_2.png" title="Class 4"></p>
 <p>Class 16 misclassified as Class 41</p>
-<p><img alt="alt text" src="/images/media/class16_class41_2.png" title="Class 16" /> <img alt="alt text" src="/images/media/class16_class41_1.png" title="Class 41" /></p>
+<p><img alt="alt text" src="/images/sdcnd/class16_class41_2.png" title="Class 16"> <img alt="alt text" src="/images/sdcnd/class16_class41_1.png" title="Class 41"></p>
 <p><strong>Data Augmentation</strong></p>
 <p>So it seems fairly reasonable, especially for the class 0 to class 4 example for the network to misclassify the images. It even looking at the gray and normalized images the differences between the two are not that drastic. In order to improve the model's performance on these, we can augment the dataset by creating more images with various operations like zooming and rotating the images. Note that it seems like the classes that are more often misclassified are also the classes with the fewest amount of data. This step took an unexpectedly long time because many additional images were created of the under represented classes. With these additional images, I retrained the model. Overall, 11915 additional images were created and a few of the additional images are shown below.</p>
-<p><img alt="alt text" src="/images/media/new_gen_image.png" title="Processed Image" /> <img alt="alt text" src="/images/media/new_gen_image_1.png" title="Processed Image" /></p>
+<p><img alt="alt text" src="/images/sdcnd/new_gen_image.png" title="Processed Image"> <img alt="alt text" src="/images/sdcnd/new_gen_image_1.png" title="Processed Image"></p>
 <p>After training with the additional images and increasing the number of epochs to 25, the accuracy on the validation set increased to ~95%. The actual vs. predicted histogram and training/ validation curve also shows an improvement. If we look closely at the actual vs. predicted histogram, it seems like the classes that were misclassified previously are now more accurately classified, which means the data augmentation worked!</p>
-<p><img alt="alt text" src="/images/media/aws_histogram.png" title="Aws Histogram" /> <img alt="alt text" src="/images/media/aws_train_valid_curve.png" title="AWS Train Curve" /></p>
+<p><img alt="alt text" src="/images/sdcnd/aws_histogram.png" title="Aws Histogram"> <img alt="alt text" src="/images/sdcnd/aws_train_valid_curve.png" title="AWS Train Curve"></p>
 <p><strong>Iterative Model Building</strong></p>
 <p>As evidenced above, the process of training, validating, and testing the model architecture took an extended amount of time. Mainly because after running the the model over the validation set, I would return to the preprocessing stages to experiment with various other methods for preprocessing. </p>
 <p>When fiddling with the model's hyperparameters, I had to switch over to use AWS to train the model because with the additional images and an increased number of epochs, the model was too slow to run on my local machine. Specifically, I launched a <code>g2.2xlarge</code> Amazon EC2 instance and it took ~2-3 minutes to train on the 45,000+ image training set with 25 epochs.</p>
@@ -164,7 +163,7 @@
 <h3>Design and Test a Model Architecture</h3>
 <p>In terms of the model architecture that was used to achieve the results above, I used a modified version of the LeNet-5 architecture (shown below). The code used to build the CNN is under the "Model Architecture" section of the Jupyter Notebook. </p>
 <p>LeNet Architecture (Actual architecture is slightly different)</p>
-<p><img alt="alt text" src="/images/media/lenet.png" title="LeNet Architecture" /></p>
+<p><img alt="alt text" src="/images/sdcnd/lenet.png" title="LeNet Architecture"></p>
 <p>Specifically, the model had the following setup:</p>
 <table>
 <thead>
@@ -241,14 +240,14 @@
 <p>In terms of the optimizer used, I considered using various optimizers such as regular gradient descent, but one of the considerations for switching to the Adam optimizer was that the Adam optimizer takes into account "momentum". Specifically, the Adam optimizer (<a href="http://sebastianruder.com/optimizing-gradient-descent/index.html#minibatchgradientdescent">read more here</a>) takes "momentum" into account by keeping a decaying average of the past gradients, which usually provides quicker convergence. </p>
 <h3>Test a Model on New Images</h3>
 <p>In order to further test the model's performance on previously unseen images, I found 6 images from Google Maps Street View to test with the model. Looking at the images below, there are couple factors that might affect the model's ability to classify these new traffic signs. For example, the "Road Work" and "Road Narrows on the Right" signs are captured at an angle. This skew in the image might not get captured by the model because the training data might not have images that are similar. However, when building the training data (via augmenting more images) I tried to include rotated images to deal with this possibility. Additionally, the reduced brightness and skew in the "No Entry" image were potential problems for the classifer.</p>
-<p><img alt="alt text" src="/images/media/new_internet_images.png" title="Internet Images" /></p>
+<p><img alt="alt text" src="/images/sdcnd/new_internet_images.png" title="Internet Images"></p>
 <p>I plotted the top 5 predictions (based on softmax probabilities) for the 6 different images.</p>
-<p><img alt="alt text" src="/images/media/softmax_prob_1.png" title="Softmax1" />
-<img alt="alt text" src="/images/media/softmax_prob_2.png" title="Softmax2" />
-<img alt="alt text" src="/images/media/softmax_prob_3.png" title="Softmax3" />
-<img alt="alt text" src="/images/media/softmax_prob_4.png" title="Softmax4" />
-<img alt="alt text" src="/images/media/softmax_prob_5.png" title="Softmax5" />
-<img alt="alt text" src="/images/media/softmax_prob_6.png" title="Softmax6" /></p>
+<p><img alt="alt text" src="/images/sdcnd/softmax_prob_1.png" title="Softmax1">
+<img alt="alt text" src="/images/sdcnd/softmax_prob_2.png" title="Softmax2">
+<img alt="alt text" src="/images/sdcnd/softmax_prob_3.png" title="Softmax3">
+<img alt="alt text" src="/images/sdcnd/softmax_prob_4.png" title="Softmax4">
+<img alt="alt text" src="/images/sdcnd/softmax_prob_5.png" title="Softmax5">
+<img alt="alt text" src="/images/sdcnd/softmax_prob_6.png" title="Softmax6"></p>
 <p>From the results above, it seems like the concerns mentioned were actually handled fairly well by the classifier. Most of the images with the skew and brightness concerns are handled well and the probabilities also show that the model was not "unsure" between classes (except for the 80 kph vs 30 kph sign). The model achieved a ~83.3% accuracy with 5/6 images correctly classified. The 80 kph sign was misclassified as 30 kph, but this is understandable because the model might have mistaken the <code>8</code> as a <code>3</code>. When looking at the image, it seems quite obvious that the image is <code>80</code>. Ultimately, I may have to add more 80 kph signs with various image translations to ensure the model does not mistakenly classify these signs.</p>
 <p>When compared to the test set, the unseen images has a lower accuracy, but it is because of the misclassification mentioned above. On the other images, the model is quite certain (high probability), while for the misclassified image has visible uncertianty (in the bar graphs of the probabilities). Overall, the model seemed to do quite well on unseen data!</p>
 <h3>Conclusions and Next Steps</h3>

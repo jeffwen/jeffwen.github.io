@@ -109,7 +109,7 @@
     <p><em>February 27, 2016</em></p>
 <p>Let's talk about remote servers, census data, classification models, and data visualization...lots to cover...</p>
 <p><em>Warning:</em> This post will be a bit lengthy and cover some details that might not be that interesting but I am also using this post as a way to capture the process so I don't forget things.
-<img alt="Census Logo" src="/images/census-logo.png" /></p>
+<img alt="Census Logo" src="/images/census-logo.png"></p>
 <h3>Summary</h3>
 <p>In this post, I will discuss some of the design decisions that I made while working on this project and also go through some of the set up required to get things up and running. To start off with the goal of this project was to take census data and use it and visualize it in an interesting way.</p>
 <p>While I did not really have a clear idea when I started the project, I worked with a couple of my teammates to come up with an overall plan. We had to use <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">census data</a> and also had to think about how to tell a story with that data using classification models and D3.js. With this said, we really racked our brains to try to figure out how to use the data in an interesting way. I think we eventually did and will share more in the upcoming 2 posts!</p>
@@ -132,7 +132,7 @@
 <li>Make the file read only with chmod 400 filename</li>
 </ol>
 <p>At this point, the server is set up and can be accessed using:</p>
-<div class="highlight"><pre>ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
+<div class="highlight"><pre><span></span>ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
 </pre></div>
 
 
@@ -198,24 +198,24 @@
 <p>Installing PostgreSQL created a <code>postgres</code> user, but to add myself as a user I had to</p>
 </li>
 </ol>
-<div class="highlight"><pre>sudo -u postgres createuser --superuser my_user_name
+<div class="highlight"><pre><span></span>sudo -u postgres createuser --superuser my_user_name
 sudo -u postgres psql
-<span class="c"># now in psql...</span>
+<span class="c1"># now in psql...</span>
 <span class="se">\p</span>assword my_user_name
-<span class="c"># exit out of psql with Ctrl+D</span>
-<span class="c"># Create a database for your user</span>
+<span class="c1"># exit out of psql with Ctrl+D</span>
+<span class="c1"># Create a database for your user</span>
 sudo -u postgres createdb my_user_name
 </pre></div>
 
 
 <h3>Load the data</h3>
 <p>At this point the Postgres environment was set up but there was no data yet! So in order to add some data, I found it easiest to just directly import a <code>.csv</code> file. However, I had to create the database first.</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">census</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">census</span><span class="p">;</span>
 </pre></div>
 
 
 <p>Then switch to the newly created database <code>\c endor</code></p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">census</span> <span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">census</span> <span class="p">(</span>
     <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
     <span class="n">age</span> <span class="nb">INT</span><span class="p">;</span> 
     <span class="n">workclass</span> <span class="nb">TEXT</span><span class="p">,</span>
@@ -236,14 +236,14 @@ sudo -u postgres createdb my_user_name
 
 
 <p>Now with the data table set up, I scp'ed the census data from my local machine to the remote machine and copied the data into database.</p>
-<div class="highlight"><pre><span class="k">COPY</span> <span class="n">census</span> <span class="k">FROM</span> <span class="s1">&#39;/path/to/ewoks.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">COPY</span> <span class="n">census</span> <span class="k">FROM</span> <span class="s1">&#39;/path/to/ewoks.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
 </pre></div>
 
 
 <h3>Permissions</h3>
 <p>Now the Postgres database is set up and work can begin if I wanted to do all the work on my remote machine. However, it is much easier to work from my local machine so I had to change a few things in the Postgres configuration files and my Amazon AWS security group.</p>
 <p>Lets start with the AWS security group. Whenever I want to log into my remote machine from a different IP address I need to add a 'rule' that allows that new IP address (or I can set it to allow any IP but thats probably not the best). So under security group on my AWS I add a new SSH with my current IP address. But I also need to allow communication with the Postgres database. Luckily, AWS has a pretty smooth process for this. Once again I add a 'rule' but this time from the drop down I select 'PostgreSQL' and I can allow any IP address to access the databse or some specified ones.</p>
-<p><img alt="Postgres AWS" src="/images/postgre_aws.png" /></p>
+<p><img alt="Postgres AWS" src="/images/postgre_aws.png"></p>
 <p>In order to edit the Postgres configuration files, I need to go back into my remote machine. There are 2 files that I need to edit.</p>
 <ul>
 <li><code>sudo nano /etc/postgresql/9.3/main/postgresql.conf</code><ul>
@@ -264,10 +264,10 @@ sudo -u postgres createdb my_user_name
 <p>FINALLY. At this point, I can actually access my remote database from my local machine. However, when using Python and psycopg2 to access the database there were a few more hurdles that I had to jump over :(.</p>
 <h3>Psycopg2 and Python</h3>
 <p>To directly connect with the database I had to install <a href="http://initd.org/psycopg/">psycopg2</a>, which is a Postgres adapter for Python. I did the following in order to get the set up working... (lots of steps and troubleshooting; took  me a long time to figure out the last step)</p>
-<div class="highlight"><pre><span class="n">brew</span> <span class="n">install</span> <span class="n">postgresql</span>
+<div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">postgresql</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
-<span class="c"># this next step I had to preform only because it kept throwing back an error saying that my</span>
-<span class="c"># AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug</span>
+<span class="c1"># this next step I had to preform only because it kept throwing back an error saying that my</span>
+<span class="c1"># AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug</span>
 <span class="n">brew</span> <span class="n">unlink</span> <span class="n">openssl</span> <span class="o">&amp;&amp;</span> <span class="n">brew</span> <span class="n">link</span> <span class="n">openssl</span> <span class="o">--</span><span class="n">force</span>
 </pre></div>
 
