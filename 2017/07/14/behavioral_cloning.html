@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <!-- <script src="/theme/typed.js-master/js/typed.js"></script> -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <!-- <script> -->
+  <!--     jQuery(function($){ -->
+  <!--     $(".element").typed({ -->
+  <!--       strings: ["aspiring data scientist.", "problem solver.","wannabe tinkerer."], -->
+  <!--       typeSpeed: 50 -->
+  <!--     }); -->
+  <!--     }); -->
+      
+  <!-- </script> -->
+
+  <link href="http://jeffwen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; Behavioral Cloning  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--   <style> -->
+<!--      .typed-cursor{ -->
+<!--      opacity: 1; -->
+<!--      font-weight: 100; -->
+<!--     -webkit-animation: blink 0.7s infinite; -->
+<!--     -moz-animation: blink 0.7s infinite; -->
+<!--      animation: blink 0.7s infinite; -->
+<!--      font-size: 1.5rem; -->
+<!--      vertical-align:middle; -->
+<!-- } -->
+<!-- @keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-webkit-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-moz-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!--      } -->
+
+<!--      </style> -->
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.github.io">
+        <img src="http://jeffwen.github.io/images/jeff_logo.png" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.github.io">Jeff Wen</a></h2>
+      <p>aspiring data scientist, problem solver, wannabe tinkerer</p>
+      <!-- <p class="element" style="display:inline-block;"></div> -->
+      <ul>
+        <li><a href="http://jeffwen.github.io/pages/about-me.html">About Me</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.github.io">Index</a> &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.github.io/2017/07/14/behavioral_cloning">Behavioral Cloning</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>July 24, 2017</em></p>
+<p>Here is the final two corners of the track with the completed model!</p>
+<p><img alt="alt text" src="/images/sdcnd/final.gif" title="Final Run"></p>
+<p>In this project, we design, train, and test a convolutional neural network (CNN) to clone the driving behavior from sample images recorded from <a href="https://github.com/udacity/self-driving-car-sim">Udacity's driving simulator</a>. The code for this project can be found at this <a href="https://github.com/jeffwen/sdcnd_behavioral_cloning">repository</a>. </p>
+<p>The goals / steps of this project are the following:
+<em> Use the simulator to collect data of good driving behavior
+</em> Build, a convolution neural network (using Keras) that predicts steering angles from images
+<em> Train and validate the model with a training and validation set
+</em> Test that the model successfully drives around the track without leaving the road</p>
+<p>The CNN that was eventually used was based on NVIDIA's <em><a href="https://arxiv.org/pdf/1604.07316v1.pdf">End to End Learning for Self-Driving Cars</a></em> paper with different input image size and with dropout added to improve robustness. Most of the training was done using an Amazon g2.2xlarge EC2 instance, which helped make training much quicker.</p>
+<h3>Data Gathering</h3>
+<p>One of the most time consuming aspects of this project was collecting the adequate data to train on. While Udacity provided a dataset from the training simulator, it was more exciting to collect my own training data. Below is a sample of the simulator screen. When collecting data, we use the "Training Mode." There are also two tracks available for training and testing. I focused on using the first track. The second image shows the view that the user sees in the driving simulator.</p>
+<p><img alt="alt text" src="/images/sdcnd/simulator_screen.png" title="Simulator Screen"></p>
+<p><img alt="alt text" src="/images/sdcnd/simulator_car.png" title="Simulator Car"></p>
+<p>By using the simulator that was provided, it was easy to record laps that would be stored as separate frames. However, the data gathering process had to include a lot of "recovery driving" and driving around corners to make sure that the model could learn the correct behaviors. After recording the different simulator runs, the output are individual frames.</p>
+<h3>Data Preparation</h3>
+<p>The final dataset before augmentation consisted of 7986 training observations and 1997 validation observations. However, the simulator actually not only recorded the center image, but also the left and right viewpoints. As seen below, the 3 camera angles comprise of each frame of the video. Therefore, the data quantitfy can actually be increased by making use of the left and right images. In particular, when using the left and right camera angles, I had to correct the steering angle so that the data could represent what the steering angle would have been if the viewpoint was from the left or right camera angles.</p>
+<p>The data took some fiddling to figure out what worked eventual specifications. For example, when intially training the model, the images were not cropped (160x320x3 images), which meant that for every image there was a large percentage of the image that contained useless information for informing the steering angle. </p>
+<p><img alt="alt text" src="/images/sdcnd/original_simulator_image.png" title="Original Simulator Image"></p>
+<p>In the above example, we can see that the top portion of every image and even the bottom portion of the image contained extraneous information. After cropping, the performance of the model was improved.</p>
+<p><img alt="alt text" src="/images/sdcnd/cropped_simulator_image.png" title="Cropped Simulator Image"></p>
+<p>Futhermore, the NVIDIA paper used the YUV channel in their implementation and I similarly chose to use the YUV channel after experimenting between RGB, BGR, and the YUV channels. </p>
+<h3>Data Exploration and Augmentation</h3>
+<p>In order to get the network to perform well, I first ran roughly 2 laps around the track (one in each direction). However, the model automated driving was quite horrible on the curved portions of the road. The car would drive off the road fairly frequently. </p>
+<p>I took a closer look at the data distribution after reading that this might be a potential issue (the model doesn't know how to deal with corners).</p>
+<p><img alt="alt text" src="/images/sdcnd/original_distribution.png" title="Original Distribution"></p>
+<p>As seen in the image above, the distribution of the data is heavily skewed towards the very low steering angles, which makes sense because most of the driving was on relatively straight roads vs. curved roads. In order to try to create a more even distribution, I collected roughly half a lap (total frames) of curved road driving and also about a quarter of a lap of recovery driving. The recovery driving entailed hitting the record button when I intentionally approached a corner and did not turn in time, then turning heavily to "correct" the behavior. </p>
+<p>However, in addition to manually trying to augment data I also forced the distribution to be more uniform by downsampling the over represented steering angles and upsampling the underrepresented ones. I created a histogram and randomly chose up to observations that fell into a particular bucket to get the total number of observations up to 500.</p>
+<p><img alt="alt text" src="/images/sdcnd/augmented_distribution.png" title="Augmented Distribution"></p>
+<p>The resulting data distribution was much more uniform and resulted in the car being able to correct for even severe mistakes (such as driving too far to one side of the track and hitting the apex). The below gif shows the model trained using the augmented data. We can see that even though the vehicle gets close to the apex/side of the road, it is able to navigate back to the center of the track.</p>
+<p><img alt="alt text" src="/images/sdcnd/recovery.gif" title="Recovery"></p>
+<h3>Building the Model</h3>
+<p>After getting the data ready, I focused on replicating the NVIDIA model architecture because it had worked well in the real life setting and therefore I figured it would be useful in the simulated world as well. </p>
+<p>Specifically, the network is 9 layers deep with exponential activation units and dropout after the convolutional layers. As mentioned previously, the training took place on a Amazon EC2 instance and I use 5 epochs to train on 80% of the total data with 20% left for validation. The network was built with Keras and used Tensorflow as the backend. One of the awesome things about Keras is that it keeps the model building relatively simple so the model was written with only a couple lines of code.</p>
+<p>While the network worked, after reading other student's efforts it seems like even simpler networks could work quite well.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Layer</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Input</td>
+<td align="center">80x320x3 YUV Image</td>
+</tr>
+<tr>
+<td align="center">Normalization</td>
+<td align="center">Normalize batch</td>
+</tr>
+<tr>
+<td align="center">Convolution 5x5</td>
+<td align="center">2x2 stride, valid padding, outputs 38x158x24</td>
+</tr>
+<tr>
+<td align="center">ELU activation</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Convolution 5x5</td>
+<td align="center">2x2 stride, valid padding, outputs 17x77x36</td>
+</tr>
+<tr>
+<td align="center">ELU activation</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Convolution 5x5</td>
+<td align="center">2x2 stride, valid padding, outputs 7x37x48</td>
+</tr>
+<tr>
+<td align="center">ELU activation</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Convolution 3x3</td>
+<td align="center">1x1 stride, valid padding, outputs 5x35x64</td>
+</tr>
+<tr>
+<td align="center">ELU activation</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Convolution 3x3</td>
+<td align="center">1x1 stride, valid padding, outputs 3x33x64</td>
+</tr>
+<tr>
+<td align="center">ELU activation</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Dropout</td>
+<td align="center">0.5 keep probablility (training)</td>
+</tr>
+<tr>
+<td align="center">Flatten</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Fully connected</td>
+<td align="center">3168 input, 100 output</td>
+</tr>
+<tr>
+<td align="center">Fully connected</td>
+<td align="center">100 input, 50 output</td>
+</tr>
+<tr>
+<td align="center">Fully connected</td>
+<td align="center">50 input, 10 output</td>
+</tr>
+<tr>
+<td align="center">Output</td>
+<td align="center">10 input, 1 output</td>
+</tr>
+</tbody>
+</table>
+<p>In order to feed data to the network, I used a generator function so that the data did not have to all be stored in memory. Only when the data was needed would it be read into memory and sent over as a batch.</p>
+<h3>Discussion and Next Steps</h3>
+<p>Overall, this project was really interesting and it was surprising that a couple lines of code could create a model that was able to emulate driving behavior. While the results are acceptable, there are definitely a couple improvements that come to mind.</p>
+<ul>
+<li>First of all, the data gather process could have been more thorough and also could have used different samples. In this case, I trained the model on images from the same track that it eventually ran on. It would interesting to tune the model and make it robust enough to work on any track that it is set on.</li>
+<li>In terms of data preprocessing, only very simple data preprocessing steps were taken. It might be beneficial to combine some of the steps that were implemented in the other projects to help, for example, highlight the lane lines more clearly so that the model can use less noisy input data.</li>
+<li>In reality, a vehicle would not be running in isolation and instead would be in an environment where there are many other distractions and unexpected objects that might suddenly appear. This is where radar and sensor data could be used in combination with the computer vision aspects to help inform a more well rounded model. </li>
+</ul>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: July 14 2017</p>
+    <p>Category: <a href="http://jeffwen.github.io/category/python/">Python</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2017/07/14/behavioral_cloning";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.github.io/archives.html">Archives</a> </p>
+    </div>
+  </main>
+</body>
+</html>
