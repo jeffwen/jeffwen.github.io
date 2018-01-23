@@ -200,7 +200,7 @@
 <p>Cool! It seems like the classifier works fairly well. It was able to pick up where the cars are in each of the test images. However, beyond just the obvious cars there are also some incorrect classifications. Furthermore, while the above described method works and performs fairly well, it is slow because it reruns the HOG extraction every time there is a new window.</p>
 <p>A better implementation would run the HOG extraction once and reuse the extracted data by "sliding" a window across the initially extracted matrix. The below images show the output of this improved implementation.</p>
 <p><img alt="alt text" src="/images/sdcnd/vehicle_final_efficient.png" title="vehicle_final_efficient"></p>
-<p>In order to deal with the false positives, we can use count the number of times that a pixel is contained within a bounding box and use that to create a heatmap of which pixels are most likely to be of a vehicle.</p>
+<p>In order to deal with the false positives, we can count the number of times that a pixel is contained within a bounding box and use that to create a heatmap of which pixels are most likely to be of a vehicle.</p>
 <p><img alt="alt text" src="/images/sdcnd/vehicle_heatmap.png" title="vehicle_heatmap"></p>
 <p>The heatmap strategy works fairly well to control for the noise in our images. Now, we can use the scipy <code>label</code> function to identify where the non-zero observations or the 'heated' observations are.</p>
 <p><img alt="alt text" src="/images/sdcnd/heatmap.png" title="heatmap"></p>
