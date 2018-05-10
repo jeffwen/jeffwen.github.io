@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="http://jeffwen.com/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <!-- <script src="/theme/typed.js-master/js/typed.js"></script> -->
+
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.com/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="http://jeffwen.com/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono"> 
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeff Wen">
+  <meta name="description" content="Posts and writings by Jeff Wen">
+
+  <!-- <script> -->
+  <!--     jQuery(function($){ -->
+  <!--     $(".element").typed({ -->
+  <!--       strings: ["aspiring data scientist.", "problem solver.","wannabe tinkerer."], -->
+  <!--       typeSpeed: 50 -->
+  <!--     }); -->
+  <!--     }); -->
+      
+  <!-- </script> -->
+
+  <link href="http://jeffwen.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Wen Atom" />
+
+<meta name="keywords" content="">
+
+  <title>
+    Jeff Wen
+&ndash; Kalman Filters for Object Tracking  </title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-70808160-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--   <style> -->
+<!--      .typed-cursor{ -->
+<!--      opacity: 1; -->
+<!--      font-weight: 100; -->
+<!--     -webkit-animation: blink 0.7s infinite; -->
+<!--     -moz-animation: blink 0.7s infinite; -->
+<!--      animation: blink 0.7s infinite; -->
+<!--      font-size: 1.5rem; -->
+<!--      vertical-align:middle; -->
+<!-- } -->
+<!-- @keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-webkit-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!-- } -->
+<!-- @-moz-keyframes blink{ -->
+<!--     0% { opacity:1; } -->
+<!--     50% { opacity:0; } -->
+<!--     100% { opacity:1; } -->
+<!--      } -->
+
+<!--      </style> -->
+<!-- preload images for the gallery page with lower priority -->
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="http://jeffwen.com">
+        <img src="http://jeffwen.com/images/jeff_logo.png" id="user_logo" alt="logo">
+      </a>
+      <h2><a href="http://jeffwen.com">Jeff Wen</a></h2>
+      <p>data scientist, problem solver, tinkerer</p>
+      <!-- <p class="element" style="display:inline-block;"></div> -->
+      <ul>
+        <li><a href="http://jeffwen.com/pages/about-me.html">About Me</a></li>
+        <li><a href="http://jeffwen.com/pages/photography.html">Photography</a></li>
+        <li><a href="https://www.linkedin.com/in/wenjeff" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/jeffwen" target="_blank">GitHub</a></li>
+        <li><a href="mailto:jeff.li.wen@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!--<header> 
+      <p>
+      <a href="http://jeffwen.com">Index</a> &brvbar; <a href="http://jeffwen.com/archives.html">Archives</a>
+      &brvbar; <a href="http://jeffwen.com/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>-->
+
+<article>
+  <div class="article_title">
+    <h3><a href="http://jeffwen.com/2017/11/15/kalman_filter">Kalman Filters for Object Tracking</a></h3>
+  </div>
+  <div class="article_text">
+    <p><em>November 15, 2017</em></p>
+<p>This post will be less invovled than some of the other projects but you can look at the code for the <a href="https://github.com/jeffwen/sdcnd_extended_kalman_filter">extended kalman filter</a> and <a href="https://github.com/jeffwen/sdcnd_unscented_kalman_filter">unscented kalman filter</a> if you want more details! Also, if you want to read more about kalman filters and understand how these types of models work feel free to read this intuitive and well written <a href="http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">blog</a>.</p>
+<p>In this project, we use an extended kalman filter and later an unscented kalman filter to predict the location and velocity of a simulated bicycle that is traveling around the vehicle. The measurement data comes from lidar and radar sensors with the main algorithm implemented in C++.</p>
+<h3>Extended Kalman Filter</h3>
+<p>In the screenshots below, the green triangles represent the predicted location, the red circles are from the laser sensor, and the blue markers are from the radar sensor. We measure the accuracy of the algorithm by calculating the RMSE of the <code>x, y</code> positions and the velocity along the <code>x, y</code> axis. </p>
+<p><img alt="alt text" src="/images/sdcnd/dataset1.png" title="Original dataset"></p>
+<ul>
+<li>The original dataset starting with lidar measurement </li>
+</ul>
+<p><img alt="alt text" src="/images/sdcnd/dataset2.png" title="Reversed dataset"></p>
+<ul>
+<li>Reverse of the original dataset starting with radar measurement</li>
+</ul>
+<p>If we just use one or the other of the sensor measurements to update the algorithm we can start to see what each sensor is better.</p>
+<p><img alt="alt text" src="/images/sdcnd/lidar_only.png" title="Lidar only"></p>
+<ul>
+<li>The original dataset starting with lidar measurement and only using the lidar measurements to update to algorithm. We can see that compared to using both sources of sensor data the overall algorithm performs worse. </li>
+</ul>
+<p><img alt="alt text" src="/images/sdcnd/radar_only.png" title="Radar only"></p>
+<ul>
+<li>The original dataset starting with lidar measurement and only using the radar measurements to update to algorithm. Compared to using only the lidar data, the radar only updated algorithm is worse at localizing the positon (higher RMSE for <code>x</code> and <code>y</code>).</li>
+</ul>
+<h3>Unscented Kalman Filter</h3>
+<p><img alt="alt text" src="/images/sdcnd/dataset1_unscented.png" title="Original dataset"></p>
+<ul>
+<li>The original dataset starting with lidar measurement </li>
+</ul>
+<p>Overall, the unscented kalman filter performs better than the extended kalman filter. The RMSE values are lower in general, but especially the velocity predictions are much better for the unscented kalman filter. One reason for this might be that mechanically, the unscented kalman filter doesn't employ a linear process model nor does it linearize the non-linear measurement model. Rather, it uses an <a href="https://en.wikipedia.org/wiki/Unscented_transform">unscented transform</a> to approximate the non-linear transformation. With regards to the process model (or motion model), instead of a constant velocity model we switched to using a constant turn rate and velocity magnitude model, which is better able to model how objects behave in turns.</p>
+<p><img alt="alt text" src="/images/sdcnd/lidar_only_unscented.png" title="Lidar only"></p>
+<ul>
+<li>Using only the lidar measurements, the overall algorithm performs worse especially with regard to the velocity predictions. </li>
+</ul>
+<p><img alt="alt text" src="/images/sdcnd/radar_only_unscented.png" title="Radar only"></p>
+<ul>
+<li>Similar to the extended kalman filter case, using just the radar measurements, the algorithm performs worse then with just the lidar or both sensors. </li>
+</ul>
+<p>One difference in terms of the two filters is the use of the normalized innovation squared (NIS) metric to finetune the noise parameters that are used in the unscented kalman filter. The NIS metric gives an approximate idea of whether or not the parameters were initialized in the correct range. Specifically, the NIS follows a Chi-squared distribution and given the number of dimensions we can figure out what the value should be if we expect that only in 5% of the cases the NIS will exceed the value. In our case, for the radar measurement example we have 3 dimensions and the value that we expect to exceed 5% of the time is <code>7.815</code>. For the lidar, since there are 2 dimensions (the <code>x</code> and <code>y</code> position) the value we expect to exceed ~5% of the time is <code>5.991</code>.</p>
+<p><img alt="alt text" src="/images/sdcnd/lidar_nis.png" title="Lidar NIS"></p>
+<ul>
+<li>For the lidar NIS, we see that only in about ~5% of the cases does the value of the NIS exceed the <code>5.991</code> value.</li>
+</ul>
+<p><img alt="alt text" src="/images/sdcnd/radar_nis.png" title="Radar NIS"></p>
+<ul>
+<li>Similarly, for the radar NIS, about ~5% of the time the NIS exceeds <code>7.815</code></li>
+</ul>
+<h3>Compile and Build</h3>
+<p>In order to compile and build this project, make sure that the following dependencies are met.</p>
+<ul>
+<li><code>cmake</code>:</li>
+<li>For Mac make sure that <code>cmake</code> is at least version 3.5</li>
+<li><code>make</code>:</li>
+<li>For Mac make sure that <code>make</code> is at least version 4.1</li>
+<li><code>gcc/g++</code>:</li>
+<li>For Mac make sure that <code>gcc/g++</code> is at least version 5.4</li>
+<li><code>uWebSocketIO</code></li>
+<li>From the project directory run <code>install-mac.sh</code>, which should be linked to the necessary <code>cmakepatch.txt</code> file</li>
+<li>In order to run the above shell script, <code>homebrew</code> should also be installed</li>
+</ul>
+<p>Once the above dependencies are installed:</p>
+<ol>
+<li>Clone this repository</li>
+<li>Create a build directory and navigate into it</li>
+<li><code>mkdir build &amp;&amp; cd build</code></li>
+<li>Compile </li>
+<li><code>cmake .. &amp;&amp; make</code></li>
+<li>Run the program</li>
+<li>Make sure that the <a href="https://github.com/udacity/self-driving-car-sim/releases">Udacity simulator</a> is installed</li>
+<li><code>./ExtendedKF</code> or</li>
+<li><code>./UnscentedKF</code></li>
+</ol>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: November 15 2017</p>
+    <p>Category: <a href="http://jeffwen.com/category/python/">Python</a>
+    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "2017/11/15/kalman_filter";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = 'http://jeffwen-blog.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+		     
+    <div id="ending_message">
+      <p>&copy; Jeff Wen. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. &brvbar; <a href="http://jeffwen.com/archives.html">Archives</a> </p>
+    </div>
+  </main>
+ 
+
+<!-- automatically include stylesheets if there are any -->
+
+  
+<!-- automatically include javasccript -->
+
+  
+<script>
+
+<!-- setting up the theater view box for the individual images -->
+$('.grid').magnificPopup({
+	delegate: 'a',
+        type: 'image',
+closeBtnInside: false,
+	gallery: {
+		enabled: true,
+		navigateByImgClick: true,
+		preload: [1,2]
+}
+});
+
+<!-- setting up the isotope grid for the photo gallery images -->
+var $grid = $('.grid').isotope({
+itemSelector: '.picture',
+    masonry:{
+columnWidth: 180,
+gutter:0
+    }
+});
+
+<!-- $grid.on("mouseenter mouseleave",".picture",function() { -->
+<!--   // change size of item by toggling gigante class -->
+<!--   $(this).toggleClass('gigante'); -->
+<!--   $grid.isotope('layout'); -->
+<!-- }); -->
+
+  </script>
+ 
+</body>
+
+</html>
