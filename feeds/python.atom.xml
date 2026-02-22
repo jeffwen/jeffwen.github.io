@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen - Python</title><link href="http://jeffwen.com/" rel="alternate"></link><link href="http://jeffwen.com/feeds/python.atom.xml" rel="self"></link><id>http://jeffwen.com/</id><updated>2018-02-23T11:07:00-05:00</updated><entry><title>Road Extraction using PyTorch</title><link href="http://jeffwen.com/2018/02/23/road_extraction" rel="alternate"></link><published>2018-02-23T11:07:00-05:00</published><updated>2018-02-23T11:07:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2018-02-23:/2018/02/23/road_extraction</id><summary type="html">&lt;p&gt;Using PyTorch implementation of UNet for road extraction&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 23, 2018&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen - Python</title><link href="http://jeffwen.com/" rel="alternate"/><link href="http://jeffwen.com/feeds/python.atom.xml" rel="self"/><id>http://jeffwen.com/</id><updated>2018-02-23T11:07:00-05:00</updated><entry><title>Road Extraction using PyTorch</title><link href="http://jeffwen.com/2018/02/23/road_extraction" rel="alternate"/><published>2018-02-23T11:07:00-05:00</published><updated>2018-02-23T11:07:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2018-02-23:/2018/02/23/road_extraction</id><summary type="html">&lt;p&gt;Using PyTorch implementation of UNet for road extraction&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 23, 2018&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="alt text" src="/images/road_extraction/sat_img_banner.png" title="Satellite Image Banner"&gt;&lt;/p&gt;
 &lt;p&gt;With the wealth of earth observation data made available by agencies such as &lt;a href="https://earthdata.nasa.gov/earth-observation-data/imagery"&gt;NASA&lt;/a&gt; and &lt;a href="https://earth.esa.int/web/guest/data-access/browse-data-products"&gt;ESA&lt;/a&gt; or private companies like &lt;a href="https://www.digitalglobe.com"&gt;DigitalGlobe&lt;/a&gt; and &lt;a href="https://www.planet.com"&gt;Planet Labs&lt;/a&gt;, there are a lot of interesting applications that can come from the combination of this data with recent advances in computer vision and machine learning. While the application of computational techniques to satellite imagery is not novel, development of techniques in this direction have the potential to impact many pressing social and humanitarian related causes.&lt;/p&gt;
 &lt;p&gt;One question of interest is how to make use of the available data to reduce dependence on limited resources. Namely, when considering rapidly growing cities it is important to understand the growth of the city not only in terms of numerically, but also it can be immensely helpful to have a geographical understanding of the city's development. For example, even if the city does not yet have paved roads, common paths or informal roadways are important to map out. While local surveyors could construct the most accurate representations, local communities might not have the resources to send surveyors out with any regularity. Instead, tools that make use of earth observations and modern computer vision techniques can serve as the first step of the process towards eventual verified and published maps.&lt;/p&gt;
@@ -60,7 +60,7 @@
 &lt;p&gt;&lt;em&gt;Pretrained Model Weights for Initialization&lt;/em&gt;: While training a network from scratch is possible, many top performing networks are typically pre-trained on ImageNet then fine-tuned on the specific data set at hand. Other transfer learning techniques also make the training process quicker and the eventual accuracy better. In the case of semantic segmentation, one possibility is to use a pre-trained network as the decoder and an untrained network as the encoder (as shown in this &lt;a href="https://arxiv.org/pdf/1801.05746.pdf"&gt;paper&lt;/a&gt;).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Ultimately, while this post details a technical solution, it is important to keep in mind that a purely technical solution often &lt;a href="https://placesjournal.org/article/mappings-intelligent-agents/"&gt;misses out&lt;/a&gt; on many important social aspects. Therefore, although technology can make it easier and more cost effective for certain tasks, it should be designed with input from the eventual end users.&lt;/p&gt;</content></entry><entry><title>Kalman Filters for Object Tracking</title><link href="http://jeffwen.com/2017/11/15/kalman_filter" rel="alternate"></link><published>2017-11-15T03:21:00-05:00</published><updated>2017-11-15T03:21:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-11-15:/2017/11/15/kalman_filter</id><summary type="html">&lt;p&gt;Using C++ to implement an extended and unscented kalman filter for object tracking&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 15, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ultimately, while this post details a technical solution, it is important to keep in mind that a purely technical solution often &lt;a href="https://placesjournal.org/article/mappings-intelligent-agents/"&gt;misses out&lt;/a&gt; on many important social aspects. Therefore, although technology can make it easier and more cost effective for certain tasks, it should be designed with input from the eventual end users.&lt;/p&gt;</content><category term="Python"/></entry><entry><title>Kalman Filters for Object Tracking</title><link href="http://jeffwen.com/2017/11/15/kalman_filter" rel="alternate"/><published>2017-11-15T03:21:00-05:00</published><updated>2017-11-15T03:21:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-11-15:/2017/11/15/kalman_filter</id><summary type="html">&lt;p&gt;Using C++ to implement an extended and unscented kalman filter for object tracking&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 15, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;This post will be less invovled than some of the other projects but you can look at the code for the &lt;a href="https://github.com/jeffwen/sdcnd_extended_kalman_filter"&gt;extended kalman filter&lt;/a&gt; and &lt;a href="https://github.com/jeffwen/sdcnd_unscented_kalman_filter"&gt;unscented kalman filter&lt;/a&gt; if you want more details! Also, if you want to read more about kalman filters and understand how these types of models work feel free to read this intuitive and well written &lt;a href="http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/"&gt;blog&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In this project, we use an extended kalman filter and later an unscented kalman filter to predict the location and velocity of a simulated bicycle that is traveling around the vehicle. The measurement data comes from lidar and radar sensors with the main algorithm implemented in C++.&lt;/p&gt;
 &lt;h3&gt;Extended Kalman Filter&lt;/h3&gt;
@@ -129,7 +129,7 @@
 &lt;li&gt;Make sure that the &lt;a href="https://github.com/udacity/self-driving-car-sim/releases"&gt;Udacity simulator&lt;/a&gt; is installed&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;./ExtendedKF&lt;/code&gt; or&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;./UnscentedKF&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>Vehicle Detection</title><link href="http://jeffwen.com/2017/08/16/vehicle_detection" rel="alternate"></link><published>2017-08-16T15:02:00-04:00</published><updated>2017-08-16T15:02:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-08-16:/2017/08/16/vehicle_detection</id><summary type="html">&lt;p&gt;Computer vision and machine learning for vehicle identification and tracking&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;August 16, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><category term="Python"/></entry><entry><title>Vehicle Detection</title><link href="http://jeffwen.com/2017/08/16/vehicle_detection" rel="alternate"/><published>2017-08-16T15:02:00-04:00</published><updated>2017-08-16T15:02:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-08-16:/2017/08/16/vehicle_detection</id><summary type="html">&lt;p&gt;Computer vision and machine learning for vehicle identification and tracking&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;August 16, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In this project, the main goal was to use computer vision and machine learning techniques to identify and track vehicles in images and video feeds. Also, take a look at the &lt;a href="https://github.com/jeffwen/sdcnd_vehicle_detection/blob/master/Vehicle%20Detection.ipynb"&gt;Jupyter Notebook&lt;/a&gt; for more details. Check out the final video output &lt;a href="https://vimeo.com/221974847"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Specifically, the project consisted of the following steps:&lt;/p&gt;
 &lt;ul&gt;
@@ -171,38 +171,38 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align="center"&gt;Parameter&lt;/th&gt;
-&lt;th align="center"&gt;Value&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Parameter&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Value&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Color Space&lt;/td&gt;
-&lt;td align="center"&gt;&lt;code&gt;LUV&lt;/code&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Color Space&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;code&gt;LUV&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Orientations&lt;/td&gt;
-&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Orientations&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Pixels per Cell&lt;/td&gt;
-&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Pixels per Cell&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Cells per Block&lt;/td&gt;
-&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Cells per Block&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;HOG Channel&lt;/td&gt;
-&lt;td align="center"&gt;0&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;HOG Channel&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Spatial Bin Size&lt;/td&gt;
-&lt;td align="center"&gt;16&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Spatial Bin Size&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;16&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;# of Color Bins&lt;/td&gt;
-&lt;td align="center"&gt;32&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;# of Color Bins&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;32&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -232,15 +232,15 @@
 &lt;li&gt;&lt;strong&gt;Performance&lt;/strong&gt;: One of the major drawbacks of the current pipeline is that it is relatively slow. Even though the classification of the frame is quick, the extraction of the features is slow. An improvement to the speed of the extraction could mean that this pipeline could be applied to an actual real-time feed. Currently the rate of feature extraction and classification is roughly 1.5 frames per second.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Noise&lt;/strong&gt;: Although the current pipeline does a fairly good job at identifying the cars, in some cases there are still misclassifications. Ideally these misclassifications need to be dealt with so that the classifications don't lead to our self-driving car crashing!&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Feature Extraction&lt;/strong&gt;: The process of identifying the right features to extract is really difficult and we can actually imagine that using a convolutional neural network might help in extracting the relevant features. A CNN is able to identify features that are important without much supervision. This might perform better than explicitly setting up the pipeline to extract the HOG, color histogram, and raw pixel values. Additionally, a car that is oout of the ordinary would be an issue for this pipeline.&lt;/li&gt;
-&lt;/ul&gt;</content></entry><entry><title>Behavioral Cloning</title><link href="http://jeffwen.com/2017/07/14/behavioral_cloning" rel="alternate"></link><published>2017-07-14T11:07:00-04:00</published><updated>2017-07-14T11:07:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-07-14:/2017/07/14/behavioral_cloning</id><summary type="html">&lt;p&gt;Cloning driving behavior with convolutional neural networks&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;July 24, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Python"/></entry><entry><title>Behavioral Cloning</title><link href="http://jeffwen.com/2017/07/14/behavioral_cloning" rel="alternate"/><published>2017-07-14T11:07:00-04:00</published><updated>2017-07-14T11:07:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-07-14:/2017/07/14/behavioral_cloning</id><summary type="html">&lt;p&gt;Cloning driving behavior with convolutional neural networks&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;July 24, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Here is the final two corners of the track with the completed model!&lt;/p&gt;
 &lt;p&gt;&lt;img alt="alt text" src="/images/sdcnd/final.gif" title="Final Run"&gt;&lt;/p&gt;
 &lt;p&gt;In this project, we design, train, and test a convolutional neural network (CNN) to clone the driving behavior from sample images recorded from &lt;a href="https://github.com/udacity/self-driving-car-sim"&gt;Udacity's driving simulator&lt;/a&gt;. The code for this project can be found at this &lt;a href="https://github.com/jeffwen/sdcnd_behavioral_cloning"&gt;repository&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;The goals / steps of this project are the following:
-&lt;em&gt; Use the simulator to collect data of good driving behavior
-&lt;/em&gt; Build, a convolution neural network (using Keras) that predicts steering angles from images
-&lt;em&gt; Train and validate the model with a training and validation set
-&lt;/em&gt; Test that the model successfully drives around the track without leaving the road&lt;/p&gt;
+* Use the simulator to collect data of good driving behavior
+* Build, a convolution neural network (using Keras) that predicts steering angles from images
+* Train and validate the model with a training and validation set
+* Test that the model successfully drives around the track without leaving the road&lt;/p&gt;
 &lt;p&gt;The CNN that was eventually used was based on NVIDIA's &lt;em&gt;&lt;a href="https://arxiv.org/pdf/1604.07316v1.pdf"&gt;End to End Learning for Self-Driving Cars&lt;/a&gt;&lt;/em&gt; paper with different input image size and with dropout added to improve robustness. Most of the training was done using an Amazon g2.2xlarge EC2 instance, which helped make training much quicker.&lt;/p&gt;
 &lt;h3&gt;Data Gathering&lt;/h3&gt;
 &lt;p&gt;One of the most time consuming aspects of this project was collecting the adequate data to train on. While Udacity provided a dataset from the training simulator, it was more exciting to collect my own training data. Below is a sample of the simulator screen. When collecting data, we use the "Training Mode." There are also two tracks available for training and testing. I focused on using the first track. The second image shows the view that the user sees in the driving simulator.&lt;/p&gt;
@@ -270,82 +270,82 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align="center"&gt;Layer&lt;/th&gt;
-&lt;th align="center"&gt;Description&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Layer&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Description&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Input&lt;/td&gt;
-&lt;td align="center"&gt;80x320x3 YUV Image&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Input&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;80x320x3 YUV Image&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Normalization&lt;/td&gt;
-&lt;td align="center"&gt;Normalize batch&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Normalization&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Normalize batch&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 5x5&lt;/td&gt;
-&lt;td align="center"&gt;2x2 stride, valid padding, outputs 38x158x24&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 5x5&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2x2 stride, valid padding, outputs 38x158x24&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;ELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;ELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 5x5&lt;/td&gt;
-&lt;td align="center"&gt;2x2 stride, valid padding, outputs 17x77x36&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 5x5&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2x2 stride, valid padding, outputs 17x77x36&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;ELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;ELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 5x5&lt;/td&gt;
-&lt;td align="center"&gt;2x2 stride, valid padding, outputs 7x37x48&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 5x5&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2x2 stride, valid padding, outputs 7x37x48&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;ELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;ELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 3x3&lt;/td&gt;
-&lt;td align="center"&gt;1x1 stride, valid padding, outputs 5x35x64&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 3x3&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;1x1 stride, valid padding, outputs 5x35x64&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;ELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;ELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 3x3&lt;/td&gt;
-&lt;td align="center"&gt;1x1 stride, valid padding, outputs 3x33x64&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 3x3&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;1x1 stride, valid padding, outputs 3x33x64&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;ELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;ELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Dropout&lt;/td&gt;
-&lt;td align="center"&gt;0.5 keep probablility (training)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Dropout&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;0.5 keep probablility (training)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Flatten&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Flatten&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;3168 input, 100 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;3168 input, 100 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;100 input, 50 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;100 input, 50 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;50 input, 10 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;50 input, 10 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Output&lt;/td&gt;
-&lt;td align="center"&gt;10 input, 1 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;10 input, 1 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -356,7 +356,7 @@
 &lt;li&gt;First of all, the data gather process could have been more thorough and also could have used different samples. In this case, I trained the model on images from the same track that it eventually ran on. It would interesting to tune the model and make it robust enough to work on any track that it is set on.&lt;/li&gt;
 &lt;li&gt;In terms of data preprocessing, only very simple data preprocessing steps were taken. It might be beneficial to combine some of the steps that were implemented in the other projects to help, for example, highlight the lane lines more clearly so that the model can use less noisy input data.&lt;/li&gt;
 &lt;li&gt;In reality, a vehicle would not be running in isolation and instead would be in an environment where there are many other distractions and unexpected objects that might suddenly appear. This is where radar and sensor data could be used in combination with the computer vision aspects to help inform a more well rounded model. &lt;/li&gt;
-&lt;/ul&gt;</content></entry><entry><title>Advanced Lane Finding</title><link href="http://jeffwen.com/2017/06/18/advanced_lane" rel="alternate"></link><published>2017-06-18T20:58:00-04:00</published><updated>2017-06-18T20:58:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-06-18:/2017/06/18/advanced_lane</id><summary type="html">&lt;p&gt;Using computer vision techniques to refine the identification of lane lines in both images and video feeds&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;June 18, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Python"/></entry><entry><title>Advanced Lane Finding</title><link href="http://jeffwen.com/2017/06/18/advanced_lane" rel="alternate"/><published>2017-06-18T20:58:00-04:00</published><updated>2017-06-18T20:58:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-06-18:/2017/06/18/advanced_lane</id><summary type="html">&lt;p&gt;Using computer vision techniques to refine the identification of lane lines in both images and video feeds&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;June 18, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The main objective for this project was to take a video feed from an onboard camera and identify the lane lines and the curvature of the road. The below image presents an example of one frame of the output that is expected. This projected uses different computer vision techniques to extract the lane lines in the frames. Code for this project can be found in this &lt;a href="https://github.com/jeffwen/sdcnd_advanced_find_lanes/blob/master/Advanced%20Lane%20Finding.ipynb"&gt;Jupyter Notebook&lt;/a&gt; and the video for this project can be found &lt;a href="https://vimeo.com/218746417"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="alt text" src="/images/sdcnd/summary_lane_area.png" title="summary_lane_area"&gt;&lt;/p&gt;
@@ -443,7 +443,7 @@
 &lt;/ol&gt;
 &lt;h2&gt;Next Steps and Conclusion&lt;/h2&gt;
 &lt;p&gt;The project was extremely rewarding and moving forward there are a lot of improvements that can be implemented. For example, there might be more opportunities to use machine learning to learn how to demarcate the lane lines rather than just use computer vision techniques to extract the lane lines. The difficulty with just using image processing techniques is that there might be situations that are unaccounted for (although if we have no training data a machine learning algorithm would not perform much better).&lt;/p&gt;
-&lt;p&gt;I am excited to continue researching and learning about this space. There are also very interesting feature extraction techniques that I would like to explore to better be able to detect lane lines. The next step is to think about how these identified lanes can be used to control the vehicle (though there might, in reality, be a few steps before we get there).&lt;/p&gt;</content></entry><entry><title>Traffic Sign Recognition</title><link href="http://jeffwen.com/2017/03/28/traffic_signs" rel="alternate"></link><published>2017-03-28T20:41:00-04:00</published><updated>2017-03-28T20:41:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-03-28:/2017/03/28/traffic_signs</id><summary type="html">&lt;p&gt;Classifying traffic signs with convolutional neural networks (LeNet architecture)&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 28, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I am excited to continue researching and learning about this space. There are also very interesting feature extraction techniques that I would like to explore to better be able to detect lane lines. The next step is to think about how these identified lanes can be used to control the vehicle (though there might, in reality, be a few steps before we get there).&lt;/p&gt;</content><category term="Python"/></entry><entry><title>Traffic Sign Recognition</title><link href="http://jeffwen.com/2017/03/28/traffic_signs" rel="alternate"/><published>2017-03-28T20:41:00-04:00</published><updated>2017-03-28T20:41:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-03-28:/2017/03/28/traffic_signs</id><summary type="html">&lt;p&gt;Classifying traffic signs with convolutional neural networks (LeNet architecture)&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 28, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In this project, we classify &lt;a href="http://benchmark.ini.rub.de/?section=gtsrb&amp;amp;subsection=dataset"&gt;German traffic signs&lt;/a&gt;. The code for this project can be found in this &lt;a href="https://github.com/jeffwen/sdcnd_traffic_sign/blob/master/Traffic_Sign_Classifier.ipynb"&gt;IPython notebook&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The objective of this project is to ultimately design, train, and test a convolutional neural network (CNN) to see if we can accurately classify the traffic signs. Specifically, with image classification tasks the variability of input images might cause the model to perform poorly. In order to remedy this situation, we will consider preprocessing steps to ensure that the model is robust to varying input images. Furthermore, depending on how the model performs, we may need to consider regularization steps such as dropouts or L2 regularization. &lt;/p&gt;
 &lt;p&gt;To start with, I use the &lt;a href="http://yann.lecun.com/exdb/lenet/"&gt;LeNet-5 architecture&lt;/a&gt; that was first published by Yann Lecun's lab in 1998. Eventually, I augmented the training set with rotated and zoomed images, normalized images, and included dropouts for the fully connected layers. This led to a final model that achieved ~95% on the validation set and ~94% on the test set. &lt;/p&gt;
@@ -505,66 +505,66 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align="center"&gt;Layer&lt;/th&gt;
-&lt;th align="center"&gt;Description&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Layer&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;Description&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Input&lt;/td&gt;
-&lt;td align="center"&gt;32x32x1 Grayscale/ Normalized image&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Input&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;32x32x1 Grayscale/ Normalized image&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 5x5&lt;/td&gt;
-&lt;td align="center"&gt;1x1 stride, valid padding, outputs 28x28x6&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 5x5&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;1x1 stride, valid padding, outputs 28x28x6&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;RELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;RELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Max pooling&lt;/td&gt;
-&lt;td align="center"&gt;2x2 stride, valid padding, outputs 14x14x6&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Max pooling&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2x2 stride, valid padding, outputs 14x14x6&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Convolution 5x5&lt;/td&gt;
-&lt;td align="center"&gt;1x1 stride, valid padding, outputs 10x10x16&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Convolution 5x5&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;1x1 stride, valid padding, outputs 10x10x16&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;RELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;RELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Max pooling&lt;/td&gt;
-&lt;td align="center"&gt;2x2 stride, valid padding, outputs 5x5x16&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Max pooling&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;2x2 stride, valid padding, outputs 5x5x16&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;400 input, 120 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;400 input, 120 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;RELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;RELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Dropout&lt;/td&gt;
-&lt;td align="center"&gt;0.6 keep probablility (training)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Dropout&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;0.6 keep probablility (training)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;120 input, 84 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;120 input, 84 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;RELU activation&lt;/td&gt;
-&lt;td align="center"&gt;&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;RELU activation&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Dropout&lt;/td&gt;
-&lt;td align="center"&gt;0.6 keep probablility (training)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Dropout&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;0.6 keep probablility (training)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align="center"&gt;Fully connected&lt;/td&gt;
-&lt;td align="center"&gt;84 input, 43 output&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;Fully connected&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;84 input, 43 output&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -596,7 +596,7 @@
 &lt;li&gt;Hyperparameter tuning: The model performed fairly well but with more time I could have increased the number of epochs or fiddled with the batch size further to see if the model performance improves&lt;/li&gt;
 &lt;li&gt;Model architecture: The LeNet architecture is a good start, but with state-of-the-art advancements such as &lt;a href="https://github.com/tensorflow/models/tree/master/inception"&gt;Google's Inception-V3&lt;/a&gt; there are other architectures that might work even better&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Ultimately, this was an exciting project that gave me the opportunity to bring together many different techniques and technologies to solve and interesting problem!&lt;/p&gt;</content></entry><entry><title>Lane Finding from Video Feeds</title><link href="http://jeffwen.com/2017/02/23/lane_finding" rel="alternate"></link><published>2017-02-23T22:41:00-05:00</published><updated>2017-02-23T22:41:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-02-23:/2017/02/23/lane_finding</id><summary type="html">&lt;p&gt;Color selection, region masking, canny edge detection, and hough transformation to find lane lines&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 23, 2017&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ultimately, this was an exciting project that gave me the opportunity to bring together many different techniques and technologies to solve and interesting problem!&lt;/p&gt;</content><category term="Python"/></entry><entry><title>Lane Finding from Video Feeds</title><link href="http://jeffwen.com/2017/02/23/lane_finding" rel="alternate"/><published>2017-02-23T22:41:00-05:00</published><updated>2017-02-23T22:41:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2017-02-23:/2017/02/23/lane_finding</id><summary type="html">&lt;p&gt;Color selection, region masking, canny edge detection, and hough transformation to find lane lines&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 23, 2017&lt;/em&gt;&lt;/p&gt;
 &lt;h1&gt;Finding Lane Lines on the Road&lt;/h1&gt;
 &lt;p&gt;The github repository with the associate IPython Notebook can be found &lt;a href="https://github.com/jeffwen/sdcnd_find_lanes"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
@@ -622,7 +622,7 @@
 &lt;p&gt;&lt;em&gt;HSL color space&lt;/em&gt;
 &lt;img alt="hsl" src="/images/challengeShadow_hlsimage_pyplot.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;In the above image, we can see that the yellow lane is very clearly highlighted and the white line markings are also captured well when compared to the grayscale image. However, to further improve the performance of the processing pipeline, we can also select out the colors that we know we care about (in this case the yellow and white lines, which are now blue and green)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## color selection for yellow and white, using the HSL color space&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;## color selection for yellow and white, using the HSL color space&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;color_selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
     &lt;span class="n"&gt;hls_image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cvtColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;COLOR_RGB2HLS&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -632,8 +632,7 @@
 
     &lt;span class="n"&gt;combined_color_images&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bitwise_or&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;white_color&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yellow_color&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bitwise_and&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mask&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;combined_color_images&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In the above code, I first convert the color map from RGB to HSL. Then I use the &lt;code&gt;inRange&lt;/code&gt; function provided by OpenCV to select colors that fall into the white and yellow ranges. After that I combine the white and yellow masks together with the &lt;code&gt;bitwise_or&lt;/code&gt; function. &lt;/p&gt;
 &lt;p&gt;With the above HSL image, we can now try to isolate the yellow and the white lines. While there are many different techniques that can be utilized here, I chose to detect the edges within the image using the Canny edge detection algorithm. &lt;/p&gt;
@@ -641,13 +640,12 @@
 &lt;p&gt;&lt;em&gt;HSL color selection&lt;/em&gt;
 &lt;img alt="hsl" src="/images/challengeShadow_hsl.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Given the above image, the goal is to pick out the lane lines. In order to do this, I use the &lt;a href="https://en.wikipedia.org/wiki/Canny_edge_detector"&gt;canny edge detector&lt;/a&gt; algorithm. In short, the algorithm:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;1. Applies a gaussian filter to the image to reduce noise
-2. Finds the gradients in both the horizontal and vertical directions
-3. Non-maximum supression, which is a way to thin the detected edges by only keeping the maximum gradient values and setting others to 0
-4. Determining potential edges by checking against a threshold 
-5. Finish cleaning potential edges by checking in the potential edge is connected to an actual edge
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Applies&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gaussian&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;reduce&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;noise&lt;/span&gt;
+&lt;span class="mf"&gt;2.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Finds&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gradients&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;both&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;horizontal&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;and&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vertical&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;directions&lt;/span&gt;
+&lt;span class="mf"&gt;3.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Non&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;maximum&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;supression&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;which&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;way&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;thin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;detected&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;edges&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;on&lt;/span&gt;&lt;span class="n"&gt;ly&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;keeping&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;maximum&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gradient&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;val&lt;/span&gt;&lt;span class="n"&gt;ues&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;and&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;setting&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;others&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;
+&lt;span class="mf"&gt;4.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Determining&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;potential&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;edges&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;checking&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;against&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="mf"&gt;5.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Finish&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cleaning&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;potential&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;edges&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;checking&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;potential&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;edge&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;connected&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;an&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;actual&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;edge&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;While, the canny edge detector automatically applies &lt;a href="https://en.wikipedia.org/wiki/Gaussian_blur"&gt;gaussian blur&lt;/a&gt;, I applied gaussian blur outside of the edge detector so that I could have more freedom with the kernel parameter. After running the image through the blurring and edge detection functions, the image is as follows. Note, the input image to this is the HSL color converted image. &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;HSL color selection with canny edge detection&lt;/em&gt;
@@ -661,16 +659,16 @@
 &lt;p&gt;&lt;em&gt;HSL color selection with canny edge detection and region masking&lt;/em&gt;
 &lt;img alt="region_canny" src="/images/challengeShadow_regioncanny.jpg"&gt; &lt;/p&gt;
 &lt;p&gt;As shown above, the HSL version provides a cleaner indication of the lane lines. Below are the functions used in processing the images.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;canny&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;low_threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high_threshold&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Applies the Canny transform&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;canny&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;low_threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high_threshold&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Applies the Canny transform&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Canny&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;low_threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high_threshold&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;gaussian_blur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kernel_size&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Applies a Gaussian Noise kernel&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Applies a Gaussian Noise kernel&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GaussianBlur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kernel_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kernel_size&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;region_of_interest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vertices&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;    Applies an image mask.&lt;/span&gt;
 
 &lt;span class="sd"&gt;    Only keeps the region of the image defined by the polygon&lt;/span&gt;
@@ -692,8 +690,7 @@
     &lt;span class="c1"&gt;#returning the image only where mask pixels are nonzero&lt;/span&gt;
     &lt;span class="n"&gt;masked_image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bitwise_and&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mask&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;masked_image&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Hough Line Transform&lt;/h2&gt;
 &lt;p&gt;Now that we have a collection of edges, we need to identify the lane lines within the image. The &lt;a href="https://en.wikipedia.org/wiki/Hough_transform"&gt;hough line transform&lt;/a&gt;, which was first invented to identify lines within images, is great for this task. To learn more about this algorithm, this &lt;a href="http://alyssaq.github.io/2014/understanding-hough-transform/"&gt;blog&lt;/a&gt; is a great resource. &lt;/p&gt;
@@ -701,8 +698,8 @@
 &lt;img alt="hsl_hough" src="/images/challengeShadow_hlshoughimage_pyplot.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Pretty awesome! The lane lines have now been highlighted and boxed with the red lines. There are quite a few parameters that needed to be adjusted, but after adjusting the parameters, the algorithm is able to pick out the lines quite well. Note that the OpenCV version of the hough transform that we are using is the probabilistic version, which is an improvement over the original. In the IPython notebook, I use a different version of the &lt;code&gt;hough_lines&lt;/code&gt; function that simple outputs the lines as a vector rather than overlaying the lines over the initial image. &lt;/p&gt;
 &lt;p&gt;Given the above image and specifically the hough lines, we now have a vector of multiple lines segments in the form of (x1,y1,x2,y2) endpoints. In order to draw lines on an image, we need a way to extrapolate an average line from the vector of endpoints.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hough_lines_overlay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rho&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;theta&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_line_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_line_gap&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hough_lines_overlay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rho&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;theta&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_line_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_line_gap&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;    `img` should be the output of a Canny transform.&lt;/span&gt;
 
 &lt;span class="sd"&gt;    Returns an image with hough lines drawn.&lt;/span&gt;
@@ -711,13 +708,12 @@
     &lt;span class="n"&gt;line_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;dtype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uint8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;draw_lines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;line_img&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Lane Line Averaging&lt;/h2&gt;
 &lt;p&gt;In order to find the average line on each side of the lane, we can first calculate the slope of each line segment and separate the positive and negative sloped lines, which represents the left and right lane lines. Then we can find the average of the left and right slopes and intercepts to get an average of the lanes. When I initially did this, the average was quite sensitive to outliers. I tried to adjust for the outliers by removing points that were greater than 1.5 standard deviations from the rest of the slopes. However, the averaged lines were still quite sensitive to the outliers. &lt;/p&gt;
 &lt;p&gt;Ultimately, by calculating the line length and calculating the weighted average of the lane line, the output was much more stable and robust against spurious line segments that the hough transform identified. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;avg_lines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;avg_lines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
     &lt;span class="n"&gt;neg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="n"&gt;pos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -738,16 +734,15 @@
     &lt;span class="n"&gt;pos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;to_keep_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt;
 
     &lt;span class="c1"&gt;## weighted average of the slopes and intercepts based on the length of the line segment&lt;/span&gt;
-    &lt;span class="n"&gt;neg_lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-    &lt;span class="n"&gt;pos_lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+    &lt;span class="n"&gt;neg_lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+    &lt;span class="n"&gt;pos_lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;neg_lines&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pos_lines&lt;/span&gt;
 
 &lt;span class="c1"&gt;## removing the outliers (adapted from http://stackoverflow.com/questions/11686720/is-there-a-numpy-builtin-to-reject-outliers-from-a-list)&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;to_keep_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obs&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obs&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obs&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The above function calculates the slope, intercept, and line length of each line segment. At this point, we can take the average lane lines from the above function and plot the lane lines onto the original image. &lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Final processed image&lt;/em&gt;
@@ -770,14 +765,14 @@
 &lt;li&gt;&lt;a href="https://vimeo.com/205495856"&gt;Lane Finding - Curve (With Averaging)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The above videos show that the new detector with the lane line averaging works quite nicely! Although if there are drastic changes the algorithm does not follow those changes until a bit later, we can fiddle with this by changing the size of the queue.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;lane_detector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;lane_detector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev_lane_lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_mean_lines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lane_lines&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;prev_lane_lines&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
         &lt;span class="c1"&gt;## add the new lane line&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;lane_lines&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;lane_lines&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="n"&gt;prev_lane_lines&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lane_lines&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
         &lt;span class="c1"&gt;## only keep the 10 most recent lane lines&lt;/span&gt;
@@ -802,7 +797,7 @@
         &lt;span class="n"&gt;canny_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;canny&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;blur_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;low_threshold&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high_threshold&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;160&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
         &lt;span class="c1"&gt;## apply region of interest&lt;/span&gt;
-        &lt;span class="n"&gt;vertices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])]],&lt;/span&gt; &lt;span class="n"&gt;dtype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;int32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;vertices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;.45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;.55&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;imshape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])]],&lt;/span&gt; &lt;span class="n"&gt;dtype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;int32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;region_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;region_of_interest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;canny_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vertices&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;vertices&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
         &lt;span class="c1"&gt;## apply hough transformation&lt;/span&gt;
@@ -826,8 +821,7 @@
         &lt;span class="n"&gt;final_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;weighted_img&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lane_lines&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;final_img&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Shortcomings &amp;amp; Next Steps&lt;/h2&gt;
 &lt;p&gt;While the detector works fairly well for straight roads, there are limitations:&lt;/p&gt;
@@ -839,7 +833,7 @@
 &lt;p&gt;In order to deal with these shortcomings, we would need to make the algorithm more robust to differences in the input video. For example, to deal with the curves in the road instead of setting a fixed length for the lane line highlights, which is currently 60% of the image height, we might be able to use the length of the identified line segment from th hough line transform as a proxy for how long the highlight should be. &lt;/p&gt;
 &lt;p&gt;The yellow and white lane lines might be harder to deal with, but we can combine human input as well as computational methods. For example, if there are training images from roads in different areas with different colored markings, we can keep a "dictionary" of these lane colors and setup the algorithm to look for the colors that expected given the geographic region in consideration. &lt;/p&gt;
 &lt;p&gt;The videos that were supplied as test videos were all basically filmed at the same angle and the roads were also fairly similar. However, if the vehicle was traveling over a hill or out of a trough the perspective would change. In these cases, the algorithm might not perform as well. In order to adjust for this, we can first apply a perspective normalization to the input video so that input would always have the same orientation and perspective. &lt;/p&gt;
-&lt;p&gt;Overall, this project was interesting and fun! It incorporated a lot of techniques and concepts that have been available for many years, but is now being applied to interesting problems like self-driving cars. &lt;/p&gt;</content></entry><entry><title>Visaurant: Reimagining the food search experience</title><link href="http://jeffwen.com/2016/05/02/visaurant" rel="alternate"></link><published>2016-05-02T14:26:00-04:00</published><updated>2016-05-02T14:26:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-05-02:/2016/05/02/visaurant</id><summary type="html">&lt;p&gt;Using computer vision techniques to visually filter and search through images&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;May 02, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Overall, this project was interesting and fun! It incorporated a lot of techniques and concepts that have been available for many years, but is now being applied to interesting problems like self-driving cars. &lt;/p&gt;</content><category term="Python"/></entry><entry><title>Visaurant: Reimagining the food search experience</title><link href="http://jeffwen.com/2016/05/02/visaurant" rel="alternate"/><published>2016-05-02T14:26:00-04:00</published><updated>2016-05-02T14:26:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-05-02:/2016/05/02/visaurant</id><summary type="html">&lt;p&gt;Using computer vision techniques to visually filter and search through images&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;May 02, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Visaurant Logo" src="/images/visaurant_logo.png"&gt;
 This blog post is a work in progress and will detail the process that I took to create the Visaurant project.&lt;/p&gt;
 &lt;p&gt;Visaurant (as you can see in the video below) is a reimagination of the way users search through images that they are interested in. One prime use case for Visaurant is in sorting and filtering through food images (hence &lt;em&gt;VIS&lt;/em&gt; -ual rest- &lt;em&gt;AURANT&lt;/em&gt;).&lt;/p&gt;
@@ -874,7 +868,7 @@ This blog post is a work in progress and will detail the process that I took to 
 &lt;img alt="Visaurant Filtered" src="/images/visaurant_filtered.png"&gt;&lt;/li&gt;
 &lt;li&gt;After filtering down to a single cluster, user can select a specific image to bring up reviews that have matching words with the image's caption
 &lt;img alt="Visaurant Caption" src="/images/visaurant_caption.png"&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>Mr. President, what did you say?</title><link href="http://jeffwen.com/2016/03/18/mr_president_what_did_you_say" rel="alternate"></link><published>2016-03-18T22:18:00-04:00</published><updated>2016-03-18T22:18:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-03-18:/2016/03/18/mr_president_what_did_you_say</id><summary type="html">&lt;p&gt;Natural language processing, latent semantic indexing, latent dirichlet allocation, and D3.js visualizations!&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><category term="Python"/></entry><entry><title>Mr. President, what did you say?</title><link href="http://jeffwen.com/2016/03/18/mr_president_what_did_you_say" rel="alternate"/><published>2016-03-18T22:18:00-04:00</published><updated>2016-03-18T22:18:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-03-18:/2016/03/18/mr_president_what_did_you_say</id><summary type="html">&lt;p&gt;Natural language processing, latent semantic indexing, latent dirichlet allocation, and D3.js visualizations!&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;I know this may be annoying but embedding D3 in Pelican isn't the easiest thing so PLEASE click &lt;a href="/html/president.html"&gt;here&lt;/a&gt; to see the actual D3! The rest of the blog here will detail the process.&lt;/p&gt;
 &lt;p&gt;Also, yes very soon I will actually deploy these things somewhere so they aren't just static HTML pages...&lt;/p&gt;
 &lt;p&gt;But still, hope you enjoy!&lt;/p&gt;
@@ -891,15 +885,14 @@ This blog post is a work in progress and will detail the process that I took to 
 &lt;p&gt;The broader goal was to see if I could analyze text and see how presidents' were either similar or different in the topics that they discussed. I also wanted to identify if those topics changed across time.&lt;/p&gt;
 &lt;h3&gt;MongoDB&lt;/h3&gt;
 &lt;p&gt;MongoDB is really easy to get running. Remember that post about the &lt;a href="/2016/02/27/making_census_data_exciting_part_1"&gt;census data&lt;/a&gt;? Well let me just post a little bit of code to show how quick it is to set up MongoDB (granted, this is on my local machine and not on AWS...but still I'm trying to make a point so forgive me).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# install with homebrew (mac)&lt;/span&gt;
-brew install mongodb
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# install with homebrew (mac)&lt;/span&gt;
+brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;mongodb
 &lt;span class="c1"&gt;# make a data directory (for mongo to write to)&lt;/span&gt;
-sudo mkdir /data/db
+sudo&lt;span class="w"&gt; &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;/data/db
 &lt;span class="c1"&gt;# change ownership for the directory and start the mongo server&lt;/span&gt;
-sudo chown your_username /data/db
+sudo&lt;span class="w"&gt; &lt;/span&gt;chown&lt;span class="w"&gt; &lt;/span&gt;your_username&lt;span class="w"&gt; &lt;/span&gt;/data/db
 mongod
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Boom. After this you can just &lt;code&gt;mongoimport&lt;/code&gt; entire &lt;code&gt;.json&lt;/code&gt; files into your database as different collections or however you'd like. So all of that to say that it is definitely easier to get things set up and data into the database (not to say that SQL isn't good...they are good for different things).&lt;/p&gt;
 &lt;p&gt;With the database set up, I had to get my data.&lt;/p&gt;
@@ -907,9 +900,9 @@ mongod
 &lt;p&gt;There were a couple sites that had some great resources, but the one that I ended up using was the UC Santa Barbara &lt;a href="http://www.presidency.ucsb.edu/sou.php"&gt;American Presidency Project&lt;/a&gt;. It has speeches, press releases, and much more dating back to President Washington.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.presidency.ucsb.edu/sou.php"&gt;&lt;img alt="American Presidency Project" src="/images/presidency_project.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;While it would have been great to have some form of an API to make calls to and get nicely formatted data, I did not have that luxury in this case and so I scraped the data that I needed using BeautifulSoup. Usually, this wouldn't be the easiest part, but this time it was actually quite simple!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# make the request to the website&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# make the request to the website&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;requester&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    url: url of the site to be scraped&lt;/span&gt;
 &lt;span class="sd"&gt;    return: BeautifulSoup obejct of the scraped text&lt;/span&gt;
 &lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
@@ -943,12 +936,11 @@ mongod
     &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;span&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;displaytext&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
     &lt;span class="c1"&gt;# each paragraph is separated into (as it will be considered a document in later analyses)&lt;/span&gt;
-    &lt;span class="n"&gt;text_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;text_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;text_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;text_list&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="n"&gt;aDict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;president&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;president&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;date&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;text_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;speech&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;State of the Union&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;aDict&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Those three functions above are a sample of the functions that I wrote to scrape the State of the Union Addresses from the website. I had similar functions to scrape Inaugural Addresses and press releases. After getting all the text, I created dictionaries with the details of the speeches and used &lt;code&gt;pymongo&lt;/code&gt; to connect to mongoDB so that I could store the data.&lt;/p&gt;
 &lt;p&gt;It wasn't necessary to use mongoDB because I used Python to scrape the data and was going to manipulate the data in Python,but I wanted to learn how to use the database for future reference. Furthermore, in case anything happened I wouldn't have to rely on the pickled files I created (as an extra saftey measure...).&lt;/p&gt;
@@ -973,7 +965,7 @@ mongod
 &lt;li&gt;It isn't long before you notice that some of the initial paragraphs in the scrolling text box are not paragraphs. Instead, there are headers, questions, and other irrelevant forms of text. These should be taken out because they do not really represent paragraphs that the presidents spoke&lt;/li&gt;
 &lt;li&gt;As an additional analyses, it would be interesting to run LDA on speeches that aren't State of the Union or Inaugural Addresses because these speeches are typically very broad ranging in topics discussed and therefore each president in the same period of time would most likely be discussing similar matters (think Obama and Bush talking about war...)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Anyways, those are just a few that came to mind. I hope you enjoyed the post and the visualizations!&lt;/p&gt;</content></entry><entry><title>Making Census Data Exciting (Part 2)</title><link href="http://jeffwen.com/2016/03/18/making_census_data_exciting_part_2" rel="alternate"></link><published>2016-03-18T17:47:00-04:00</published><updated>2016-03-18T17:47:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-03-18:/2016/03/18/making_census_data_exciting_part_2</id><summary type="html">&lt;p&gt;Getting data out of a remote server and show results on a D3 dashboard&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Anyways, those are just a few that came to mind. I hope you enjoyed the post and the visualizations!&lt;/p&gt;</content><category term="Python"/></entry><entry><title>Making Census Data Exciting (Part 2)</title><link href="http://jeffwen.com/2016/03/18/making_census_data_exciting_part_2" rel="alternate"/><published>2016-03-18T17:47:00-04:00</published><updated>2016-03-18T17:47:00-04:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-03-18:/2016/03/18/making_census_data_exciting_part_2</id><summary type="html">&lt;p&gt;Getting data out of a remote server and show results on a D3 dashboard&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;March 18, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In this post, I discuss the results of the work from the &lt;a href="/2016/02/27/making_census_data_exciting_part_1"&gt;first post&lt;/a&gt;. That first post was a bit lengthy and went into the details of getting the PostgreSQL set up, but that was all necessary to be able to query the data to set up the &lt;a href="/html/dashboard.html"&gt;dashboard&lt;/a&gt; (a screenshot is shown below, you can click on multiple things at once...cross filter charts)!&lt;/p&gt;
 &lt;p&gt;&lt;a href="/html/dashboard.html"&gt;&lt;img alt="Dashboard" src="/images/dashboard.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;Problem Statement&lt;/h3&gt;
@@ -988,9 +980,9 @@ mongod
 &lt;h3&gt;Approach&lt;/h3&gt;
 &lt;p&gt;As part of the problem, I wanted to use PostgreSQL to get used to using it in a remote environment so that I could learn to store my data remotely (hence the previous post). However, the next step was to get the data out of the database so that it could be manipulated and massaged for further analysis.&lt;/p&gt;
 &lt;p&gt;For this, Psycopg2 was the best tool as it allowed for a pretty straight forward way to connect with the remote database. I wrote a Python script so that anyone on my team could quickly enter their login details and the script would ask for the SQL query. Then, the output would be a pandas dataframe of the data that was requested.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# input must be strings&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# input must be strings&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;query_database&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dbname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    dbname: database name&lt;/span&gt;
 &lt;span class="sd"&gt;    user: username&lt;/span&gt;
 &lt;span class="sd"&gt;    password: password for the user&lt;/span&gt;
@@ -1002,12 +994,12 @@ mongod
     &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="c1"&gt;# Create connection with database&lt;/span&gt;
         &lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;psycopg2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dbname=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;dbname&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; user=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; password=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; host=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; port=&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connected&amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connected&amp;quot;&lt;/span&gt;
         &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
         &lt;span class="c1"&gt;# Ask for user&amp;#39;s SQL query&lt;/span&gt;
-        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Query please: &amp;quot;&lt;/span&gt;
-        &lt;span class="n"&gt;input_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Query please: &amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;input_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
         &lt;span class="c1"&gt;# Execute search query&lt;/span&gt;
         &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1021,9 +1013,8 @@ mongod
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;
 
     &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connection error or query mistake&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connection error or query mistake&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This made it quite easy to get the data out of the AWS database. The next steps was to clean the data and then run models to predict the hours worked.&lt;/p&gt;
 &lt;p&gt;In terms of cleaning the data, I wrote a function that took as input the previously outputted dataframe and returned a cleaned dataframe with white spaces removed from column headers, hours per week worked turned into a binary variable (&amp;lt; 40 hours worked or &amp;gt;= 40 hours worked), and other categorical variables turned into dummy variable columns. &lt;/p&gt;
@@ -1039,7 +1030,7 @@ mongod
 &lt;h3&gt;Summary&lt;/h3&gt;
 &lt;p&gt;Overall, this project was quite interesting in that it had multiple moving parts that came together as a single dashboard deliverable. The awesome thing about this project was that it was pretty open ended so the problem statement that we came up with actually seemed like a real problem.&lt;/p&gt;
 &lt;p&gt;I spent most of my time on setting up the database, writing the script to pull data out, and tweaking/customizing the dashboard. In terms of takeaways, I realized that visualization is a large aspect of data science because the communication of results is vital to any problem. More specifically, a visually appealing tool can really help tell an impactful story (of course, the tool has to make sense).&lt;/p&gt;
-&lt;p&gt;Working with PostgreSQL and D3 helped me understand a more complete picture of the analytics space than just using Python. Moving forward, I would like to continue expanding my knowledge in these technologies and more!&lt;/p&gt;</content></entry><entry><title>Making Census Data Exciting (Part 1)</title><link href="http://jeffwen.com/2016/02/27/making_census_data_exciting_part_1" rel="alternate"></link><published>2016-02-27T13:31:00-05:00</published><updated>2016-02-27T13:31:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-02-27:/2016/02/27/making_census_data_exciting_part_1</id><summary type="html">&lt;p&gt;Setting up the AWS EC2 used to store census data and also discussing some project design choices&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 27, 2016&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Working with PostgreSQL and D3 helped me understand a more complete picture of the analytics space than just using Python. Moving forward, I would like to continue expanding my knowledge in these technologies and more!&lt;/p&gt;</content><category term="Python"/></entry><entry><title>Making Census Data Exciting (Part 1)</title><link href="http://jeffwen.com/2016/02/27/making_census_data_exciting_part_1" rel="alternate"/><published>2016-02-27T13:31:00-05:00</published><updated>2016-02-27T13:31:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-02-27:/2016/02/27/making_census_data_exciting_part_1</id><summary type="html">&lt;p&gt;Setting up the AWS EC2 used to store census data and also discussing some project design choices&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 27, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Let's talk about remote servers, census data, classification models, and data visualization...lots to cover...&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Warning:&lt;/em&gt; This post will be a bit lengthy and cover some details that might not be that interesting but I am also using this post as a way to capture the process so I don't forget things.
 &lt;img alt="Census Logo" src="/images/census-logo.png"&gt;&lt;/p&gt;
@@ -1065,9 +1056,8 @@ mongod
 &lt;li&gt;Make the file read only with chmod 400 filename&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;At this point, the server is set up and can be accessed using:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/my_cool_machine.pem&lt;span class="w"&gt; &lt;/span&gt;ubuntu@123.234.123.234
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4&gt;Loading the tools and getting things ready&lt;/h4&gt;
 &lt;p&gt;At this point we needed to get a couple packages onto the server so that we could get working. &lt;code&gt;apt-get&lt;/code&gt; is awesome for this when using Ubuntu.&lt;/p&gt;
@@ -1131,47 +1121,43 @@ mongod
 &lt;p&gt;Installing PostgreSQL created a &lt;code&gt;postgres&lt;/code&gt; user, but to add myself as a user I had to&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo -u postgres createuser --superuser my_user_name
-sudo -u postgres psql
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;postgres&lt;span class="w"&gt; &lt;/span&gt;createuser&lt;span class="w"&gt; &lt;/span&gt;--superuser&lt;span class="w"&gt; &lt;/span&gt;my_user_name
+sudo&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;postgres&lt;span class="w"&gt; &lt;/span&gt;psql
 &lt;span class="c1"&gt;# now in psql...&lt;/span&gt;
-&lt;span class="se"&gt;\p&lt;/span&gt;assword my_user_name
+&lt;span class="se"&gt;\p&lt;/span&gt;assword&lt;span class="w"&gt; &lt;/span&gt;my_user_name
 &lt;span class="c1"&gt;# exit out of psql with Ctrl+D&lt;/span&gt;
 &lt;span class="c1"&gt;# Create a database for your user&lt;/span&gt;
-sudo -u postgres createdb my_user_name
-&lt;/pre&gt;&lt;/div&gt;
-
+sudo&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;postgres&lt;span class="w"&gt; &lt;/span&gt;createdb&lt;span class="w"&gt; &lt;/span&gt;my_user_name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;Load the data&lt;/h3&gt;
 &lt;p&gt;At this point the Postgres environment was set up but there was no data yet! So in order to add some data, I found it easiest to just directly import a &lt;code&gt;.csv&lt;/code&gt; file. However, I had to create the database first.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DATABASE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;census&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Then switch to the newly created database &lt;code&gt;\c endor&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="nb"&gt;SERIAL&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;age&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
-    &lt;span class="n"&gt;workclass&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;fnlwgt&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;education&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;education_num&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;marital_status&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;occupation&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;relationship&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;race&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;sex&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;capital_gain&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;capital_loss&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;hours_per_week&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;native_country&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;TABLE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;census&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;SERIAL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;PRIMARY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;workclass&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;fnlwgt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;education&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;education_num&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;marital_status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;occupation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;relationship&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;race&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;sex&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;capital_gain&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;capital_loss&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;hours_per_week&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;native_country&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;TEXT&lt;/span&gt;
 &lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Now with the data table set up, I scp'ed the census data from my local machine to the remote machine and copied the data into database.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;COPY&lt;/span&gt; &lt;span class="n"&gt;census&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/path/to/ewoks.csv&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;DELIMITER&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;CSV&lt;/span&gt; &lt;span class="n"&gt;HEADER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;COPY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;census&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/path/to/ewoks.csv&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;DELIMITER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CSV&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;HEADER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;Permissions&lt;/h3&gt;
 &lt;p&gt;Now the Postgres database is set up and work can begin if I wanted to do all the work on my remote machine. However, it is much easier to work from my local machine so I had to change a few things in the Postgres configuration files and my Amazon AWS security group.&lt;/p&gt;
@@ -1197,17 +1183,16 @@ sudo -u postgres createdb my_user_name
 &lt;p&gt;FINALLY. At this point, I can actually access my remote database from my local machine. However, when using Python and psycopg2 to access the database there were a few more hurdles that I had to jump over :(.&lt;/p&gt;
 &lt;h3&gt;Psycopg2 and Python&lt;/h3&gt;
 &lt;p&gt;To directly connect with the database I had to install &lt;a href="http://initd.org/psycopg/"&gt;psycopg2&lt;/a&gt;, which is a Postgres adapter for Python. I did the following in order to get the set up working... (lots of steps and troubleshooting; took  me a long time to figure out the last step)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;
 &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;psycopg2&lt;/span&gt;
 &lt;span class="c1"&gt;# this next step I had to preform only because it kept throwing back an error saying that my&lt;/span&gt;
 &lt;span class="c1"&gt;# AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug&lt;/span&gt;
 &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;unlink&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;force&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;Finishing up&lt;/h3&gt;
 &lt;p&gt;Whew! That was exciting. I know...&lt;/p&gt;
-&lt;p&gt;The process to get the server and database all set up may seem quite tedious, but many of the steps above are actually quite quick! Plus, it is good to have things all set up so that the analysis and visualization steps can happen smoothly! In the next post, I will discuss more of the details behind the analysis and also hopefully show a working version of the D3 dashboard!&lt;/p&gt;</content></entry><entry><title>What's Cooking?</title><link href="http://jeffwen.com/2015/12/19/whats_cooking" rel="alternate"></link><published>2015-12-19T11:01:00-05:00</published><updated>2015-12-19T11:01:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-12-19:/2015/12/19/whats_cooking</id><summary type="html">&lt;p&gt;Blog post on my entry for the What's Cooking kaggle competition&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;December 19, 2015&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The process to get the server and database all set up may seem quite tedious, but many of the steps above are actually quite quick! Plus, it is good to have things all set up so that the analysis and visualization steps can happen smoothly! In the next post, I will discuss more of the details behind the analysis and also hopefully show a working version of the D3 dashboard!&lt;/p&gt;</content><category term="Python"/></entry><entry><title>What's Cooking?</title><link href="http://jeffwen.com/2015/12/19/whats_cooking" rel="alternate"/><published>2015-12-19T11:01:00-05:00</published><updated>2015-12-19T11:01:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-12-19:/2015/12/19/whats_cooking</id><summary type="html">&lt;p&gt;Blog post on my entry for the What's Cooking kaggle competition&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;December 19, 2015&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Update!&lt;/strong&gt;: The competition has now ended and I am in 87th place on the public leaderboard out of 1,388 teams/individuals. Top 6% for my first kaggle!&lt;/em&gt;&lt;/p&gt;
 &lt;h3&gt;Getting Started&lt;/h3&gt;
 &lt;p&gt;Ever since I have known about kaggle, I have always seen it as a place where accomplished data scientists and skilled veterans of the machine learning space go to stretch their legs and dominate. However, as I continued to look through the competitions and through the forums where aspiring data scientists were asking a wide variety of questions, I realized that my preconceptions were probably holding me back from learning a lot through practical application. It is definitely one thing to read about algorithms and techniques and quite another to actually implement. Anyways, with that in mind, I figured I would jump in and get started.&lt;/p&gt;
@@ -1237,7 +1222,7 @@ sudo -u postgres createdb my_user_name
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Anyways, the data comes in .json files, which python makes pretty easy to parse with the json package. As an example, the first entry in the data file looks like this&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;cuisine&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;greek&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;cuisine&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;greek&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
  &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10259&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
  &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ingredients&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;romaine lettuce&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
   &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;black olives&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -1248,8 +1233,7 @@ sudo -u postgres createdb my_user_name
   &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;seasoning&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
   &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;garbanzo beans&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
   &lt;span class="sa"&gt;u&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;feta cheese crumbles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;Note: I did a few things to look through the data and summarize/ explore the data before I got started. Namely, I looked at the counts of the each cuisine to see if there were any biased classes, which there were, but when I set custom weighting for the classes the models didn't change much so I decided I would return to this later. Furthermore, I looked to format the data correctly because things like the registered trademark signs caused encoding problems in the input data.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Given the way the data was formatted, I wanted to separate out the cuisine as the y-variable and have the x-variables be the ingredients. This is where the initial decisions had to be made.&lt;/p&gt;
@@ -1270,8 +1254,8 @@ sudo -u postgres createdb my_user_name
 &lt;li&gt;I had decided from the beginning that I wanted to start with a bag of ingredients and not a bag of words.&lt;/li&gt;
 &lt;li&gt;Though I knew that I could customize the analyzer function in the sci-kit learn package, I wanted to start with a baseline model before moving onto more complex models.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;binary_encoding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;list_of_ingredients&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;binary_encoding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;list_of_ingredients&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    list_of_ingredients: a list of ingredients that has been deduplicated and represents the features (column titles of the matrix)&lt;/span&gt;
 &lt;span class="sd"&gt;    input_data: the data to be converted into a feature matrix&lt;/span&gt;
 &lt;span class="sd"&gt;    returns a sparse feature matrix&lt;/span&gt;
@@ -1287,14 +1271,13 @@ sudo -u postgres createdb my_user_name
         &lt;span class="n"&gt;aList&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
     &lt;span class="n"&gt;sparse_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scipy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sparse&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csr_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aList&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# create a sparse matrix&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;sparse_matrix&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;After implementing the function above on the data, and running a simply logistic regression model on the data, I received ~0.77 on the leaderboard. Though it wasn't great it was my first submission and I was quite happy. Even through this initial phase of feature extracting, I realized that a lot of the time I spent on this competition would be on feature engineering and processing.&lt;/p&gt;
 &lt;h4&gt;&lt;em&gt;Moving forward&lt;/em&gt;&lt;/h4&gt;
 &lt;p&gt;With the ~0.77 in the books, I decided it was time to start tuning and adding complexity.&lt;/p&gt;
 &lt;p&gt;The first thing that I did was write a preprocessing function to help me clean the input data. I decided that I wanted to stem the words so that 'olives' would become 'olive' because the plural shouldn't lead to two different ingredients. Then I also stripped the words of punctuation and other non-alphabetic characters. After this initial step, I decided it would be good to sort the words in the ingredient list so that ingredients like 'feta cheese crumbles' and 'crumble feta cheese' would be one feature and not multiple after the word stemming and ingredient sorting (may or may not have been necessary, but I figured given the way the data was structured it wouldn't hurt).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preprocess&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preprocess&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;new_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="n"&gt;pbar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProgressBar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# Progress bar to ease the waiting&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;recipe&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;pbar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1307,10 +1290,9 @@ sudo -u postgres createdb my_user_name
             &lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_ingredient&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
         &lt;span class="n"&gt;new_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;new_data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sort_ingredient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sort_ingredient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;new_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="n"&gt;pbar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProgressBar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;recipe&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;pbar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1320,8 +1302,7 @@ sudo -u postgres createdb my_user_name
             &lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sorted_ingredient&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;new_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;new_data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;After this preprocessing step, I move towards using &lt;a href="https://en.wikipedia.org/wiki/Tf–idf"&gt;tf-idf&lt;/a&gt; because I figured having an indication of the frequency of a certain ingredient would provide additional information as opposed to simple binary encoding. So I used the slightly modified tf-idf vectorizer from sci-kit learn. Similar to the count vectorizer, the default analyzer seemed to split up the words of an ingredient into two words because of the way that my data was being passed in. To solve this, I wrote my own analyzer function that basically parsed the ingredient list and returned the entire ingredient (with all the words) as one feature &lt;em&gt;(think: ['romaine lettuce', 'black olives'] vs. ['romaine', 'lettuce', 'black', 'olives'])&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Ultimately, combining the preprocessing with the tf-idf vectorizing and a logistic regession model gave me ~0.778 on the leader board (an improvement!). So the next step was to figure out how to further tune the model. &lt;/p&gt;
@@ -1333,7 +1314,7 @@ sudo -u postgres createdb my_user_name
 &lt;h4&gt;&lt;em&gt;Rethinking my initial assumptions&lt;/em&gt;&lt;/h4&gt;
 &lt;p&gt;Initially, I had decided not to use the standard sci-kit learn vectorizer analyzers because I felt that it would take away information from my data. However, upon further consideration, I realized that it was worth a try because with &amp;gt; 5000 features not all the features would be important anyways so why create more features by creating a bag of ingredients if a bag of words may actually help to reduce complexity a little bit.&lt;/p&gt;
 &lt;p&gt;With this in mind, I rewrote my preprocessing function and started using the tf-idf vectorizer from sci-kit learn with a few parameters modified.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preprocess_all_ingredients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preprocess_all_ingredients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;new_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="n"&gt;pbar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProgressBar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# Progress bar to ease the waiting&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;recipe&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;pbar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1347,22 +1328,19 @@ sudo -u postgres createdb my_user_name
             &lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_ingredient&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
         &lt;span class="n"&gt;new_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_recipe&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;new_data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The new function is similar to the previous preprocessing function but uses a lemmatizer instead of a stemmer (&lt;a href="http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html"&gt;read more here&lt;/a&gt;), which basically takes context into account (though lemmatization may not have much use in this case given the ingredients are separate words in a string and not a cohesive sentence).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;tfidf_vectorizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TfidfVectorizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stop_words&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ngram_range&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;analyzer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;word&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.56&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;token_pattern&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\w+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;tfidf_vectorizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TfidfVectorizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stop_words&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ngram_range&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;analyzer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;word&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.56&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;token_pattern&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\w+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;With the new preprocessing and vectorizer in place, I used a logistic regression again and got ~0.787. So there was again an improvement but at this point, I figured maybe I had come close to the extent of progress I would make with the logistic regression model. I did run a grid search over the regularization parameter and received a score of ~0.788. However, I was ready to move onto other models and thought that I would perhaps come back to logistic regressions if I were to do stacking and blending of models later on.&lt;/p&gt;
 &lt;h4&gt;&lt;em&gt;Big improvements&lt;/em&gt;&lt;/h4&gt;
 &lt;p&gt;The next steps in the modeling process led to huge improvements and at one point even got me to the top 3% of the leaderboard. &lt;/p&gt;
 &lt;p&gt;At this time the top performers seemed to be using neural nets and xgb models (extreme gradient boosted trees). I tried xgb but my results were not great (the best xgb gave me ~0.78). &lt;/p&gt;
 &lt;p&gt;With the basic preprocessing functions set, I felt like I should spend more time on reading and understanding how to tune my models. I had used support vector machines (SVM) before, but I was unsure if the model would handle the data given that my computer is old and SVMs are not known to perform particularly quickly if the dataset is too large. Given that I had thousand of features, I was afraid of the run time of using SVMs, but in the end after reading a couple resources (including &lt;a href="http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf"&gt;this one&lt;/a&gt;) I decided I would give it a try and just change to something else if necessary. Furthermore, SVMs have fewer hyperparameters to tune (so it would be easier to set up a grid search compared to say xgb or neural nets).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;param_grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;linear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]},{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;param_grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;linear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]},{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gamma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kernel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rbf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I tried both linear and non-linear kernels and a variety of regularization parameters (I tried to read a lot on how to choose the parameters to place in the grid search). After fitting the model, which took at least 8 hours, I took a look at the parameter grid, which also shows the CV scores from the 3-fold CV that was performed in the grid search and noticed that the scores were pretty varied, but some scores were &amp;gt; 0.80. Of course I was excited, but not ecstatic because I knew that my CV was not exactly in line with the Kaggle leaderboard score calculation. When I submitted, I was surpised to see that my submission received a score on the leaderboard of ~0.81044 (&lt;strong&gt;HUGE improvement for me!&lt;/strong&gt;).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="SVM improvement" src="/images/svm_2.png"&gt;&lt;/p&gt;
@@ -1391,4 +1369,4 @@ sudo -u postgres createdb my_user_name
 &lt;li&gt;Feature engineering and preprocessing take lots of time but are very important! I think this is where industry domain becomes handy because if I knew more about cooking I might have been able to create some more informative features&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3&gt;The End!&lt;/h3&gt;
-&lt;p&gt;There are a lot of things that I have left out of this post in regards to my process and thinking but if there are any questions feel free to email me! I hope that this is just a start of my continued learning through kaggle and similar platforms. &lt;/p&gt;</content></entry></feed>
+&lt;p&gt;There are a lot of things that I have left out of this post in regards to my process and thinking but if there are any questions feel free to email me! I hope that this is just a start of my continued learning through kaggle and similar platforms. &lt;/p&gt;</content><category term="python"/></entry></feed>

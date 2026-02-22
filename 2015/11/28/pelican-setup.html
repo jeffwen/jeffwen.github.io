@@ -142,26 +142,24 @@
 <h4>New Posts</h4>
 <p>In order to get more familiar with the workings of the platform/ try to customize what I was doing, I decided to write my own function to help speed up the process of writing a new blog. Pelican makes this quite simple with the fabfile.py, which allows you to create new functions for anything that you may want to customize.</p>
 <p>In my case, I wanted to be able to create new posts from the command line. So by typing the following I can now create a new Markdown file in my content folder with the title, slug, date, etc. preformatted.</p>
-<div class="highlight"><pre><span></span>fab newpost:<span class="s2">&quot;title of my post&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>fab<span class="w"> </span>newpost:<span class="s2">&quot;title of my post&quot;</span>
+</code></pre></div>
 
 <p>The code that makes this happen is just a simple function that fills in a prespecified template.</p>
-<div class="highlight"><pre><span></span><span class="n">TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Title: {title}</span>
-<span class="s2">Date: {year}-{month}-{day} {hour}:{minute}</span>
+<div class="highlight"><pre><span></span><code><span class="n">TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Title: </span><span class="si">{title}</span>
+<span class="s2">Date: </span><span class="si">{year}</span><span class="s2">-</span><span class="si">{month}</span><span class="s2">-</span><span class="si">{day}</span><span class="s2"> </span><span class="si">{hour}</span><span class="s2">:</span><span class="si">{minute}</span>
 <span class="s2">Category:</span>
-<span class="s2">Slug: {slug}</span>
+<span class="s2">Slug: </span><span class="si">{slug}</span>
 <span class="s2">Summary:</span>
 <span class="s2">Status: draft</span>
 <span class="s2">&quot;&quot;&quot;</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newpost</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">newpost</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
     <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
     <span class="n">slug</span> <span class="o">=</span> <span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
-    <span class="n">f_create</span> <span class="o">=</span> <span class="s2">&quot;content/{}{:0&gt;2}{:0&gt;2}_{}.md&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">f_create</span> <span class="o">=</span> <span class="s2">&quot;content/</span><span class="si">{}{:0&gt;2}{:0&gt;2}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.md&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">today</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">today</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">slug</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">TEMPLATE</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
                                 <span class="n">year</span><span class="o">=</span><span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
@@ -173,9 +171,8 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f_create</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
          <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;File created -&gt; &quot;</span> <span class="o">+</span> <span class="n">f_create</span><span class="p">)</span>
-</pre></div>
-
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File created -&gt; &quot;</span> <span class="o">+</span> <span class="n">f_create</span><span class="p">)</span>
+</code></pre></div>
 
 <h4>Themes</h4>
 <p>I also wanted to experiment with HTML/ CSS and modify the themes that I was using on my blog. I started with the <a href="https://github.com/gfidente/pelican-svbhack">SVBHACK</a> theme but did not really like that the index and archives links were at the top of the page, which seemed to clutter the simplicity of the page. This was a pretty simple customization that I fixed by changing some of the HTML template code to move the links around but now the top of the page is clean!</p>
@@ -187,9 +184,8 @@
 <h3>Writing and Viewing</h3>
 <p>Pelican actually makes it surprisingly simple to write and view what has been written.</p>
 <p>With the function that I wrote above, I can now create first drafts pretty quickly, then when I want to see the post on my blog, Pelican allows for a local server to be created to view the changes. What is most awesome is that if I use</p>
-<div class="highlight"><pre><span></span>make devserver
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>devserver
+</code></pre></div>
 
 <p>I can actually have the page regenerate each time with new content and all I have to do is refresh the page. So now I can make sure that everything is formatted correctly before I publish my posts.</p>
 <h3>Final Thoughts</h3>

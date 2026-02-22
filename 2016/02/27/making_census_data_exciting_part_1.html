@@ -135,9 +135,8 @@
 <li>Make the file read only with chmod 400 filename</li>
 </ol>
 <p>At this point, the server is set up and can be accessed using:</p>
-<div class="highlight"><pre><span></span>ssh -i ~/.ssh/my_cool_machine.pem ubuntu@123.234.123.234
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/my_cool_machine.pem<span class="w"> </span>ubuntu@123.234.123.234
+</code></pre></div>
 
 <h4>Loading the tools and getting things ready</h4>
 <p>At this point we needed to get a couple packages onto the server so that we could get working. <code>apt-get</code> is awesome for this when using Ubuntu.</p>
@@ -201,47 +200,43 @@
 <p>Installing PostgreSQL created a <code>postgres</code> user, but to add myself as a user I had to</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span>sudo -u postgres createuser --superuser my_user_name
-sudo -u postgres psql
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>createuser<span class="w"> </span>--superuser<span class="w"> </span>my_user_name
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
 <span class="c1"># now in psql...</span>
-<span class="se">\p</span>assword my_user_name
+<span class="se">\p</span>assword<span class="w"> </span>my_user_name
 <span class="c1"># exit out of psql with Ctrl+D</span>
 <span class="c1"># Create a database for your user</span>
-sudo -u postgres createdb my_user_name
-</pre></div>
-
+sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>createdb<span class="w"> </span>my_user_name
+</code></pre></div>
 
 <h3>Load the data</h3>
 <p>At this point the Postgres environment was set up but there was no data yet! So in order to add some data, I found it easiest to just directly import a <code>.csv</code> file. However, I had to create the database first.</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">census</span><span class="p">;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">census</span><span class="p">;</span>
+</code></pre></div>
 
 <p>Then switch to the newly created database <code>\c endor</code></p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">census</span> <span class="p">(</span>
-    <span class="n">id</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-    <span class="n">age</span> <span class="nb">INT</span><span class="p">;</span> 
-    <span class="n">workclass</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">fnlwgt</span> <span class="nb">INT</span><span class="p">,</span>
-    <span class="n">education</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">education_num</span> <span class="nb">INT</span><span class="p">,</span>
-    <span class="n">marital_status</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">occupation</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">relationship</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">race</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">sex</span> <span class="nb">TEXT</span><span class="p">,</span>
-    <span class="n">capital_gain</span> <span class="nb">INT</span><span class="p">,</span>
-    <span class="n">capital_loss</span> <span class="nb">INT</span><span class="p">,</span>
-    <span class="n">hours_per_week</span> <span class="nb">INT</span><span class="p">,</span>
-    <span class="n">native_country</span> <span class="nb">TEXT</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">census</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">workclass</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">fnlwgt</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">education</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">education_num</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">marital_status</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">occupation</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">relationship</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">race</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sex</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">capital_gain</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">capital_loss</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">hours_per_week</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">native_country</span><span class="w"> </span><span class="nb">TEXT</span>
 <span class="p">);</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now with the data table set up, I scp'ed the census data from my local machine to the remote machine and copied the data into database.</p>
-<div class="highlight"><pre><span></span><span class="k">COPY</span> <span class="n">census</span> <span class="k">FROM</span> <span class="s1">&#39;/path/to/ewoks.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">COPY</span><span class="w"> </span><span class="n">census</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;/path/to/ewoks.csv&#39;</span><span class="w"> </span><span class="k">DELIMITER</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="n">CSV</span><span class="w"> </span><span class="n">HEADER</span><span class="p">;</span>
+</code></pre></div>
 
 <h3>Permissions</h3>
 <p>Now the Postgres database is set up and work can begin if I wanted to do all the work on my remote machine. However, it is much easier to work from my local machine so I had to change a few things in the Postgres configuration files and my Amazon AWS security group.</p>
@@ -267,13 +262,12 @@ sudo -u postgres createdb my_user_name
 <p>FINALLY. At this point, I can actually access my remote database from my local machine. However, when using Python and psycopg2 to access the database there were a few more hurdles that I had to jump over :(.</p>
 <h3>Psycopg2 and Python</h3>
 <p>To directly connect with the database I had to install <a href="http://initd.org/psycopg/">psycopg2</a>, which is a Postgres adapter for Python. I did the following in order to get the set up working... (lots of steps and troubleshooting; took  me a long time to figure out the last step)</p>
-<div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">postgresql</span>
+<div class="highlight"><pre><span></span><code><span class="n">brew</span> <span class="n">install</span> <span class="n">postgresql</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
 <span class="c1"># this next step I had to preform only because it kept throwing back an error saying that my</span>
 <span class="c1"># AWS was not set up correctly but when I looked on stackoverflow it seemed like it was a psychopg2 bug</span>
 <span class="n">brew</span> <span class="n">unlink</span> <span class="n">openssl</span> <span class="o">&amp;&amp;</span> <span class="n">brew</span> <span class="n">link</span> <span class="n">openssl</span> <span class="o">--</span><span class="n">force</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Finishing up</h3>
 <p>Whew! That was exciting. I know...</p>

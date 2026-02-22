@@ -139,7 +139,7 @@
 </li>
 </ol>
 <p>Anyways, the data comes in .json files, which python makes pretty easy to parse with the json package. As an example, the first entry in the data file looks like this</p>
-<div class="highlight"><pre><span></span><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;cuisine&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;greek&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;cuisine&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;greek&#39;</span><span class="p">,</span>
  <span class="sa">u</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10259</span><span class="p">,</span>
  <span class="sa">u</span><span class="s1">&#39;ingredients&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">u</span><span class="s1">&#39;romaine lettuce&#39;</span><span class="p">,</span>
   <span class="sa">u</span><span class="s1">&#39;black olives&#39;</span><span class="p">,</span>
@@ -150,8 +150,7 @@
   <span class="sa">u</span><span class="s1">&#39;seasoning&#39;</span><span class="p">,</span>
   <span class="sa">u</span><span class="s1">&#39;garbanzo beans&#39;</span><span class="p">,</span>
   <span class="sa">u</span><span class="s1">&#39;feta cheese crumbles&#39;</span><span class="p">]}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><em>Note: I did a few things to look through the data and summarize/ explore the data before I got started. Namely, I looked at the counts of the each cuisine to see if there were any biased classes, which there were, but when I set custom weighting for the classes the models didn't change much so I decided I would return to this later. Furthermore, I looked to format the data correctly because things like the registered trademark signs caused encoding problems in the input data.</em></p>
 <p>Given the way the data was formatted, I wanted to separate out the cuisine as the y-variable and have the x-variables be the ingredients. This is where the initial decisions had to be made.</p>
@@ -172,8 +171,8 @@
 <li>I had decided from the beginning that I wanted to start with a bag of ingredients and not a bag of words.</li>
 <li>Though I knew that I could customize the analyzer function in the sci-kit learn package, I wanted to start with a baseline model before moving onto more complex models.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_encoding</span><span class="p">(</span><span class="n">list_of_ingredients</span><span class="p">,</span><span class="n">input_data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">binary_encoding</span><span class="p">(</span><span class="n">list_of_ingredients</span><span class="p">,</span><span class="n">input_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    list_of_ingredients: a list of ingredients that has been deduplicated and represents the features (column titles of the matrix)</span>
 <span class="sd">    input_data: the data to be converted into a feature matrix</span>
 <span class="sd">    returns a sparse feature matrix</span>
@@ -189,14 +188,13 @@
         <span class="n">aList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">aList</span><span class="p">)</span> <span class="c1"># create a sparse matrix</span>
     <span class="k">return</span> <span class="n">sparse_matrix</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>After implementing the function above on the data, and running a simply logistic regression model on the data, I received ~0.77 on the leaderboard. Though it wasn't great it was my first submission and I was quite happy. Even through this initial phase of feature extracting, I realized that a lot of the time I spent on this competition would be on feature engineering and processing.</p>
 <h4><em>Moving forward</em></h4>
 <p>With the ~0.77 in the books, I decided it was time to start tuning and adding complexity.</p>
 <p>The first thing that I did was write a preprocessing function to help me clean the input data. I decided that I wanted to stem the words so that 'olives' would become 'olive' because the plural shouldn't lead to two different ingredients. Then I also stripped the words of punctuation and other non-alphabetic characters. After this initial step, I decided it would be good to sort the words in the ingredient list so that ingredients like 'feta cheese crumbles' and 'crumble feta cheese' would be one feature and not multiple after the word stemming and ingredient sorting (may or may not have been necessary, but I figured given the way the data was structured it wouldn't hurt).</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
     <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span> <span class="c1"># Progress bar to ease the waiting</span>
     <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
@@ -209,10 +207,9 @@
             <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_ingredient</span><span class="p">))</span>
         <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">new_data</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sort_ingredient</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sort_ingredient</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
     <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
@@ -222,8 +219,7 @@
             <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sorted_ingredient</span><span class="p">)</span>
         <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">new_data</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>After this preprocessing step, I move towards using <a href="https://en.wikipedia.org/wiki/Tf–idf">tf-idf</a> because I figured having an indication of the frequency of a certain ingredient would provide additional information as opposed to simple binary encoding. So I used the slightly modified tf-idf vectorizer from sci-kit learn. Similar to the count vectorizer, the default analyzer seemed to split up the words of an ingredient into two words because of the way that my data was being passed in. To solve this, I wrote my own analyzer function that basically parsed the ingredient list and returned the entire ingredient (with all the words) as one feature <em>(think: ['romaine lettuce', 'black olives'] vs. ['romaine', 'lettuce', 'black', 'olives'])</em>.</p>
 <p>Ultimately, combining the preprocessing with the tf-idf vectorizing and a logistic regession model gave me ~0.778 on the leader board (an improvement!). So the next step was to figure out how to further tune the model. </p>
@@ -235,7 +231,7 @@
 <h4><em>Rethinking my initial assumptions</em></h4>
 <p>Initially, I had decided not to use the standard sci-kit learn vectorizer analyzers because I felt that it would take away information from my data. However, upon further consideration, I realized that it was worth a try because with &gt; 5000 features not all the features would be important anyways so why create more features by creating a bag of ingredients if a bag of words may actually help to reduce complexity a little bit.</p>
 <p>With this in mind, I rewrote my preprocessing function and started using the tf-idf vectorizer from sci-kit learn with a few parameters modified.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_all_ingredients</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">preprocess_all_ingredients</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
     <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">()</span> <span class="c1"># Progress bar to ease the waiting</span>
     <span class="k">for</span> <span class="n">recipe</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
@@ -249,22 +245,19 @@
             <span class="n">new_recipe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_ingredient</span><span class="p">))</span>
         <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_recipe</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">new_data</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The new function is similar to the previous preprocessing function but uses a lemmatizer instead of a stemmer (<a href="http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">read more here</a>), which basically takes context into account (though lemmatization may not have much use in this case given the ingredients are separate words in a string and not a cohesive sentence).</p>
-<div class="highlight"><pre><span></span><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="n">max_df</span><span class="o">=</span><span class="mf">0.56</span><span class="p">,</span> <span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="n">max_df</span><span class="o">=</span><span class="mf">0.56</span><span class="p">,</span> <span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>With the new preprocessing and vectorizer in place, I used a logistic regression again and got ~0.787. So there was again an improvement but at this point, I figured maybe I had come close to the extent of progress I would make with the logistic regression model. I did run a grid search over the regularization parameter and received a score of ~0.788. However, I was ready to move onto other models and thought that I would perhaps come back to logistic regressions if I were to do stacking and blending of models later on.</p>
 <h4><em>Big improvements</em></h4>
 <p>The next steps in the modeling process led to huge improvements and at one point even got me to the top 3% of the leaderboard. </p>
 <p>At this time the top performers seemed to be using neural nets and xgb models (extreme gradient boosted trees). I tried xgb but my results were not great (the best xgb gave me ~0.78). </p>
 <p>With the basic preprocessing functions set, I felt like I should spend more time on reading and understanding how to tune my models. I had used support vector machines (SVM) before, but I was unsure if the model would handle the data given that my computer is old and SVMs are not known to perform particularly quickly if the dataset is too large. Given that I had thousand of features, I was afraid of the run time of using SVMs, but in the end after reading a couple resources (including <a href="http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf">this one</a>) I decided I would give it a try and just change to something else if necessary. Furthermore, SVMs have fewer hyperparameters to tune (so it would be easier to set up a grid search compared to say xgb or neural nets).</p>
-<div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">]}]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">]}]</span>
+</code></pre></div>
 
 <p>I tried both linear and non-linear kernels and a variety of regularization parameters (I tried to read a lot on how to choose the parameters to place in the grid search). After fitting the model, which took at least 8 hours, I took a look at the parameter grid, which also shows the CV scores from the 3-fold CV that was performed in the grid search and noticed that the scores were pretty varied, but some scores were &gt; 0.80. Of course I was excited, but not ecstatic because I knew that my CV was not exactly in line with the Kaggle leaderboard score calculation. When I submitted, I was surpised to see that my submission received a score on the leaderboard of ~0.81044 (<strong>HUGE improvement for me!</strong>).</p>
 <p><img alt="SVM improvement" src="/images/svm_2.png"></p>

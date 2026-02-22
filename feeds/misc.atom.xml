@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen - misc</title><link href="http://jeffwen.com/" rel="alternate"></link><link href="http://jeffwen.com/feeds/misc.atom.xml" rel="self"></link><id>http://jeffwen.com/</id><updated>2016-02-10T16:27:00-05:00</updated><entry><title>Movie Scraping and Regression Analysis</title><link href="http://jeffwen.com/2016/02/10/movie_scraping_and_regression_analysis" rel="alternate"></link><published>2016-02-10T16:27:00-05:00</published><updated>2016-02-10T16:27:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-02-10:/2016/02/10/movie_scraping_and_regression_analysis</id><summary type="html">&lt;p&gt;Scraping movies and building regression models to predict total adjusted domestic gross&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 10, 2016&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Wen - misc</title><link href="http://jeffwen.com/" rel="alternate"/><link href="http://jeffwen.com/feeds/misc.atom.xml" rel="self"/><id>http://jeffwen.com/</id><updated>2016-02-10T16:27:00-05:00</updated><entry><title>Movie Scraping and Regression Analysis</title><link href="http://jeffwen.com/2016/02/10/movie_scraping_and_regression_analysis" rel="alternate"/><published>2016-02-10T16:27:00-05:00</published><updated>2016-02-10T16:27:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2016-02-10:/2016/02/10/movie_scraping_and_regression_analysis</id><summary type="html">&lt;p&gt;Scraping movies and building regression models to predict total adjusted domestic gross&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;February 10, 2016&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In ths post, I will share a bit about what I have been up to over the past few weeks. I plan on putting up my code soon!&lt;/p&gt;
 &lt;h1&gt;Getting Started&lt;/h1&gt;
 &lt;p&gt;For this project, I wanted to make use of a couple things that I learned at Metis. More specifically, I was interested in using BeautifulSoup, Statsmodels, and Scikit-learn to try and predict total adjusted domestic gross from movie data scraped from &lt;a href="http://www.boxofficemojo.com"&gt;boxofficemojo&lt;/a&gt;. One of the main objectives of the project was to try and get a sense for how to collect data and make sure that it is in a clean enough format to run analyses on.&lt;/p&gt;
@@ -57,10 +57,9 @@
 &lt;p&gt;With the new data, I continued to iterate and build models successively by tuning the parameters (mainly by plotting the residuals and looking to see if the residuals were random/ checking to see that there weren't major collinearity problems). By this time the model's adjusted R-squared was at .657.&lt;/p&gt;
 &lt;p&gt;I figured it might be good to group the genres because some of the genres were occurring realtively infrequently. So I wrote a function to standardize the number of genres. However, when I ran the regression again, the model seemed to fit the data less well so I took out the new genre variable that I created.&lt;/p&gt;
 &lt;p&gt;After performing log and exponential transformations to the dependent and some of the independent variables, the model seemed to be more or less set (at least in terms of fit of the residuals and the adjusted r-squared ~0.70). &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;model4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;smf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ols&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model_data_3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;model4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;smf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ols&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model_data_3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;result4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_regularized&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In the above code example, the &lt;code&gt;Popular_Month&lt;/code&gt; independent variable is a generated binary variable based on which of the months were popular (May, June, July, November, and December).&lt;/p&gt;
 &lt;p&gt;Given that the model was explaning about ~30% more of the variance than the initial model, I felt like it was time to move to scikit-learn to do some train test splits along with cross validation to make sure that the model was performing as expected on unseen data. &lt;/p&gt;
@@ -82,7 +81,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img alt="Seasonal Decomposition" src="/images/seasonal_decompose.png"&gt;&lt;/p&gt;
-&lt;p&gt;This was a fun project that exposed me to a lot of different tools and I look forward to learning more by continuing some of the ideas that I had about how to extend the analysis!&lt;/p&gt;</content></entry><entry><title>Setting up the blog</title><link href="http://jeffwen.com/2015/11/28/pelican-setup" rel="alternate"></link><published>2015-11-28T13:03:00-05:00</published><updated>2015-11-28T13:03:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-11-28:/2015/11/28/pelican-setup</id><summary type="html">&lt;p&gt;Setting up the blog and things to remember&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 28, 2015&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This was a fun project that exposed me to a lot of different tools and I look forward to learning more by continuing some of the ideas that I had about how to extend the analysis!&lt;/p&gt;</content><category term="misc"/></entry><entry><title>Setting up the blog</title><link href="http://jeffwen.com/2015/11/28/pelican-setup" rel="alternate"/><published>2015-11-28T13:03:00-05:00</published><updated>2015-11-28T13:03:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-11-28:/2015/11/28/pelican-setup</id><summary type="html">&lt;p&gt;Setting up the blog and things to remember&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 28, 2015&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Over the past couple of days, I have been working towards getting a blog up and running. There were a couple of different options that I was considering and ultimately I ended up choosing to use &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; as my site generator. I also use GitHub Pages to host my blog for free!&lt;/p&gt;
 &lt;h3&gt;Decisions&lt;/h3&gt;
 &lt;p&gt;Initially, I was considering just sticking with Jekyll, which is the site generator that pairs really nicely with &lt;a href="https://help.github.com/articles/using-jekyll-with-pages/"&gt;GitHub Pages&lt;/a&gt;. However, I read a couple different posts by other users, thought about the decision, and noticed the following:&lt;/p&gt;
@@ -115,26 +114,24 @@
 &lt;h4&gt;New Posts&lt;/h4&gt;
 &lt;p&gt;In order to get more familiar with the workings of the platform/ try to customize what I was doing, I decided to write my own function to help speed up the process of writing a new blog. Pelican makes this quite simple with the fabfile.py, which allows you to create new functions for anything that you may want to customize.&lt;/p&gt;
 &lt;p&gt;In my case, I wanted to be able to create new posts from the command line. So by typing the following I can now create a new Markdown file in my content folder with the title, slug, date, etc. preformatted.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;fab newpost:&lt;span class="s2"&gt;&amp;quot;title of my post&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;fab&lt;span class="w"&gt; &lt;/span&gt;newpost:&lt;span class="s2"&gt;&amp;quot;title of my post&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The code that makes this happen is just a simple function that fills in a prespecified template.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;TEMPLATE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;Title: {title}&lt;/span&gt;
-&lt;span class="s2"&gt;Date: {year}-{month}-{day} {hour}:{minute}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;TEMPLATE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;Title: &lt;/span&gt;&lt;span class="si"&gt;{title}&lt;/span&gt;
+&lt;span class="s2"&gt;Date: &lt;/span&gt;&lt;span class="si"&gt;{year}&lt;/span&gt;&lt;span class="s2"&gt;-&lt;/span&gt;&lt;span class="si"&gt;{month}&lt;/span&gt;&lt;span class="s2"&gt;-&lt;/span&gt;&lt;span class="si"&gt;{day}&lt;/span&gt;&lt;span class="s2"&gt; &lt;/span&gt;&lt;span class="si"&gt;{hour}&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;{minute}&lt;/span&gt;
 &lt;span class="s2"&gt;Category:&lt;/span&gt;
-&lt;span class="s2"&gt;Slug: {slug}&lt;/span&gt;
+&lt;span class="s2"&gt;Slug: &lt;/span&gt;&lt;span class="si"&gt;{slug}&lt;/span&gt;
 &lt;span class="s2"&gt;Summary:&lt;/span&gt;
 &lt;span class="s2"&gt;Status: draft&lt;/span&gt;
 &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;newpost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;newpost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;today&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;slug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;f_create&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;content/{}{:0&amp;gt;2}{:0&amp;gt;2}_{}.md&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;f_create&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;content/&lt;/span&gt;&lt;span class="si"&gt;{}{:0&amp;gt;2}{:0&amp;gt;2}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;.md&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
         &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TEMPLATE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                                 &lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -146,9 +143,8 @@
     &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_create&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
          &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;File created -&amp;gt; &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;f_create&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;File created -&amp;gt; &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;f_create&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4&gt;Themes&lt;/h4&gt;
 &lt;p&gt;I also wanted to experiment with HTML/ CSS and modify the themes that I was using on my blog. I started with the &lt;a href="https://github.com/gfidente/pelican-svbhack"&gt;SVBHACK&lt;/a&gt; theme but did not really like that the index and archives links were at the top of the page, which seemed to clutter the simplicity of the page. This was a pretty simple customization that I fixed by changing some of the HTML template code to move the links around but now the top of the page is clean!&lt;/p&gt;
@@ -160,13 +156,12 @@
 &lt;h3&gt;Writing and Viewing&lt;/h3&gt;
 &lt;p&gt;Pelican actually makes it surprisingly simple to write and view what has been written.&lt;/p&gt;
 &lt;p&gt;With the function that I wrote above, I can now create first drafts pretty quickly, then when I want to see the post on my blog, Pelican allows for a local server to be created to view the changes. What is most awesome is that if I use&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make devserver
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;devserver
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I can actually have the page regenerate each time with new content and all I have to do is refresh the page. So now I can make sure that everything is formatted correctly before I publish my posts.&lt;/p&gt;
 &lt;h3&gt;Final Thoughts&lt;/h3&gt;
-&lt;p&gt;As I learn more about Pelican and blogging in general, I may update this post to include new information about customizations or features that I learn about!&lt;/p&gt;</content></entry><entry><title>Hello World!</title><link href="http://jeffwen.com/2015/11/27/hello-world" rel="alternate"></link><published>2015-11-27T03:15:00-05:00</published><updated>2015-11-27T03:15:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-11-27:/2015/11/27/hello-world</id><summary type="html">&lt;p&gt;First blog post&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 27, 2015&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;As I learn more about Pelican and blogging in general, I may update this post to include new information about customizations or features that I learn about!&lt;/p&gt;</content><category term="Misc"/></entry><entry><title>Hello World!</title><link href="http://jeffwen.com/2015/11/27/hello-world" rel="alternate"/><published>2015-11-27T03:15:00-05:00</published><updated>2015-11-27T03:15:00-05:00</updated><author><name>Jeff Wen</name></author><id>tag:jeffwen.com,2015-11-27:/2015/11/27/hello-world</id><summary type="html">&lt;p&gt;First blog post&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;November 27, 2015&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Hello everyone, my name is Jeff. I've started this blog to keep track of the things that I am up to and also to share about exciting things that I am learning. Thanks for stopping by!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Misc"/></entry></feed>

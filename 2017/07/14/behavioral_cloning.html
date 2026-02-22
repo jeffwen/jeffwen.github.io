@@ -114,10 +114,10 @@
 <p><img alt="alt text" src="/images/sdcnd/final.gif" title="Final Run"></p>
 <p>In this project, we design, train, and test a convolutional neural network (CNN) to clone the driving behavior from sample images recorded from <a href="https://github.com/udacity/self-driving-car-sim">Udacity's driving simulator</a>. The code for this project can be found at this <a href="https://github.com/jeffwen/sdcnd_behavioral_cloning">repository</a>. </p>
 <p>The goals / steps of this project are the following:
-<em> Use the simulator to collect data of good driving behavior
-</em> Build, a convolution neural network (using Keras) that predicts steering angles from images
-<em> Train and validate the model with a training and validation set
-</em> Test that the model successfully drives around the track without leaving the road</p>
+* Use the simulator to collect data of good driving behavior
+* Build, a convolution neural network (using Keras) that predicts steering angles from images
+* Train and validate the model with a training and validation set
+* Test that the model successfully drives around the track without leaving the road</p>
 <p>The CNN that was eventually used was based on NVIDIA's <em><a href="https://arxiv.org/pdf/1604.07316v1.pdf">End to End Learning for Self-Driving Cars</a></em> paper with different input image size and with dropout added to improve robustness. Most of the training was done using an Amazon g2.2xlarge EC2 instance, which helped make training much quicker.</p>
 <h3>Data Gathering</h3>
 <p>One of the most time consuming aspects of this project was collecting the adequate data to train on. While Udacity provided a dataset from the training simulator, it was more exciting to collect my own training data. Below is a sample of the simulator screen. When collecting data, we use the "Training Mode." There are also two tracks available for training and testing. I focused on using the first track. The second image shows the view that the user sees in the driving simulator.</p>
@@ -147,82 +147,82 @@
 <table>
 <thead>
 <tr>
-<th align="center">Layer</th>
-<th align="center">Description</th>
+<th style="text-align: center;">Layer</th>
+<th style="text-align: center;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">Input</td>
-<td align="center">80x320x3 YUV Image</td>
+<td style="text-align: center;">Input</td>
+<td style="text-align: center;">80x320x3 YUV Image</td>
 </tr>
 <tr>
-<td align="center">Normalization</td>
-<td align="center">Normalize batch</td>
+<td style="text-align: center;">Normalization</td>
+<td style="text-align: center;">Normalize batch</td>
 </tr>
 <tr>
-<td align="center">Convolution 5x5</td>
-<td align="center">2x2 stride, valid padding, outputs 38x158x24</td>
+<td style="text-align: center;">Convolution 5x5</td>
+<td style="text-align: center;">2x2 stride, valid padding, outputs 38x158x24</td>
 </tr>
 <tr>
-<td align="center">ELU activation</td>
-<td align="center"></td>
+<td style="text-align: center;">ELU activation</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Convolution 5x5</td>
-<td align="center">2x2 stride, valid padding, outputs 17x77x36</td>
+<td style="text-align: center;">Convolution 5x5</td>
+<td style="text-align: center;">2x2 stride, valid padding, outputs 17x77x36</td>
 </tr>
 <tr>
-<td align="center">ELU activation</td>
-<td align="center"></td>
+<td style="text-align: center;">ELU activation</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Convolution 5x5</td>
-<td align="center">2x2 stride, valid padding, outputs 7x37x48</td>
+<td style="text-align: center;">Convolution 5x5</td>
+<td style="text-align: center;">2x2 stride, valid padding, outputs 7x37x48</td>
 </tr>
 <tr>
-<td align="center">ELU activation</td>
-<td align="center"></td>
+<td style="text-align: center;">ELU activation</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Convolution 3x3</td>
-<td align="center">1x1 stride, valid padding, outputs 5x35x64</td>
+<td style="text-align: center;">Convolution 3x3</td>
+<td style="text-align: center;">1x1 stride, valid padding, outputs 5x35x64</td>
 </tr>
 <tr>
-<td align="center">ELU activation</td>
-<td align="center"></td>
+<td style="text-align: center;">ELU activation</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Convolution 3x3</td>
-<td align="center">1x1 stride, valid padding, outputs 3x33x64</td>
+<td style="text-align: center;">Convolution 3x3</td>
+<td style="text-align: center;">1x1 stride, valid padding, outputs 3x33x64</td>
 </tr>
 <tr>
-<td align="center">ELU activation</td>
-<td align="center"></td>
+<td style="text-align: center;">ELU activation</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Dropout</td>
-<td align="center">0.5 keep probablility (training)</td>
+<td style="text-align: center;">Dropout</td>
+<td style="text-align: center;">0.5 keep probablility (training)</td>
 </tr>
 <tr>
-<td align="center">Flatten</td>
-<td align="center"></td>
+<td style="text-align: center;">Flatten</td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
-<td align="center">Fully connected</td>
-<td align="center">3168 input, 100 output</td>
+<td style="text-align: center;">Fully connected</td>
+<td style="text-align: center;">3168 input, 100 output</td>
 </tr>
 <tr>
-<td align="center">Fully connected</td>
-<td align="center">100 input, 50 output</td>
+<td style="text-align: center;">Fully connected</td>
+<td style="text-align: center;">100 input, 50 output</td>
 </tr>
 <tr>
-<td align="center">Fully connected</td>
-<td align="center">50 input, 10 output</td>
+<td style="text-align: center;">Fully connected</td>
+<td style="text-align: center;">50 input, 10 output</td>
 </tr>
 <tr>
-<td align="center">Output</td>
-<td align="center">10 input, 1 output</td>
+<td style="text-align: center;">Output</td>
+<td style="text-align: center;">10 input, 1 output</td>
 </tr>
 </tbody>
 </table>

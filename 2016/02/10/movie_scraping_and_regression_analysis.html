@@ -167,10 +167,9 @@
 <p>With the new data, I continued to iterate and build models successively by tuning the parameters (mainly by plotting the residuals and looking to see if the residuals were random/ checking to see that there weren't major collinearity problems). By this time the model's adjusted R-squared was at .657.</p>
 <p>I figured it might be good to group the genres because some of the genres were occurring realtively infrequently. So I wrote a function to standardize the number of genres. However, when I ran the regression again, the model seemed to fit the data less well so I took out the new genre variable that I created.</p>
 <p>After performing log and exponential transformations to the dependent and some of the independent variables, the model seemed to be more or less set (at least in terms of fit of the residuals and the adjusted r-squared ~0.70). </p>
-<div class="highlight"><pre><span></span><span class="n">model4</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">model_data_3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">model4</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;exponential(Adjusted_Gross,0.1) ~ exponential(Avg_per_Theater, 0.3) + Genre + Popular_Month + exponential(Runtime, 0.5)&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">model_data_3</span><span class="p">)</span>
 <span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit_regularized</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>In the above code example, the <code>Popular_Month</code> independent variable is a generated binary variable based on which of the months were popular (May, June, July, November, and December).</p>
 <p>Given that the model was explaning about ~30% more of the variance than the initial model, I felt like it was time to move to scikit-learn to do some train test splits along with cross validation to make sure that the model was performing as expected on unseen data. </p>

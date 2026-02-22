@@ -135,7 +135,7 @@
 <p><em>HSL color space</em>
 <img alt="hsl" src="/images/challengeShadow_hlsimage_pyplot.jpg"></p>
 <p>In the above image, we can see that the yellow lane is very clearly highlighted and the white line markings are also captured well when compared to the grayscale image. However, to further improve the performance of the processing pipeline, we can also select out the colors that we know we care about (in this case the yellow and white lines, which are now blue and green)</p>
-<div class="highlight"><pre><span></span><span class="c1">## color selection for yellow and white, using the HSL color space</span>
+<div class="highlight"><pre><span></span><code><span class="c1">## color selection for yellow and white, using the HSL color space</span>
 <span class="k">def</span> <span class="nf">color_selection</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
 
     <span class="n">hls_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2HLS</span><span class="p">)</span>
@@ -145,8 +145,7 @@
 
     <span class="n">combined_color_images</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">(</span><span class="n">white_color</span><span class="p">,</span> <span class="n">yellow_color</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">combined_color_images</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>In the above code, I first convert the color map from RGB to HSL. Then I use the <code>inRange</code> function provided by OpenCV to select colors that fall into the white and yellow ranges. After that I combine the white and yellow masks together with the <code>bitwise_or</code> function. </p>
 <p>With the above HSL image, we can now try to isolate the yellow and the white lines. While there are many different techniques that can be utilized here, I chose to detect the edges within the image using the Canny edge detection algorithm. </p>
@@ -154,13 +153,12 @@
 <p><em>HSL color selection</em>
 <img alt="hsl" src="/images/challengeShadow_hsl.jpg"></p>
 <p>Given the above image, the goal is to pick out the lane lines. In order to do this, I use the <a href="https://en.wikipedia.org/wiki/Canny_edge_detector">canny edge detector</a> algorithm. In short, the algorithm:</p>
-<div class="highlight"><pre><span></span>1. Applies a gaussian filter to the image to reduce noise
-2. Finds the gradients in both the horizontal and vertical directions
-3. Non-maximum supression, which is a way to thin the detected edges by only keeping the maximum gradient values and setting others to 0
-4. Determining potential edges by checking against a threshold 
-5. Finish cleaning potential edges by checking in the potential edge is connected to an actual edge
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Applies</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">gaussian</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">reduce</span><span class="w"> </span><span class="n">noise</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Finds</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">gradients</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">both</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">horizontal</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">vertical</span><span class="w"> </span><span class="n">directions</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Non</span><span class="o">-</span><span class="n">maximum</span><span class="w"> </span><span class="n">supression</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">thin</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">detected</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="kr">on</span><span class="n">ly</span><span class="w"> </span><span class="n">keeping</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">maximum</span><span class="w"> </span><span class="n">gradient</span><span class="w"> </span><span class="nb">val</span><span class="n">ues</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">setting</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Determining</span><span class="w"> </span><span class="n">potential</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="n">against</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">threshold</span><span class="w"> </span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Finish</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">potential</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">potential</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">connected</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="n">edge</span>
+</code></pre></div>
 
 <p>While, the canny edge detector automatically applies <a href="https://en.wikipedia.org/wiki/Gaussian_blur">gaussian blur</a>, I applied gaussian blur outside of the edge detector so that I could have more freedom with the kernel parameter. After running the image through the blurring and edge detection functions, the image is as follows. Note, the input image to this is the HSL color converted image. </p>
 <p><em>HSL color selection with canny edge detection</em>
@@ -174,16 +172,16 @@
 <p><em>HSL color selection with canny edge detection and region masking</em>
 <img alt="region_canny" src="/images/challengeShadow_regioncanny.jpg"> </p>
 <p>As shown above, the HSL version provides a cleaner indication of the lane lines. Below are the functions used in processing the images.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="p">,</span> <span class="n">high_threshold</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Applies the Canny transform&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="p">,</span> <span class="n">high_threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies the Canny transform&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="p">,</span> <span class="n">high_threshold</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">gaussian_blur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Applies a Gaussian Noise kernel&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies a Gaussian Noise kernel&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">region_of_interest</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Applies an image mask.</span>
 
 <span class="sd">    Only keeps the region of the image defined by the polygon</span>
@@ -205,8 +203,7 @@
     <span class="c1">#returning the image only where mask pixels are nonzero</span>
     <span class="n">masked_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">masked_image</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>Hough Line Transform</h2>
 <p>Now that we have a collection of edges, we need to identify the lane lines within the image. The <a href="https://en.wikipedia.org/wiki/Hough_transform">hough line transform</a>, which was first invented to identify lines within images, is great for this task. To learn more about this algorithm, this <a href="http://alyssaq.github.io/2014/understanding-hough-transform/">blog</a> is a great resource. </p>
@@ -214,8 +211,8 @@
 <img alt="hsl_hough" src="/images/challengeShadow_hlshoughimage_pyplot.jpg"></p>
 <p>Pretty awesome! The lane lines have now been highlighted and boxed with the red lines. There are quite a few parameters that needed to be adjusted, but after adjusting the parameters, the algorithm is able to pick out the lines quite well. Note that the OpenCV version of the hough transform that we are using is the probabilistic version, which is an improvement over the original. In the IPython notebook, I use a different version of the <code>hough_lines</code> function that simple outputs the lines as a vector rather than overlaying the lines over the initial image. </p>
 <p>Given the above image and specifically the hough lines, we now have a vector of multiple lines segments in the form of (x1,y1,x2,y2) endpoints. In order to draw lines on an image, we need a way to extrapolate an average line from the vector of endpoints.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hough_lines_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">min_line_len</span><span class="p">,</span> <span class="n">max_line_gap</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hough_lines_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">min_line_len</span><span class="p">,</span> <span class="n">max_line_gap</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `img` should be the output of a Canny transform.</span>
 
 <span class="sd">    Returns an image with hough lines drawn.</span>
@@ -224,13 +221,12 @@
     <span class="n">line_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="n">draw_lines</span><span class="p">(</span><span class="n">line_img</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">line_img</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>Lane Line Averaging</h2>
 <p>In order to find the average line on each side of the lane, we can first calculate the slope of each line segment and separate the positive and negative sloped lines, which represents the left and right lane lines. Then we can find the average of the left and right slopes and intercepts to get an average of the lanes. When I initially did this, the average was quite sensitive to outliers. I tried to adjust for the outliers by removing points that were greater than 1.5 standard deviations from the rest of the slopes. However, the averaged lines were still quite sensitive to the outliers. </p>
 <p>Ultimately, by calculating the line length and calculating the weighted average of the lane line, the output was much more stable and robust against spurious line segments that the hough transform identified. </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">avg_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">avg_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
 
     <span class="n">neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
@@ -251,16 +247,15 @@
     <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">to_keep_index</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])]</span>
 
     <span class="c1">## weighted average of the slopes and intercepts based on the length of the line segment</span>
-    <span class="n">neg_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">None</span>
-    <span class="n">pos_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="n">neg_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">pos_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">neg_lines</span><span class="p">,</span> <span class="n">pos_lines</span>
 
 <span class="c1">## removing the outliers (adapted from http://stackoverflow.com/questions/11686720/is-there-a-numpy-builtin-to-reject-outliers-from-a-list)</span>
 <span class="k">def</span> <span class="nf">to_keep_index</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">obs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">obs</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">std</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">obs</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The above function calculates the slope, intercept, and line length of each line segment. At this point, we can take the average lane lines from the above function and plot the lane lines onto the original image. </p>
 <p><em>Final processed image</em>
@@ -283,14 +278,14 @@
 <li><a href="https://vimeo.com/205495856">Lane Finding - Curve (With Averaging)</a></li>
 </ul>
 <p>The above videos show that the new detector with the lane line averaging works quite nicely! Although if there are drastic changes the algorithm does not follow those changes until a bit later, we can fiddle with this by changing the size of the queue.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">lane_detector</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">lane_detector</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_lane_lines</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">find_mean_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lane_lines</span><span class="p">,</span> <span class="n">prev_lane_lines</span><span class="p">):</span>
 
         <span class="c1">## add the new lane line</span>
-        <span class="k">if</span> <span class="n">lane_lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lane_lines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">prev_lane_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lane_lines</span><span class="p">)</span>
 
         <span class="c1">## only keep the 10 most recent lane lines</span>
@@ -315,7 +310,7 @@
         <span class="n">canny_img</span> <span class="o">=</span> <span class="n">canny</span><span class="p">(</span><span class="n">blur_img</span><span class="p">,</span> <span class="n">low_threshold</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">high_threshold</span><span class="o">=</span><span class="mi">160</span><span class="p">)</span>
 
         <span class="c1">## apply region of interest</span>
-        <span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">100</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*.</span><span class="mi">45</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*.</span><span class="mi">55</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[(</span><span class="mi">100</span><span class="p">,</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">.45</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">.55</span><span class="p">,</span> <span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="n">imshape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">imshape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
         <span class="n">region_img</span> <span class="o">=</span> <span class="n">region_of_interest</span><span class="p">(</span><span class="n">canny_img</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="n">vertices</span><span class="p">)</span>
 
         <span class="c1">## apply hough transformation</span>
@@ -339,8 +334,7 @@
         <span class="n">final_img</span> <span class="o">=</span> <span class="n">weighted_img</span><span class="p">(</span><span class="n">lane_lines</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">final_img</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>Shortcomings &amp; Next Steps</h2>
 <p>While the detector works fairly well for straight roads, there are limitations:</p>

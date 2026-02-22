@@ -126,15 +126,14 @@
 <p>The broader goal was to see if I could analyze text and see how presidents' were either similar or different in the topics that they discussed. I also wanted to identify if those topics changed across time.</p>
 <h3>MongoDB</h3>
 <p>MongoDB is really easy to get running. Remember that post about the <a href="/2016/02/27/making_census_data_exciting_part_1">census data</a>? Well let me just post a little bit of code to show how quick it is to set up MongoDB (granted, this is on my local machine and not on AWS...but still I'm trying to make a point so forgive me).</p>
-<div class="highlight"><pre><span></span><span class="c1"># install with homebrew (mac)</span>
-brew install mongodb
+<div class="highlight"><pre><span></span><code><span class="c1"># install with homebrew (mac)</span>
+brew<span class="w"> </span>install<span class="w"> </span>mongodb
 <span class="c1"># make a data directory (for mongo to write to)</span>
-sudo mkdir /data/db
+sudo<span class="w"> </span>mkdir<span class="w"> </span>/data/db
 <span class="c1"># change ownership for the directory and start the mongo server</span>
-sudo chown your_username /data/db
+sudo<span class="w"> </span>chown<span class="w"> </span>your_username<span class="w"> </span>/data/db
 mongod
-</pre></div>
-
+</code></pre></div>
 
 <p>Boom. After this you can just <code>mongoimport</code> entire <code>.json</code> files into your database as different collections or however you'd like. So all of that to say that it is definitely easier to get things set up and data into the database (not to say that SQL isn't good...they are good for different things).</p>
 <p>With the database set up, I had to get my data.</p>
@@ -142,9 +141,9 @@ mongod
 <p>There were a couple sites that had some great resources, but the one that I ended up using was the UC Santa Barbara <a href="http://www.presidency.ucsb.edu/sou.php">American Presidency Project</a>. It has speeches, press releases, and much more dating back to President Washington.</p>
 <p><a href="http://www.presidency.ucsb.edu/sou.php"><img alt="American Presidency Project" src="/images/presidency_project.png"></a></p>
 <p>While it would have been great to have some form of an API to make calls to and get nicely formatted data, I did not have that luxury in this case and so I scraped the data that I needed using BeautifulSoup. Usually, this wouldn't be the easiest part, but this time it was actually quite simple!</p>
-<div class="highlight"><pre><span></span><span class="c1"># make the request to the website</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># make the request to the website</span>
 <span class="k">def</span> <span class="nf">requester</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    url: url of the site to be scraped</span>
 <span class="sd">    return: BeautifulSoup obejct of the scraped text</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -178,12 +177,11 @@ mongod
     <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;displaytext&#39;</span><span class="p">})</span>
 
     <span class="c1"># each paragraph is separated into (as it will be considered a document in later analyses)</span>
-    <span class="n">text_list</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">text_list</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">text_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">text_list</span><span class="p">]</span>
     <span class="n">aDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;president&#39;</span><span class="p">:</span><span class="n">president</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="n">date</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="n">text_list</span><span class="p">,</span><span class="s1">&#39;url&#39;</span><span class="p">:</span><span class="n">url</span><span class="p">,</span><span class="s1">&#39;speech&#39;</span><span class="p">:</span><span class="s1">&#39;State of the Union&#39;</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">aDict</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Those three functions above are a sample of the functions that I wrote to scrape the State of the Union Addresses from the website. I had similar functions to scrape Inaugural Addresses and press releases. After getting all the text, I created dictionaries with the details of the speeches and used <code>pymongo</code> to connect to mongoDB so that I could store the data.</p>
 <p>It wasn't necessary to use mongoDB because I used Python to scrape the data and was going to manipulate the data in Python,but I wanted to learn how to use the database for future reference. Furthermore, in case anything happened I wouldn't have to rely on the pickled files I created (as an extra saftey measure...).</p>

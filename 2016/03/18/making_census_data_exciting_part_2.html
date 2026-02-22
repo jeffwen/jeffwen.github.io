@@ -124,9 +124,9 @@
 <h3>Approach</h3>
 <p>As part of the problem, I wanted to use PostgreSQL to get used to using it in a remote environment so that I could learn to store my data remotely (hence the previous post). However, the next step was to get the data out of the database so that it could be manipulated and massaged for further analysis.</p>
 <p>For this, Psycopg2 was the best tool as it allowed for a pretty straight forward way to connect with the remote database. I wrote a Python script so that anyone on my team could quickly enter their login details and the script would ask for the SQL query. Then, the output would be a pandas dataframe of the data that was requested.</p>
-<div class="highlight"><pre><span></span><span class="c1"># input must be strings</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># input must be strings</span>
 <span class="k">def</span> <span class="nf">query_database</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    dbname: database name</span>
 <span class="sd">    user: username</span>
 <span class="sd">    password: password for the user</span>
@@ -138,12 +138,12 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Create connection with database</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;dbname=&quot;</span><span class="o">+</span><span class="n">dbname</span><span class="o">+</span><span class="s2">&quot; user=&quot;</span><span class="o">+</span><span class="n">user</span><span class="o">+</span><span class="s2">&quot; password=&quot;</span><span class="o">+</span><span class="n">password</span><span class="o">+</span><span class="s2">&quot; host=&quot;</span><span class="o">+</span><span class="n">host</span><span class="o">+</span><span class="s2">&quot; port=&quot;</span><span class="o">+</span><span class="n">port</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s2">&quot;Connected&quot;</span>
+        <span class="nb">print</span> <span class="s2">&quot;Connected&quot;</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
         <span class="c1"># Ask for user&#39;s SQL query</span>
-        <span class="k">print</span> <span class="s2">&quot;Query please: &quot;</span>
-        <span class="n">input_query</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="s2">&quot;Query please: &quot;</span>
+        <span class="n">input_query</span> <span class="o">=</span> <span class="n">raw_input</span><span class="p">()</span>
 
         <span class="c1"># Execute search query</span>
         <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">input_query</span><span class="p">)</span>
@@ -157,9 +157,8 @@
         <span class="k">return</span> <span class="n">df</span>
 
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&quot;Connection error or query mistake&quot;</span>
-</pre></div>
-
+        <span class="nb">print</span> <span class="s2">&quot;Connection error or query mistake&quot;</span>
+</code></pre></div>
 
 <p>This made it quite easy to get the data out of the AWS database. The next steps was to clean the data and then run models to predict the hours worked.</p>
 <p>In terms of cleaning the data, I wrote a function that took as input the previously outputted dataframe and returned a cleaned dataframe with white spaces removed from column headers, hours per week worked turned into a binary variable (&lt; 40 hours worked or &gt;= 40 hours worked), and other categorical variables turned into dummy variable columns. </p>
